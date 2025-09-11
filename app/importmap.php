@@ -49,4 +49,7 @@ return [
     '@app/translations/configuration' => [
         'path' => './var/translations/configuration.js',
     ],
+    '@hotwired/turbo' => [
+        'version' => '7.3.0',
+    ],
 ];

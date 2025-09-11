@@ -17,6 +17,8 @@ init:
 		composer require symfony/twig-pack symfony/asset-mapper symfony/security-bundle symfony/validator symfony/form symfony/mailer symfony/twig-bundle symfony/runtime orm && \
 		composer require symfonycasts/verify-email-bundle symfonycasts/reset-password-bundle symfony/ux-twig-component symfony/ux-live-component symfony/ux-translator  && \
 		composer require symfony/maker-bundle --dev && \
+		composer require symfony/stimulus-bundle && \ 
+		composer require symfony/ux-turbo && \
 		bin/console importmap:install \
 	"
 
