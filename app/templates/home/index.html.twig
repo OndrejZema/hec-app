@@ -1,15 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'guest.html.twig' %}
 
 {% block title %}Hello HomeController!{% endblock %}
 
-{% block body %}
+{% block content %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Hello {{ controller_name }}! ✅ tohle je app HEC</h1>
     <a href="{{path('app_login')}}"> Login </a>
     This friendly message is coming from:
     <ul>

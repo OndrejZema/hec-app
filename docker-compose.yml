@@ -15,10 +15,15 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./app:/var/www/html
+      - ./app:/var/www/html:cached
     depends_on:
       - php
-
+  mailpit:
+    image: axllent/mailpit
+    container_name: mailpit
+    ports:
+      - "8025:8025" # web UI
+      - "1025:1025" # SMTP server
   mariadb:
     image: mariadb:11.3
     container_name: hec_mariadb

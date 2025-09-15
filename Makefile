@@ -19,8 +19,16 @@ init:
 		composer require symfony/maker-bundle --dev && \
 		composer require symfony/stimulus-bundle && \ 
 		composer require symfony/ux-turbo && \
+		composer require symfonycasts/tailwind-bundle && \
 		bin/console importmap:install \
 	"
+tw-init:
+	docker compose exec php bash -c "php bin/console tailwind:init"
+
+tw-watch:
+	docker compose exec php bash -c "php bin/console tailwind:build --watch"
+tw-build:
+	docker compose exec php bash -c "php bin/console tailwind:build"
 
 # Instalace závislostí (pokud už projekt existuje)
 install:
