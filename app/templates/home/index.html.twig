@@ -1,20 +1,42 @@
 {% extends 'guest.html.twig' %}
-
-{% block title %}Hello HomeController!{% endblock %}
+{% trans_default_domain 'home' %}
+{% block title %}HEC{% endblock %}
 
 {% block content %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="text-center">
+    <section class="my-20">
+    <h1 class="text-gray-700 font-bold">
+        <span class="text-amber-500">H</span>ome 
+        <span class="text-amber-500">E</span>letricity 
+        <span class="text-amber-500">C</span>onsultant 
+    </h1>
+    <p class="text-gray-500">
+        {{ 'hero.subtitle'|trans}}
+    </p>
+    <wa-button>{{'hero.get_started'|trans}} </wa-button>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅ tohle je app HEC</h1>
-    <a href="{{path('app_login')}}"> Login </a>
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/var/www/html/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/var/www/html/templates/home/index.html.twig</code></li>
-    </ul>
+    </section>
+    <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <twig:home:FeatureCardSm value="35%" label=" {{'hero.feature_1'|trans}}"></twig:home:FeatureCardSm>
+    <twig:home:FeatureCardSm value="24/7" label="{{'hero.feature_2'|trans}}"></twig:home:FeatureCardSm>
+    <twig:home:FeatureCardSm value="AI" label="  {{'hero.feature_3'|trans}}"></twig:home:FeatureCardSm>
+    <twig:home:FeatureCardSm value="100%" label="{{'hero.feature_4'|trans}}"></twig:home:FeatureCardSm>
+    </section>
+    <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
+    
+    <twig:home:FeatureCardLg title="{{'feature.title_1'|trans}}" text="{{'feature.text_1'|trans}}" icon="chart-line">
+    </twig:home:FeatureCardLg>
+    <twig:home:FeatureCardLg title="{{'feature.title_2'|trans}}" text="{{'feature.text_2'|trans}}" icon="exchange-alt">
+    </twig:home:FeatureCardLg>
+    <twig:home:FeatureCardLg title="{{'feature.title_3'|trans}}" text="{{'feature.text_3'|trans}}" icon="bolt">
+    </twig:home:FeatureCardLg>
+    <twig:home:FeatureCardLg title="{{'feature.title_4'|trans}}" text="{{'feature.text_4'|trans}}" icon="bullseye">
+    </twig:home:FeatureCardLg>
+    <twig:home:FeatureCardLg title="{{'feature.title_5'|trans}}" text="{{'feature.text_5'|trans}}" icon="mobile-alt">
+    </twig:home:FeatureCardLg>
+    <twig:home:FeatureCardLg title="{{'feature.title_6'|trans}}" text="{{'feature.text_6'|trans}}" icon="leaf">
+    </twig:home:FeatureCardLg>
+
+    </section>
 </div>
 {% endblock %}
