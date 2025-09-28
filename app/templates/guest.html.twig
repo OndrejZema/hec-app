@@ -9,13 +9,13 @@
             Logo
             </div>
             <div>
-                <wa-button appearance="plain">
+                <wa-button appearance="plain" href="{{path('app_login')}}">
                 <wa-icon name="user" slot="start"> </wa-icon>
-                Login
+                {{ 'login'|trans({}, 'common') }}
                 </wa-button>
-                <wa-button appearance="plain">
+                <wa-button appearance="plain" href="{{path('app_register')}}">
                 <wa-icon name="right-to-bracket" slot="start"> </wa-icon>
-                Register
+                {{ 'register'|trans({}, 'common') }}
                 </wa-button>
             </div>
         </nav>
