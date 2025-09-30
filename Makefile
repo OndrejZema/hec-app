@@ -43,3 +43,7 @@ auth:
 		bin/console make:reset-password && \
 		php bin/console make:migration \
 	"
+make-migration:
+	docker compose exec php bash -c "php bin/console make:migration"
+migrate:
+	docker compose exec php bash -c "php bin/console doctrine:migrations:migrate"

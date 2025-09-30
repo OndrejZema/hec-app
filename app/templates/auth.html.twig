@@ -3,10 +3,16 @@
 
 {% block body %}
 
-<div class="flex justify-center">
-
+<div class="flex flex-col items-center justify-center">
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
 {% block content %}
 
 {% endblock %}
+<a href="{{path('app_home')}}">
+    <wa-icon name="chevron-left"></wa-icon>
+    Zpět na domovskou stránku 
+</a>
 </div>
 {% endblock %}

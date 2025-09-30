@@ -1,0 +1,87 @@
+{# Globální obalení pole: widget + error #}
+{% block form_row %}
+    <div class="wa-field">
+        {{ form_widget(form) }}
+
+        {% if errors|length > 0 %}
+            <div class="text-red-500">
+                {% for error in errors %}
+                    <div>{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+{# === Konkrétní typy polí === #}
+
+{% block text_widget %}
+    <wa-input
+        type="text"
+        id="{{ id }}"
+        name="{{ full_name }}"
+        value="{{ value }}"
+        label="{{ label|default(name|humanize) }}"
+        {% if required %}required{% endif %}
+        {% for attrname, attrvalue in attr %}
+            {{- attrname }}="{{ attrvalue }}"
+        {% endfor %}
+    ></wa-input>
+{% endblock %}
+
+{% block password_widget %}
+    <wa-input
+        type="password"
+        id="{{ id }}"
+        name="{{ full_name }}"
+        value="{{ value }}"
+        label="{{ label|default(name|humanize) }}"
+        {% if required %}required{% endif %}
+        {% for attrname, attrvalue in attr %}
+            {{- attrname }}="{{ attrvalue }}"
+        {% endfor %}
+    ></wa-input>
+{% endblock %}
+
+{% block email_widget %}
+    <wa-input
+        type="email"
+        id="{{ id }}"
+        name="{{ full_name }}"
+        value="{{ value }}"
+        label="{{ label|default(name|humanize) }}"
+        {% if required %}required{% endif %}
+        {% for attrname, attrvalue in attr %}
+            {{- attrname }}="{{ attrvalue }}"
+        {% endfor %}
+    ></wa-input>
+{% endblock %}
+
+{% block textarea_widget %}
+    <wa-input
+        as="textarea"
+        id="{{ id }}"
+        name="{{ full_name }}"
+        label="{{ label|default(name|humanize) }}"
+        {% if required %}required{% endif %}
+        {% for attrname, attrvalue in attr %}
+            {{- attrname }}="{{ attrvalue }}"
+        {% endfor %}
+    >{{ value }}</wa-input>
+{% endblock %}
+
+{%- block checkbox_widget -%}
+    <wa-checkbox
+        type="text"
+        id="{{ id }}"
+        name="{{ full_name }}"
+        checked="{{ value }}"
+        {% if required %}required{% endif %}
+        {% for attrname, attrvalue in attr %}
+            {{- attrname }}="{{ attrvalue }}"
+        {% endfor %}
+    >
+    {{ label|default(name|humanize) }}
+    </wa-checkbox>
+{%- endblock checkbox_widget %}
