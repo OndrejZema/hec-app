@@ -1,4 +1,5 @@
 import './bootstrap.js';
+import './components/HecChart.js'
 /*
  * Welcome to your app's main JavaScript file!
  *

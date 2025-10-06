@@ -6,13 +6,19 @@
 <div class="text-center">
     <section class="my-20">
     <h1 class="text-gray-700 font-bold">
-        <span class="text-amber-500">H</span>ome 
-        <span class="text-amber-500">E</span>letricity 
-        <span class="text-amber-500">C</span>onsultant 
+        <span class="text-amber-500">H</span>ome
+        <span class="text-amber-500">E</span>letricity
+        <span class="text-amber-500">C</span>onsultant
     </h1>
     <p class="text-gray-500">
         {{ 'hero.subtitle'|trans}}
     </p>
+        {{ form_start(testForm) }}
+        <div class="gap-1 flex flex-col">
+            {{ form_row(testForm.items) }}
+        </div>
+            <wa-button type="submit" class="w-full mt-2">Register</wa-button>
+        {{ form_end(testForm) }}
     <wa-button href="{{path('app_register')}}">{{'hero.get_started'|trans}} </wa-button>
 
     </section>
@@ -23,7 +29,7 @@
     <twig:home:FeatureCardSm value="100%" label="{{'hero.feature_4'|trans}}"></twig:home:FeatureCardSm>
     </section>
     <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
-    
+
     <twig:home:FeatureCardLg title="{{'feature.title_1'|trans}}" text="{{'feature.text_1'|trans}}" icon="chart-line">
     </twig:home:FeatureCardLg>
     <twig:home:FeatureCardLg title="{{'feature.title_2'|trans}}" text="{{'feature.text_2'|trans}}" icon="exchange-alt">

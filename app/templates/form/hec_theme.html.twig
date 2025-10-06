@@ -85,3 +85,17 @@
     {{ label|default(name|humanize) }}
     </wa-checkbox>
 {%- endblock checkbox_widget %}
+
+{%- block chart_widget -%}
+    <hec-chart
+        id="{{ id }}"
+        name="{{ full_name }}"
+        type="{{ type }}"
+        data="{{ data|json_encode|e('html_attr') }}"
+        {% if required %}required{% endif %}
+        {% for attrname, attrvalue in attr %}
+            {{- attrname }}="{{ attrvalue }}"
+        {% endfor %}
+    >
+    </hec-chart>
+{%- endblock chart_widget %}
