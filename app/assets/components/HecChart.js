@@ -34,7 +34,7 @@ class HecChart extends HTMLElement {
             <div style="height: 30rem;">
                 <canvas id="chartCanvas-${this.id}"></canvas>
             </div>
-            <input id="hiddenInputValue${this.id}" name="${this.name}"></input>`;
+            <input id="hiddenInputValue${this.id}" name="${this.name}" class="hidden">`;
     }
 
     initChart() {

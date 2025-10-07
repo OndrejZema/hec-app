@@ -11,15 +11,15 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/', name: 'app_home', methods: ['GET', 'POST'])]
     public function index(Request $request,): Response
     {
         $testForm = $this->createForm(TestFormType::class, ['chartData' => [100, 200, 300]]);
         $testForm->handleRequest($request);
 
-        dd($testForm);
+        //dd($testForm);
         if ($testForm->isSubmitted() && $testForm->isValid()) {
-            dd($testForm);
+            dd($testForm->getData()['items']);
             return $this->redirectToRoute('app_login');
         }
 
