@@ -3,13 +3,8 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-
-
-    <wa-card class="mt-5 w-full max-w-sm sm:max-w-md lg:max-w-lg">
     <h1 class="h3 mb-3 font-weight-normal text-center">{{'register'|trans({}, 'common')}}</h1>
-
     {# {{ form_errors(registrationForm) }} #}
-
     {{ form_start(registrationForm) }}
         <div class="gap-1 flex flex-col">
             {{ form_row(registrationForm.email) }}
@@ -22,7 +17,4 @@
         <div>Už nemáte účet? </div>
         <a href="{{ path('app_login') }}">Přihlašte se </a>
     </div>
-
-    </wa-card>
-    
 {% endblock %}

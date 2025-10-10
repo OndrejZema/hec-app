@@ -3,11 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block content %}
-
-    <wa-card class="mt-5 w-full max-w-sm sm:max-w-md lg:max-w-lg">
     <h1 class="h3 mb-3 font-weight-normal text-center">{{'login'|trans({}, 'common')}}</h1>
-    
-    
     <form method="post" class="grid grid-cols-1 gap-1">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -17,7 +13,7 @@
         <wa-input label="Password" type="password" name="_password" id="password" autocomplete="current-password" required></wa-input>
         <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
         <div class="flex justify-end">
-        <a href="#">Forgot password?</a>
+        <a href="{{ path('app_forgot_password_request') }}">Forgot password?</a>
         </div>
         <wa-button type="submit">
             {{'login'|trans({}, 'common')}}
@@ -27,5 +23,4 @@
         <div>Ještě nemáte účet? </div>
         <a href="{{ path('app_register') }}">Registruj se </a>
     </div>
-    </wa-card>
 {% endblock %}

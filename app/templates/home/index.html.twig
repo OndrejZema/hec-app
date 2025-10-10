@@ -13,12 +13,6 @@
     <p class="text-gray-500">
         {{ 'hero.subtitle'|trans}}
     </p>
-        {{ form_start(testForm) }}
-        <div class="gap-1 flex flex-col">
-            {{ form_row(testForm.items) }}
-        </div>
-            <wa-button type="submit" class="w-full mt-2">Register</wa-button>
-        {{ form_end(testForm) }}
     <wa-button href="{{path('app_register')}}">{{'hero.get_started'|trans}} </wa-button>
 
     </section>

@@ -1,9 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block body%}
+{% block body %}
+    <div class="logged-layout">
+        <div class="logged-layout-logo">
+            Logo
+        </div>
+        <header class="logged-layout-header flex justify-end p-2 items-center">
+            <wa-button>Logout</wa-button>
+        </header>
+        <nav class="logged-layout-nav p-2">
+            <div class="flex flex-col gap-2">
+                <wa-button appearance="plain" class="w-full">Jedna</wa-button>
+                <wa-button appearance="plain" class="w-full">Dva</wa-button>
+            </div>
+        </nav>
+        <div class="logged-layout-content p-8 bg-gray-200">
+        {% block content %}
 
-{% block content%}
-
-{%endblock%}
-
-{%endblock%}
+        {% endblock %}
+    </div>
+    </div>
+{% endblock %}
