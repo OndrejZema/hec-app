@@ -1,15 +1,15 @@
 {% extends 'auth.html.twig' %}
-
-{% block title %}Reset your password{% endblock %}
+{% trans_default_domain 'auth' %}
+{% block title %}{{ 'reset_password.title'|trans }}{% endblock %}
 
 {% block content %}
-    <h1>Reset your password</h1>
+    <h1>{{ 'reset_password.title'|trans }}</h1>
 
     {{ form_start(resetForm) }}
     <div class="gap-1 flex flex-col">
 
         {{ form_row(resetForm.plainPassword) }}
     </div>
-    <wa-button type="submit" class="mt-2 w-full">Reset password</wa-button>
+    <wa-button type="submit" class="mt-2 w-full">{{ 'reset_password.action'|trans }}</wa-button>
     {{ form_end(resetForm) }}
 {% endblock %}

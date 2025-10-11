@@ -1,20 +1,20 @@
 {% extends 'auth.html.twig' %}
-
-{% block title %}Register{% endblock %}
+{% trans_default_domain 'auth' %}
+{% block title %}{{ 'register.title'|trans }}{% endblock %}
 
 {% block content %}
-    <h1 class="h3 mb-3 font-weight-normal text-center">{{'register'|trans({}, 'common')}}</h1>
+    <h1 class="h3 mb-3 font-weight-normal text-center">{{ 'register.title'|trans }}</h1>
     {# {{ form_errors(registrationForm) }} #}
     {{ form_start(registrationForm) }}
-        <div class="gap-1 flex flex-col">
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.plainPassword) }}
-            {{ form_row(registrationForm.agreeTerms) }}
-        </div>
-        <wa-button type="submit" class="w-full mt-2">Register</wa-button>
+    <div class="gap-1 flex flex-col">
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+    </div>
+    <wa-button type="submit" class="w-full mt-2">{{ 'register'|trans({}, 'common') }}</wa-button>
     {{ form_end(registrationForm) }}
     <div class="flex justify-center gap-0.5 mt-1">
-        <div>Už nemáte účet? </div>
-        <a href="{{ path('app_login') }}">Přihlašte se </a>
+        <div>{{ 'register.have_account'|trans }} </div>
+        <a href="{{ path('app_login') }}">{{ 'login'|trans({}, 'common') }}</a>
     </div>
 {% endblock %}

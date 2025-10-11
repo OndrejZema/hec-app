@@ -1,26 +1,26 @@
 {% extends 'auth.html.twig' %}
-
-{% block title %}Log in!{% endblock %}
+{% trans_default_domain 'auth' %}
+{% block title %}{{ 'login'|trans }}{% endblock %}
 
 {% block content %}
-    <h1 class="h3 mb-3 font-weight-normal text-center">{{'login'|trans({}, 'common')}}</h1>
+    <h1 class="h3 mb-3 font-weight-normal text-center">{{'login.title'|trans}}</h1>
     <form method="post" class="grid grid-cols-1 gap-1">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
 
-        <wa-input label="Email" type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus></wa-input>
-        <wa-input label="Password" type="password" name="_password" id="password" autocomplete="current-password" required></wa-input>
+        <wa-input label="{{ 'form.email'|trans({}, 'common') }}" type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus></wa-input>
+        <wa-input label="{{ 'form.password'|trans({}, 'common') }}" type="password" name="_password" id="password" autocomplete="current-password" required></wa-input>
         <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
         <div class="flex justify-end">
-        <a href="{{ path('app_forgot_password_request') }}">Forgot password?</a>
+        <a href="{{ path('app_forgot_password_request') }}">{{ 'login.forgot_password'|trans  }}</a>
         </div>
         <wa-button type="submit">
             {{'login'|trans({}, 'common')}}
         </wa-button>
     </form>
     <div class="flex justify-center gap-0.5 mt-1">
-        <div>Ještě nemáte účet? </div>
-        <a href="{{ path('app_register') }}">Registruj se </a>
+        <div>{{ 'login.dont_have_account'|trans }}</div>
+        <a href="{{ path('app_register') }}">{{ 'register'|trans({}, 'common')}} </a>
     </div>
 {% endblock %}

@@ -3,3 +3,11 @@ footer:
 
 login: "Přihlásit se"
 register: "Registrovat se"
+try_again: "Zkusit znovu"
+
+form:
+    email: "E-mail"
+    first_name: "Jméno"
+    last_name: "Příjmení"
+    password: "Heslo"
+    agree_terms: "Souhlasím s podmínkami"

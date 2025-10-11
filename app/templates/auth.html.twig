@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% trans_default_domain 'auth' %}
 
 {% block body %}
 
@@ -15,7 +15,7 @@
         </wa-card>
         <a href="{{ path('app_home') }}">
             <wa-icon name="chevron-left"></wa-icon>
-            Zpět na domovskou stránku
+            {{ 'back_to_home'|trans }}
         </a>
     </div>
 {% endblock %}

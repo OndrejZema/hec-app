@@ -1,0 +1,18 @@
+back_to_home: "Zpět na domovskou stránku"
+login:
+    title: "Přihlášení"
+    forgot_password: "Zapomenuté heslo"
+    dont_have_account: "Ještě nemáte účet?"
+register:
+    title: "Registrace"
+    have_account: "Už máte účet?"
+reset_password:
+    title: "Reset hesla"
+    action: "Resetovat heslo"
+    send_email:
+        action: "Poslat e-mail"
+        tip: "Vložte e-mail adresu a my Vám pošleme link na reset hesla"
+    check_email:
+        title: "Resetování hesla"
+        text: "Pokud se najde účet se zadaným e-mailem, bude na něj odeslán odkaz pro resetování hesla. Tento linik vyprší: "
+        spam: "Pokud jste nedostali e-mail, zkontrolujte spam složku"

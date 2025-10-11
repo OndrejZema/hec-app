@@ -16,12 +16,17 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class RegistrationFormType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'label' => 'form.email',
+                'translation_domain' => 'common',
+            ])
             ->add('agreeTerms', CheckboxType::class, [
-                'label' => 'Agree terms',
+                'label' => 'form.agree_terms',
+                'translation_domain' => 'common',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -30,7 +35,8 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
-                'label' => 'Password ',
+                'label' => 'form.password',
+                'translation_domain' => 'common',
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
