@@ -1,20 +1,26 @@
 {% extends 'base.html.twig' %}
-
+{% set currentRoute = app.request.attributes.get('_route') %}
 {% block body %}
     <div class="logged-layout">
-        <div class="logged-layout-logo">
+        <div class="logged-layout-logo bg-white">
             Logo
         </div>
-        <header class="logged-layout-header flex justify-end p-2 items-center">
+        <header class="logged-layout-header flex justify-end p-2 items-center bg-white">
             <wa-button>Logout</wa-button>
         </header>
-        <nav class="logged-layout-nav p-2">
+
+        <nav class="logged-layout-nav p-2 bg-white">
             <div class="flex flex-col gap-2">
-                <wa-button appearance="plain" class="w-full">Jedna</wa-button>
-                <wa-button appearance="plain" class="w-full">Dva</wa-button>
+                <wa-button size="small" appearance="{{ currentRoute == 'app_dashboard' ? 'filled' : 'plain' }}" variant="neutral" class="w-full">
+                    <wa-icon slot="start" name="user" class="hec-icon"></wa-icon>
+                    Consumption profile
+                </wa-button>
+                <wa-button size="small" appearance="{{ currentRoute == 'app_performance_profile' ? 'filled' : 'plain' }}" variant="neutral" class="w-full">
+                    Performance profile
+                </wa-button>
             </div>
         </nav>
-        <div class="logged-layout-content p-8 bg-gray-200">
+        <div class="logged-layout-content p-8 bg-gray-100 border border-gray-200 rounded">
         {% block content %}
 
         {% endblock %}

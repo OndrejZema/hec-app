@@ -7,17 +7,17 @@
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
     {% block stylesheets %}
         {{ importmap('app') }}
-        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.5/dist/styles/webawesome.css" />
+        <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.6/dist/styles/webawesome.css" />
     {% endblock %}
 
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
-        <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.5/dist/webawesome.loader.js"></script>
+        <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.6/dist/webawesome.loader.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-dragdata@latest/dist/chartjs-plugin-dragdata.min.js"></script>
     {% endblock %}
 </head>
-<body class="bg-gray-100">
+<body>
 {% block body %}{% endblock %}
 {% block footer %}{% endblock %}
 </body>

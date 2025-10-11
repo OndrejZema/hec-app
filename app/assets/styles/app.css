@@ -27,3 +27,9 @@
 .logged-layout-content{
     grid-area: content;
 }
+@layer components {
+    .hec-icon{
+        @apply text-amber-500;
+    }
+
+}

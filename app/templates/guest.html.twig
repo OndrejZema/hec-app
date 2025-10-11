@@ -2,36 +2,38 @@
 
 
 {% block body %}
-    {% block nav %}
-    <header class="w-full flex justify-center border-b border-gray-200 bg-white">
-        <nav class="w-full max-w-[80rem] flex justify-between py-1 items-center">
-            <div>
-            Logo
-            </div>
-            <div>
-                <wa-button appearance="plain" href="{{path('app_login')}}">
-                <wa-icon name="user" slot="start"> </wa-icon>
-                {{ 'login'|trans({}, 'common') }}
-                </wa-button>
-                <wa-button appearance="plain" href="{{path('app_register')}}">
-                <wa-icon name="right-to-bracket" slot="start"> </wa-icon>
-                {{ 'register'|trans({}, 'common') }}
-                </wa-button>
-            </div>
-        </nav>
-    </header>
-    {% endblock %}
+    <section class="bg-gray-100 pb-10">
+        {% block nav %}
+            <header class="w-full flex justify-center border-b border-gray-200 bg-white">
+                <nav class="w-full max-w-[80rem] flex justify-between py-1 items-center">
+                    <div>
+                        Logo
+                    </div>
+                    <div>
+                        <wa-button appearance="plain" href="{{ path('app_login') }}">
+                            <wa-icon name="user" slot="start"></wa-icon>
+                            {{ 'login'|trans({}, 'common') }}
+                        </wa-button>
+                        <wa-button appearance="plain" href="{{ path('app_register') }}">
+                            <wa-icon name="right-to-bracket" slot="start"></wa-icon>
+                            {{ 'register'|trans({}, 'common') }}
+                        </wa-button>
+                    </div>
+                </nav>
+            </header>
+        {% endblock %}
 
-    <section class="flex justify-center w-ful">
-        <div class="w-full max-w-[80rem] flex justify-center">
-            {% block content %}
-            {% endblock %}
-        </div>
+        <section class="flex justify-center w-ful">
+            <div class="w-full max-w-[80rem] flex justify-center">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </section>
     </section>
 {% endblock %}
 
-{% block footer%}
-<footer class="bg-teal-900 text-white p-8 text-center mt-10">
-© 2025 HEC - Home Electricity Consultant. {{'footer.all_right_served'|trans({}, 'common')}}
-</footer>
+{% block footer %}
+    <footer class="bg-teal-900 text-white p-8 text-center">
+        © 2025 HEC - Home Electricity Consultant. {{ 'footer.all_right_served'|trans({}, 'common') }}
+    </footer>
 {% endblock %}
