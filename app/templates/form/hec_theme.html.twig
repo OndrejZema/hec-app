@@ -22,7 +22,7 @@
         id="{{ id }}"
         name="{{ full_name }}"
         value="{{ value }}"
-        label="{{ label|default(name|humanize) }}"
+        label="{{ label|trans(label_translation_parameters|default({}), translation_domain) }}"
         {% if required %}required{% endif %}
         {% for attrname, attrvalue in attr %}
             {{- attrname }}="{{ attrvalue }}"
@@ -36,7 +36,7 @@
         id="{{ id }}"
         name="{{ full_name }}"
         value="{{ value }}"
-        label="{{ label|default(name|humanize) }}"
+        label="{{ label|trans(label_translation_parameters|default({}), translation_domain) }}"
         {% if required %}required{% endif %}
         {% for attrname, attrvalue in attr %}
             {{- attrname }}="{{ attrvalue }}"
@@ -50,7 +50,7 @@
         id="{{ id }}"
         name="{{ full_name }}"
         value="{{ value }}"
-        label="{{ label|default(name|humanize) }}"
+        label="{{ label|trans(label_translation_parameters|default({}), translation_domain) }}"
         {% if required %}required{% endif %}
         {% for attrname, attrvalue in attr %}
             {{- attrname }}="{{ attrvalue }}"
@@ -63,7 +63,7 @@
         as="textarea"
         id="{{ id }}"
         name="{{ full_name }}"
-        label="{{ label|default(name|humanize) }}"
+        label="{{ label|trans(label_translation_parameters|default({}), translation_domain) }}"
         {% if required %}required{% endif %}
         {% for attrname, attrvalue in attr %}
             {{- attrname }}="{{ attrvalue }}"
@@ -82,7 +82,7 @@
             {{- attrname }}="{{ attrvalue }}"
         {% endfor %}
     >
-    {{ label|default(name|humanize) }}
+    {{ label|trans(label_translation_parameters|default({}), translation_domain) }}
     </wa-checkbox>
 {%- endblock checkbox_widget %}
 
@@ -91,6 +91,7 @@
         id="{{ id }}"
         name="{{ full_name }}"
         type="{{ type }}"
+{#        label="{{ label|trans(label_translation_parameters|default({}), translation_domain) }}"#}
         data="{{ data|json_encode|e('html_attr') }}"
         {% if required %}required{% endif %}
         {% for attrname, attrvalue in attr %}

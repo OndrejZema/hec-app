@@ -2,4 +2,9 @@ controllers:
     resource:
         path: ../src/Controller/
         namespace: App\Controller
+    prefix: /{_locale}
     type: attribute
+    requirements:
+        _locale: cs|en
+    defaults:
+        _locale: en

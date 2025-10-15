@@ -1,5 +1,14 @@
 footer:
-  all_right_served: "All rights served"
+    all_right_served: "All right served"
 
 login: "Login"
+logout: "Logout"
 register: "Register"
+try_again: "Try again"
+
+form:
+    email: "Email"
+    first_name: "First name"
+    last_name: "Last name"
+    password: "Password"
+    agree_terms: "Agree terms"

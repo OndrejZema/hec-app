@@ -6,24 +6,46 @@
             Logo
         </div>
         <header class="logged-layout-header flex justify-end p-2 items-center bg-white">
-            <wa-button>Logout</wa-button>
+            <div class="language-switcher">
+                {% set route = app.request.attributes.get('_route') %}
+                {% set route_params = app.request.attributes.get('_route_params') %}
+
+                <a href="{{ path(route, route_params|merge({'_locale': 'cs'})) }}"
+                   class="{{ app.request.locale == 'cs' ? 'active' : '' }}">
+                    🇨🇿 Čeština
+                </a>
+                <a href="{{ path(route, route_params|merge({'_locale': 'en'})) }}"
+                   class="{{ app.request.locale == 'en' ? 'active' : '' }}">
+                    🇬🇧 English
+                </a>
+            </div>
+            <form method="post" action="{{ path('app_logout') }}">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+                <wa-button appearance="outlined" type="submit">
+                    <wa-icon slot="start" name="right-from-bracket" class="hec-icon"></wa-icon>
+                    {{ 'logout'|trans({}, 'common') }}
+                </wa-button>
+            </form>
         </header>
 
         <nav class="logged-layout-nav p-2 bg-white">
             <div class="flex flex-col gap-2">
-                <wa-button size="small" appearance="{{ currentRoute == 'app_dashboard' ? 'filled' : 'plain' }}" variant="neutral" class="w-full">
+                <wa-button size="small" appearance="{{ currentRoute == 'app_dashboard' ? 'filled' : 'plain' }}"
+                           variant="neutral" class="w-full">
                     <wa-icon slot="start" name="user" class="hec-icon"></wa-icon>
                     Consumption profile
                 </wa-button>
-                <wa-button size="small" appearance="{{ currentRoute == 'app_performance_profile' ? 'filled' : 'plain' }}" variant="neutral" class="w-full">
+                <wa-button size="small"
+                           appearance="{{ currentRoute == 'app_performance_profile' ? 'filled' : 'plain' }}"
+                           variant="neutral" class="w-full">
                     Performance profile
                 </wa-button>
             </div>
         </nav>
         <div class="logged-layout-content p-8 bg-gray-100 border border-gray-200 rounded">
-        {% block content %}
+            {% block content %}
 
-        {% endblock %}
-    </div>
+            {% endblock %}
+        </div>
     </div>
 {% endblock %}

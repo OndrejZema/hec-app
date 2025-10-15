@@ -2,6 +2,7 @@ footer:
   all_right_served: "Všechna práva vyhrazena"
 
 login: "Přihlásit se"
+logout: "Odhlásit se"
 register: "Registrovat se"
 try_again: "Zkusit znovu"
 

@@ -1,0 +1,18 @@
+back_to_home: "Back to home page"
+login:
+    title: "Login"
+    forgot_password: "Forgot password"
+    dont_have_account: "Don't have an account yet?"
+register:
+    title: "Register"
+    have_account: "Do you already have an account?"
+reset_password:
+    title: "Reset password"
+    action: "Reset password"
+    send_email:
+        action: "Send email"
+        tip: "Enter your email address and we will send you a link to reset your password."
+    check_email:
+        title: "Password reset"
+        text: "If an account with the specified email address is found, a password reset link will be sent to it. This link will expire: "
+        spam: "If you did not receive an email, check your spam folder."
