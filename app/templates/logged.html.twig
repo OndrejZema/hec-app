@@ -3,42 +3,66 @@
 {% block body %}
     <div class="logged-layout">
         <div class="logged-layout-logo bg-white">
-            Logo
+            <img src="{{ asset('imgs/logo.svg') }}" class="size-35">
         </div>
-        <header class="logged-layout-header flex justify-end p-2 items-center bg-white">
-            <div class="language-switcher">
-                {% set route = app.request.attributes.get('_route') %}
-                {% set route_params = app.request.attributes.get('_route_params') %}
-
-                <a href="{{ path(route, route_params|merge({'_locale': 'cs'})) }}"
-                   class="{{ app.request.locale == 'cs' ? 'active' : '' }}">
-                    🇨🇿 Čeština
-                </a>
-                <a href="{{ path(route, route_params|merge({'_locale': 'en'})) }}"
-                   class="{{ app.request.locale == 'en' ? 'active' : '' }}">
-                    🇬🇧 English
-                </a>
-            </div>
-            <form method="post" action="{{ path('app_logout') }}">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
-                <wa-button appearance="outlined" type="submit">
-                    <wa-icon slot="start" name="right-from-bracket" class="hec-icon"></wa-icon>
-                    {{ 'logout'|trans({}, 'common') }}
+        <header class="logged-layout-header flex justify-between p-2 items-center bg-white mr-10">
+            <div class="flex items-center gap-2">
+                Current House
+                <wa-dropdown>
+                    <wa-button size="small" slot="trigger" appearance="outlined">
+                        <div class="flex justify-between items-center min-w-60">
+                            <div class="flex items-center gap-1">
+                                <wa-icon name="house"></wa-icon>
+                                <div class="mt-0.5">House 2</div>
+                            </div>
+                            <wa-icon name="chevron-down"></wa-icon>
+                        </div>
+                    </wa-button>
+                    <wa-dropdown-item>House 1</wa-dropdown-item>
+                </wa-dropdown>
+                <wa-button size="small" appearance="filled">
+                    <wa-icon name="plus"></wa-icon>
                 </wa-button>
-            </form>
+            </div>
+            <div class="flex items-center">
+                <twig:LanguageSelect/>
+                <twig:ProfileDropdown/>
+            </div>
         </header>
 
-        <nav class="logged-layout-nav p-2 bg-white">
+        <nav class="logged-layout-nav p-2 bg-white flex flex-col justify-between items-stretch gap-2">
             <div class="flex flex-col gap-2">
                 <wa-button size="small" appearance="{{ currentRoute == 'app_dashboard' ? 'filled' : 'plain' }}"
                            variant="neutral" class="w-full">
-                    <wa-icon slot="start" name="user" class="hec-icon"></wa-icon>
-                    Consumption profile
+                    <wa-icon slot="start" name="gauge" class="hec-icon"></wa-icon>
+                    {{ 'logged.consumption_profile'|trans({}, 'navigation') }}
                 </wa-button>
                 <wa-button size="small"
                            appearance="{{ currentRoute == 'app_performance_profile' ? 'filled' : 'plain' }}"
                            variant="neutral" class="w-full">
-                    Performance profile
+                    <wa-icon slot="start" name="chart-line" class="hec-icon"></wa-icon>
+                    {{ 'logged.performance_profile'|trans({}, 'navigation') }}
+
+                </wa-button>
+                <wa-button size="small"
+                           appearance="{{ currentRoute == 'app_performance_profile' ? 'filled' : 'plain' }}"
+                           variant="neutral" class="w-full">
+                    <wa-icon slot="start" name="dollar-sign" class="hec-icon"></wa-icon>
+                    {{ 'logged.broker_profile'|trans({}, 'navigation') }}
+
+                </wa-button>
+                <wa-button size="small"
+                           appearance="{{ currentRoute == 'app_performance_profile' ? 'filled' : 'plain' }}"
+                           variant="neutral" class="w-full">
+                    <wa-icon slot="start" name="battery-three-quarters" class="hec-icon"></wa-icon>
+                    {{ 'logged.battery'|trans({}, 'navigation') }}
+                </wa-button>
+            </div>
+            <div class="w-full flex justify-center">
+                <wa-button
+                    appearance="filled"
+                    variant="neutral" pill>
+                    <wa-icon name="cogs" class="hec-icon"></wa-icon>
                 </wa-button>
             </div>
         </nav>

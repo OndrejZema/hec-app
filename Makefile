@@ -20,6 +20,7 @@ init:
 		composer require symfony/stimulus-bundle && \ 
 		composer require symfony/ux-turbo && \
 		composer require symfonycasts/tailwind-bundle && \
+		composer require symfony/asset && \
 		bin/console importmap:install \
 	"
 tw-init:

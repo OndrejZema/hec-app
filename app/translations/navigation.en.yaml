@@ -1,0 +1,5 @@
+logged:
+    broker_profile: "Broker profile"
+    performance_profile: "Performance profile"
+    consumption_profile: "Consumption profile"
+    battery: "Battery"

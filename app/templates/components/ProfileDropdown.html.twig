@@ -1,0 +1,17 @@
+<div>
+    <wa-dropdown>
+        <wa-button slot="trigger" appearance="outlined" pill>
+            <wa-icon name="user"></wa-icon>
+        </wa-button>
+        <wa-dropdown-item>
+            <form method="post" action="{{ path('app_logout') }}">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+                <wa-button appearance="outlined" type="submit">
+                    <wa-icon slot="start" name="right-from-bracket" class="hec-icon"></wa-icon>
+                    {{ 'logout'|trans({}, 'common') }}
+                </wa-button>
+            </form>
+        </wa-dropdown-item>
+
+    </wa-dropdown>
+</div>

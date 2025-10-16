@@ -1,0 +1,28 @@
+<div>
+    {% set route = app.request.attributes.get('_route') %}
+    {% set route_params = app.request.attributes.get('_route_params') %}
+
+    <wa-dropdown>
+        <wa-button slot="trigger" appearance="plain">
+            <div class="flex items-center gap-2">
+                <img src="{{ app.request.locale == 'cs' ?asset('icons/cz.svg') :asset('icons/gb.svg') }}"
+                     class="size-6">
+                {{ app.request.locale|upper }}
+            </div>
+        </wa-button>
+        <wa-dropdown-item>
+            <a href="{{ path(route, route_params|merge({'_locale': 'cs'})) }}"
+               class="flex items-center gap-2 p-2 !no-underline !text-gray-600 font-medium">
+                <img src="{{ asset('icons/cz.svg') }}" class="size-5">
+                CS
+            </a>
+        </wa-dropdown-item>
+        <wa-dropdown-item>
+            <a href="{{ path(route, route_params|merge({'_locale': 'en'})) }}"
+               class="flex items-center gap-2 p-2 !no-underline !text-gray-600 font-medium">
+                <img src="{{ asset('icons/gb.svg') }}" class="size-5">
+                EN
+            </a>
+        </wa-dropdown-item>
+    </wa-dropdown>
+</div>
