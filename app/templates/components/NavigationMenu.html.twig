@@ -1,0 +1,42 @@
+{% set currentRoute = app.request.attributes.get('_route') %}
+<nav class="p-2 bg-white flex flex-col justify-between items-stretch gap-2 h-full">
+    <div class="flex flex-col gap-2">
+        <wa-button size="small" appearance="{{ currentRoute == 'app_dashboard' ? 'filled' : 'plain' }}"
+                   variant="neutral" class="w-full">
+            <wa-icon slot="start" name="gauge" class="hec-icon"></wa-icon>
+            {{ 'logged.consumption_profile'|trans({}, 'navigation') }}
+        </wa-button>
+        <wa-button size="small"
+                   appearance="{{ currentRoute == 'app_performance_profile' ? 'filled' : 'plain' }}"
+                   variant="neutral" class="w-full">
+            <wa-icon slot="start" name="chart-line" class="hec-icon"></wa-icon>
+            {{ 'logged.performance_profile'|trans({}, 'navigation') }}
+
+        </wa-button>
+        <wa-button size="small"
+                   appearance="{{ currentRoute == 'app_performance_profile' ? 'filled' : 'plain' }}"
+                   variant="neutral" class="w-full">
+            <wa-icon slot="start" name="dollar-sign" class="hec-icon"></wa-icon>
+            {{ 'logged.broker_profile'|trans({}, 'navigation') }}
+
+        </wa-button>
+        <wa-button size="small"
+                   appearance="{{ currentRoute == 'app_performance_profile' ? 'filled' : 'plain' }}"
+                   variant="neutral" class="w-full">
+            <wa-icon slot="start" name="battery-three-quarters" class="hec-icon"></wa-icon>
+            {{ 'logged.battery'|trans({}, 'navigation') }}
+        </wa-button>
+    </div>
+    <div class="w-full flex justify-center gap-2">
+        <wa-button
+                appearance="filled"
+                variant="neutral" pill>
+            <wa-icon name="house" class="hec-icon"></wa-icon>
+        </wa-button>
+        <wa-button
+                appearance="filled"
+                variant="neutral" pill>
+            <wa-icon name="cogs" class="hec-icon"></wa-icon>
+        </wa-button>
+    </div>
+</nav>

@@ -27,7 +27,7 @@ tw-init:
 	docker compose exec php bash -c "php bin/console tailwind:init"
 
 tw-watch:
-	docker compose exec php bash -c "php bin/console tailwind:build --watch"
+	docker compose exec php bash -c "php bin/console tailwind:build --watch" -d
 tw-build:
 	docker compose exec php bash -c "php bin/console tailwind:build"
 
