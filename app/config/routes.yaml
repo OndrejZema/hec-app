@@ -8,3 +8,5 @@ controllers:
         _locale: cs|en
     defaults:
         _locale: en
+        permanent: true
+        route: app_home

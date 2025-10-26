@@ -20,24 +20,19 @@
                     </wa-button>
                     <wa-dropdown-item>House 1</wa-dropdown-item>
                 </wa-dropdown>
-                <wa-button size="small" appearance="filled">
-                    <wa-icon name="plus"></wa-icon>
-                </wa-button>
             </div>
             <div class="flex items-center">
                 <div class="md:hidden">
-                    <wa-drawer label="Drawer" id="drawer-overview">
+                    <wa-drawer label="HEC" id="mobile-nav">
                         <twig:LanguageSelect/>
                         <twig:NavigationMenu />
                     </wa-drawer>
 
-                    <wa-button appearance="plain"><wa-icon name="bars"></wa-icon></wa-button>
-
-                    <script>
-                        const drawer = document.querySelector('#drawer-overview');
-                        const openButton = drawer.nextElementSibling;
-                        openButton.addEventListener('click', () => (drawer.open = true));
-                    </script>
+                    <wa-button appearance="plain"
+                               data-controller="dialog"
+                               data-action="click->dialog#handleClick"
+                               data-dialog-dialog-id-value="mobile-nav"
+                    ><wa-icon name="bars"></wa-icon></wa-button>
                 </div>
                 <div class="hidden md:block">
                     <twig:LanguageSelect/>
