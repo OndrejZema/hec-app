@@ -3,12 +3,40 @@
 {% block title %}Hello HouseController!{% endblock %}
 
 {% block content %}
+    <h3 class="">Houses</h3>
+    <div class="max-w-[50rem]">
+        <turbo-frame id="house_table" src="{{ path('app_house', {page: page, perPage: perPage}) }}" data-turbo-action="advance">
 
-<div>
-    {% for house in houses %}
-        <li>{{ house.name }}</li>
-    {% else %}
-        <li>Žádné domy nenalezeny</li>
-    {% endfor %}
-</div>
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                        <wa-skeleton></wa-skeleton>
+                    </th>
+                    <th>
+                        <wa-skeleton></wa-skeleton>
+                    </th>
+                    <th>
+                        <wa-skeleton></wa-skeleton>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in [1, 2, 3, 4, 5] %}
+                    <tr>
+                        <td>
+                            <wa-skeleton></wa-skeleton>
+                        </td>
+                        <td>
+                            <wa-skeleton></wa-skeleton>
+                        </td>
+                        <td>
+                            <wa-skeleton></wa-skeleton>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </turbo-frame>
+    </div>
 {% endblock %}

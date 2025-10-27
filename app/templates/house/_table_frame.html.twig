@@ -1,0 +1,43 @@
+<turbo-frame id="house_table">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for house in houses %}
+            <tr>
+                <td>{{ house.name }}</td>
+                <td>{{ house.description }}</td>
+                <td>
+                    <wa-button size="small" appearance="plain" variant="danger">
+                        <wa-icon name="trash"></wa-icon>
+                    </wa-button>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <div class="flex flex-col md:flex-row justify-between">
+        <wa-select size="small" value="10">
+            <wa-option value="10">10</wa-option>
+            <wa-option value="20">20</wa-option>
+            <wa-option value="50">50</wa-option>
+            <wa-option value="100">100</wa-option>
+        </wa-select>
+        <div class="flex gap-1 items-center">
+            <wa-button size="small" appearance="plain outlined" href="{{ path('app_house', {page: page-1, perPage: perPage}) }}">
+                <wa-icon name="chevron-left"></wa-icon>
+            </wa-button>
+            <wa-input size="small" class="w-12"></wa-input>
+            <div class="text-gray-600">of 15</div>
+            <wa-button size="small" appearance="plain outlined" href="{{ path('app_house', {page: page+1, perPage: perPage}) }}">
+                <wa-icon name="chevron-right"></wa-icon>
+            </wa-button>
+        </div>
+    </div>
+</turbo-frame>

@@ -11,9 +11,16 @@
 * {
     box-sizing: border-box;
 }
-
-
 @layer components {
+    th{
+        color: var(--color-gray-600);
+    }
+    td{
+        background-color: var(--color-gray-50);
+    }
+    table{
+        @apply !border !border-gray-200 !rounded;
+    }
     .hec-icon {
         @apply text-amber-500;
     }
