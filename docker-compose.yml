@@ -36,6 +36,17 @@ services:
       - "3306:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: hec_phpmyadmin
+    environment:
+      PMA_HOST: mariadb
+      PMA_USER: symfony
+      PMA_PASSWORD: symfony
+    ports:
+      - "8888:80"
+    depends_on:
+      - mariadb
 
 volumes:
   mariadb_data:
