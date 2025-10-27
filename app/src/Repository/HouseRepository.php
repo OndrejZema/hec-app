@@ -3,17 +3,28 @@
 namespace App\Repository;
 
 use App\Entity\House;
+use App\Entity\User;
+use App\Repository\Interface\IHouseRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<House>
  */
-class HouseRepository extends ServiceEntityRepository
+class HouseRepository extends ServiceEntityRepository implements IHouseRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, House::class);
+    }
+
+    public function findByUser(User $user): array
+    {
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.user = :userId')
+            ->setParameter('userId', $user->getId())
+            ->getQuery()
+            ->getResult();
     }
 
     //    /**
