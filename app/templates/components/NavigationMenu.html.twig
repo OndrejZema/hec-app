@@ -1,6 +1,6 @@
 {% set currentRoute = app.request.attributes.get('_route') %}
-<nav class="p-2 bg-white flex flex-col justify-between items-stretch gap-2 h-full">
-    <div class="flex flex-col gap-2">
+<nav class="p-2 bg-white flex flex-col justify-between items-stretch gap-2  h-full">
+    <div class="flex flex-col gap-0.5 md:gap-2">
         <wa-button size="small" appearance="{{ currentRoute == 'app_dashboard' ? 'filled' : 'plain' }}"
                    variant="neutral" class="w-full">
             <wa-icon slot="start" name="gauge" class="hec-icon"></wa-icon>
