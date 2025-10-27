@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -36,6 +38,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private bool $isVerified = false;
+
+    /**
+     * @var Collection<int, House>
+     */
+    #[ORM\OneToMany(targetEntity: House::class, mappedBy: 'user')]
+    private Collection $houses;
+
+    public function __construct()
+    {
+        $this->houses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -126,6 +139,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, House>
+     */
+    public function getHouses(): Collection
+    {
+        return $this->houses;
+    }
+
+    public function addHouse(House $house): static
+    {
+        if (!$this->houses->contains($house)) {
+            $this->houses->add($house);
+            $house->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHouse(House $house): static
+    {
+        if ($this->houses->removeElement($house)) {
+            // set the owning side to null (unless already changed)
+            if ($house->getUser() === $this) {
+                $house->setUser(null);
+            }
+        }
 
         return $this;
     }
