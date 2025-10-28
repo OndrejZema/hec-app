@@ -14,3 +14,8 @@ form:
     last_name: "Last name"
     password: "Password"
     agree_terms: "Agree terms"
+    name: "Name"
+    description: "Description"
+    save: "Save"
+    delete: "Delete"
+    delete_question: "Are you sure you want to delete the record?"

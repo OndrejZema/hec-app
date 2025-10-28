@@ -1,0 +1,27 @@
+<div>
+    <wa-dialog label="{{ 'form.delete'|trans({}, 'common') }}" id="delete-dialog">
+        <p>{{ 'form.delete_question'|trans({}, 'common') }}</p>
+
+        <div class="flex justify-end">
+            <form method="POST" action="{{ path(routeName, {id: id}) }}">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ id) }}">
+                <input type="hidden" name="_method" value="DELETE">
+                <wa-button type="submit" slot="footer" variant="danger" data-dialog="close">
+                    <wa-icon slot="start" name="trash"></wa-icon>
+                    {{ 'form.delete'|trans({}, 'common') }}
+                </wa-button>
+            </form>
+        </div>
+    </wa-dialog>
+
+    <wa-button
+        appearance="plain"
+        variant="danger"
+        size="small"
+        data-controller="dialog"
+        data-action="click->dialog#handleClick"
+        data-dialog-dialog-id-value="delete-dialog"
+    >
+        <wa-icon name="trash"></wa-icon>
+    </wa-button>
+</div>

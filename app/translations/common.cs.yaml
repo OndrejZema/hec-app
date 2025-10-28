@@ -14,3 +14,8 @@ form:
     last_name: "Příjmení"
     password: "Heslo"
     agree_terms: "Souhlasím s podmínkami"
+    name: "Název"
+    description: "Popisek"
+    save: "Uložit"
+    delete: "Smazat"
+    delete_question: "Opravdu chcete smazat záznam?"

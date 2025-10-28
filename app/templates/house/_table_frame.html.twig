@@ -13,9 +13,7 @@
                 <td>{{ house.name }}</td>
                 <td>{{ house.description }}</td>
                 <td>
-                    <wa-button size="small" appearance="plain" variant="danger">
-                        <wa-icon name="trash"></wa-icon>
-                    </wa-button>
+                    <twig:DeleteDialog routeName="app_house_delete" id="{{ house.id }}"></twig:DeleteDialog>
                 </td>
             </tr>
         {% endfor %}
