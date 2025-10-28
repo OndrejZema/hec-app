@@ -1,0 +1,15 @@
+{% extends 'logged.html.twig' %}
+
+{% block title %}Hello HouseController!{% endblock %}
+
+{% block content %}
+    <div class="max-w-[50rem]">
+        {{ form_start(form) }}
+        <div class="gap-1 flex flex-col">
+            {{ form_row(form.name) }}
+            {{ form_row(form.description) }}
+        </div>
+        <wa-button type="submit" class="w-full mt-2">{{ 'save'|trans({}, 'common') }}</wa-button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
