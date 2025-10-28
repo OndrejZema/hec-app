@@ -1,0 +1,22 @@
+<table>
+    <thead>
+    <tr>
+        {% for i in 1..colsCount %}
+            <th>
+                <wa-skeleton></wa-skeleton>
+            </th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in 1..rowsCount %}
+        <tr>
+            {% for j in 1..colsCount %}
+                <td>
+                    <wa-skeleton></wa-skeleton>
+                </td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

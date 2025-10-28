@@ -3,40 +3,16 @@
 {% block title %}Hello HouseController!{% endblock %}
 
 {% block content %}
-    <h3 class="">Houses</h3>
     <div class="max-w-[50rem]">
-        <turbo-frame id="house_table" src="{{ path('app_house', {page: page, perPage: perPage}) }}" data-turbo-action="advance">
-
-            <table>
-                <thead>
-                <tr>
-                    <th>
-                        <wa-skeleton></wa-skeleton>
-                    </th>
-                    <th>
-                        <wa-skeleton></wa-skeleton>
-                    </th>
-                    <th>
-                        <wa-skeleton></wa-skeleton>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for i in [1, 2, 3, 4, 5] %}
-                    <tr>
-                        <td>
-                            <wa-skeleton></wa-skeleton>
-                        </td>
-                        <td>
-                            <wa-skeleton></wa-skeleton>
-                        </td>
-                        <td>
-                            <wa-skeleton></wa-skeleton>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        <div class="flex justify-between">
+            <h3 class="">Houses</h3>
+            <wa-button size="small" variant="primary" href="{{ path('app_house_create') }}">
+                <wa-icon name="add"></wa-icon>
+            </wa-button>
+        </div>
+        <turbo-frame id="house_table" src="{{ path('app_house', {page: page, perPage: perPage}) }}"
+                     data-turbo-action="advance">
+            <twig:SkeletonTable colsCount="3" rowsCount="5"></twig:SkeletonTable>
         </turbo-frame>
     </div>
 {% endblock %}

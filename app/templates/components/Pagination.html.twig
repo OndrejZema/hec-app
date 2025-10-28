@@ -1,0 +1,65 @@
+<div>
+    <div class="flex flex-col md:flex-row justify-between">
+        <div class="flex items-center gap-2">
+        <wa-dropdown>
+            <wa-button slot="trigger" with-caret size="small" appearance="plain outlined"
+                       class="bg-white">{{ perPage }}</wa-button>
+
+            <wa-dropdown-item>
+                <wa-button appearance="plain" size="small" href="{{ path(routeName, {page: 1, perPage: 10}) }}">10
+                </wa-button>
+            </wa-dropdown-item>
+            <wa-dropdown-item>
+                <wa-button appearance="plain" size="small" href="{{ path(routeName, {page: 1, perPage: 20}) }}">20
+                </wa-button>
+            </wa-dropdown-item>
+            <wa-dropdown-item>
+                <wa-button appearance="plain" size="small" href="{{ path(routeName, {page: 1, perPage: 50}) }}">50
+                </wa-button>
+            </wa-dropdown-item>
+            <wa-dropdown-item>
+                <wa-button appearance="plain" size="small" href="{{ path(routeName, {page: 1, perPage: 100}) }}">100
+                </wa-button>
+            </wa-dropdown-item>
+        </wa-dropdown>
+        {{ 'per_page'|trans({}, 'common') }}
+        </div>
+        <div class="flex gap-1 items-center">
+            {% if page - 1 <= 0 %}
+                <wa-button disabled="{{ true }}" size="small" appearance="plain outlined">
+                    <wa-icon name="chevron-left"></wa-icon>
+                </wa-button>
+            {% else %}
+                <wa-button size="small" appearance="plain outlined"
+                           href="{{ path(routeName, {page: page-1, perPage: perPage}) }}">
+                    <wa-icon name="chevron-left"></wa-icon>
+                </wa-button>
+            {% endif %}
+
+            <wa-dropdown>
+                <wa-button slot="trigger" with-caret size="small" appearance="plain outlined"
+                           class="bg-white">{{ page }}</wa-button>
+
+                {% for i in 1..lastPage %}
+                    <wa-dropdown-item>
+                        <wa-button appearance="plain" size="small"
+                                   href="{{ path(routeName, {page: i, perPage: perPage}) }}">
+                            {{ i }}
+                        </wa-button>
+                    </wa-dropdown-item>
+                {% endfor %}
+            </wa-dropdown>
+            <div class="text-gray-600"> {{ 'of'|trans({}, 'common')|lower }} {{ lastPage }} </div>
+            {% if page + 1 > lastPage %}
+                <wa-button disabled="{{ true }}" size="small" appearance="plain outlined">
+                    <wa-icon name="chevron-right"></wa-icon>
+                </wa-button>
+            {% else %}
+                <wa-button size="small" appearance="plain outlined"
+                           href="{{ path(routeName, {page: page+1, perPage: perPage}) }}">
+                    <wa-icon name="chevron-right"></wa-icon>
+                </wa-button>
+            {% endif %}
+        </div>
+    </div>
+</div>

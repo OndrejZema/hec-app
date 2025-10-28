@@ -5,6 +5,8 @@ login: "Login"
 logout: "Logout"
 register: "Register"
 try_again: "Try again"
+of: "Of"
+per_page: "Per page"
 
 form:
     email: "Email"

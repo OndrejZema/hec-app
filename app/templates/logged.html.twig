@@ -3,7 +3,9 @@
 {% block body %}
     <div class="logged-layout">
         <div class="logged-layout-logo bg-white">
-            <img src="{{ asset('imgs/logo.svg') }}" class="">
+            <a href="{{ path('app_dashboard') }}">
+                <img src="{{ asset('imgs/logo.svg') }}" class="">
+            </a>
         </div>
         <header class="logged-layout-header flex justify-between p-2 items-center bg-white mr-10">
             <div class="flex items-center gap-2">
@@ -25,14 +27,16 @@
                 <div class="md:hidden">
                     <wa-drawer label="HEC" id="mobile-nav">
                         <twig:LanguageSelect/>
-                        <twig:NavigationMenu />
+                        <twig:NavigationMenu/>
                     </wa-drawer>
 
                     <wa-button appearance="plain"
                                data-controller="dialog"
                                data-action="click->dialog#handleClick"
                                data-dialog-dialog-id-value="mobile-nav"
-                    ><wa-icon name="bars"></wa-icon></wa-button>
+                    >
+                        <wa-icon name="bars"></wa-icon>
+                    </wa-button>
                 </div>
                 <div class="hidden md:block">
                     <twig:LanguageSelect/>

@@ -5,6 +5,8 @@ login: "Přihlásit se"
 logout: "Odhlásit se"
 register: "Registrovat se"
 try_again: "Zkusit znovu"
+of: "Z"
+per_page: "Na stránku"
 
 form:
     email: "E-mail"
