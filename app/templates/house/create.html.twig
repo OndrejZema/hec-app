@@ -4,6 +4,12 @@
 
 {% block content %}
     <div class="max-w-[50rem]">
+        <div class="flex items-center justify-between">
+            <h3>House</h3>
+            <wa-button appearance="plain outlined" href="{{ path('app_house') }}">
+                <wa-icon name="chevron-left"></wa-icon>
+            </wa-button>
+        </div>
         {{ form_start(form) }}
         <div class="gap-1 flex flex-col">
             {{ form_row(form.name) }}

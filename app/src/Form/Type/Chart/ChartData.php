@@ -11,6 +11,5 @@ class ChartData
     public function __construct(
         public array $labels,
         public array $datasets,
-
     ){}
 }

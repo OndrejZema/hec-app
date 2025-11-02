@@ -21,6 +21,7 @@ init:
 		composer require symfony/ux-turbo && \
 		composer require symfonycasts/tailwind-bundle && \
 		composer require symfony/asset && \
+		composer stof/doctrine-extensions-bundle && \
 		bin/console importmap:install \
 	"
 tw-init:

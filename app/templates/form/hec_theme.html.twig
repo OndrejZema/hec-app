@@ -59,16 +59,17 @@
 {% endblock %}
 
 {% block textarea_widget %}
-    <wa-input
+    <wa-textarea
         as="textarea"
         id="{{ id }}"
         name="{{ full_name }}"
         label="{{ label|trans(label_translation_parameters|default({}), translation_domain) }}"
+        value="{{ value }}"
         {% if required %}required{% endif %}
         {% for attrname, attrvalue in attr %}
             {{- attrname }}="{{ attrvalue }}"
         {% endfor %}
-    >{{ value }}</wa-input>
+    ></wa-textarea>
 {% endblock %}
 
 {%- block checkbox_widget -%}

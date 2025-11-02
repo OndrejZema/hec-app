@@ -2,15 +2,21 @@
 
 namespace App\Repository\Interface;
 
+use App\Dto\Pagination\PaginationDto;
 use App\Entity\House;
 use App\Entity\User;
 
 interface IHouseRepository
 {
+    public function getById(User $user, int $id): ?House;
+
     /**
-     * @param User $user
-     * @return array<House>
+     * @return array{0: array<House>, 1: PaginationDto}
      */
-    public function findByUser(User $user): array;
+    public function getAll(User $user, int $page, int $perPage): array;
+
+    public function save(House $house, bool $flush = true): void;
+
+    public function delete(User $user, int $id, bool $flush = true): void;
 
 }

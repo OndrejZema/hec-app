@@ -1,5 +1,6 @@
 <div>
-    <wa-dialog label="{{ 'form.delete'|trans({}, 'common') }}" id="delete-dialog">
+    {% set dialogId = 'delete-dialog-house-' ~ id %}
+    <wa-dialog label="{{ 'form.delete'|trans({}, 'common') }}" id="{{ dialogId }}">
         <p>{{ 'form.delete_question'|trans({}, 'common') }}</p>
 
         <div class="flex justify-end">
@@ -20,7 +21,7 @@
         size="small"
         data-controller="dialog"
         data-action="click->dialog#handleClick"
-        data-dialog-dialog-id-value="delete-dialog"
+        data-dialog-dialog-id-value="{{ dialogId }}"
     >
         <wa-icon name="trash"></wa-icon>
     </wa-button>

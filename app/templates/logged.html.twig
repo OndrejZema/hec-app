@@ -8,21 +8,7 @@
             </a>
         </div>
         <header class="logged-layout-header flex justify-between p-2 items-center bg-white mr-10">
-            <div class="flex items-center gap-2">
-                Current House
-                <wa-dropdown>
-                    <wa-button size="small" slot="trigger" appearance="outlined">
-                        <div class="flex justify-between items-center min-w-60">
-                            <div class="flex items-center gap-1">
-                                <wa-icon name="house"></wa-icon>
-                                <div class="mt-0.5">House 2</div>
-                            </div>
-                            <wa-icon name="chevron-down"></wa-icon>
-                        </div>
-                    </wa-button>
-                    <wa-dropdown-item>House 1</wa-dropdown-item>
-                </wa-dropdown>
-            </div>
+            <twig:SelectedHouse></twig:SelectedHouse>
             <div class="flex items-center">
                 <div class="md:hidden">
                     <wa-drawer label="HEC" id="mobile-nav">

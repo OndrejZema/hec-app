@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Dto\HouseDto;
+use App\Dto\House\CreateHouseDto;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,13 +21,14 @@ class HouseFormType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'form.description',
                 'translation_domain' => 'common',
+                'required' => false,
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => HouseDto::class,
+            'data_class' => CreateHouseDto::class,
         ]);
     }
 }

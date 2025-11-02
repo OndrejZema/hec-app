@@ -2,9 +2,13 @@
 
 namespace App\Repository;
 
+use App\Dto\House\CreateHouseDto;
+use App\Dto\House\HouseDto;
+use App\Dto\House\UpdateHouseDto;
 use App\Entity\House;
 use App\Entity\User;
 use App\Repository\Interface\IHouseRepository;
+use App\Trait\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -13,42 +17,50 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class HouseRepository extends ServiceEntityRepository implements IHouseRepository
 {
+    use Paginator;
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, House::class);
     }
-
-    public function findByUser(User $user): array
+    public function getById(User $user, int $id): ?House
     {
         return $this->createQueryBuilder('h')
             ->andWhere('h.user = :userId')
+            ->andWhere('h.id = :id')
             ->setParameter('userId', $user->getId())
+            ->setParameter('id', $id)
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
     }
 
-    //    /**
-    //     * @return House[] Returns an array of House objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('h')
-    //            ->andWhere('h.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('h.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function getAll(User $user, int $page, int $perPage): array
+    {
+        $qb = $this->createQueryBuilder('h')
+            ->andWhere('h.user = :userId')
+            ->setParameter('userId', $user->getId());
+        list($paginator, $pagination) = $this->paginate($qb, $page, $perPage);
 
-    //    public function findOneBySomeField($value): ?House
-    //    {
-    //        return $this->createQueryBuilder('h')
-    //            ->andWhere('h.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        return [iterator_to_array($paginator), $pagination];
+    }
+
+    public function save(House $house, bool $flush = true): void
+    {
+        $this->getEntityManager()->persist($house);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function delete(User $user, int $id, bool $flush = true): void
+    {
+        $house = $this->findOneBy(['user' => $user, 'id' => $id]);
+        if($house !== null){
+            $this->getEntityManager()->remove($house);
+
+            if ($flush) {
+                $this->getEntityManager()->flush();
+            }
+        }
+    }
 }

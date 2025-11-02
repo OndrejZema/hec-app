@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -16,6 +17,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -45,9 +48,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: House::class, mappedBy: 'user')]
     private Collection $houses;
 
+    /**
+     * @var Collection<int, HouseVisit>
+     */
+    #[ORM\OneToMany(targetEntity: HouseVisit::class, mappedBy: 'user')]
+    private Collection $houseVisits;
+
     public function __construct()
     {
         $this->houses = new ArrayCollection();
+        $this->houseVisits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -74,7 +84,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -119,8 +129,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function __serialize(): array
     {
-        $data = (array) $this;
-        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+        $data = (array)$this;
+        $data["\0" . self::class . "\0password"] = hash('crc32c', $this->password);
 
         return $data;
     }
@@ -172,4 +182,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, HouseVisit>
+     */
+    public function getHouseVisits(): Collection
+    {
+        return $this->houseVisits;
+    }
+
+    public function addHouseVisit(HouseVisit $houseVisit): static
+    {
+        if (!$this->houseVisits->contains($houseVisit)) {
+            $this->houseVisits->add($houseVisit);
+            $houseVisit->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHouseVisit(HouseVisit $houseVisit): static
+    {
+        if ($this->houseVisits->removeElement($houseVisit)) {
+            // set the owning side to null (unless already changed)
+            if ($houseVisit->getUser() === $this) {
+                $houseVisit->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }
