@@ -2,27 +2,27 @@
 <nav class="p-2 bg-white flex flex-col justify-between items-stretch gap-2  h-full">
     <div class="flex flex-col gap-0.5 md:gap-2">
         <wa-button size="small" appearance="{{ currentRoute == 'app_dashboard' ? 'filled' : 'plain' }}"
-                   variant="neutral" class="w-full">
+                   variant="neutral" class="nav-btn">
             <wa-icon slot="start" name="gauge" class="hec-icon"></wa-icon>
             {{ 'logged.consumption_profile'|trans({}, 'navigation') }}
         </wa-button>
         <wa-button size="small"
                    appearance="{{ currentRoute == 'app_performance_profile' ? 'filled' : 'plain' }}"
-                   variant="neutral" class="w-full">
+                   variant="neutral" class="nav-btn">
             <wa-icon slot="start" name="chart-line" class="hec-icon"></wa-icon>
             {{ 'logged.performance_profile'|trans({}, 'navigation') }}
 
         </wa-button>
         <wa-button size="small"
                    appearance="{{ currentRoute == 'app_performance_profile' ? 'filled' : 'plain' }}"
-                   variant="neutral" class="w-full">
+                   variant="neutral" class="nav-btn">
             <wa-icon slot="start" name="dollar-sign" class="hec-icon"></wa-icon>
             {{ 'logged.broker_profile'|trans({}, 'navigation') }}
 
         </wa-button>
         <wa-button size="small"
                    appearance="{{ currentRoute == 'app_performance_profile' ? 'filled' : 'plain' }}"
-                   variant="neutral" class="w-full">
+                   variant="neutral" class="nav-btn">
             <wa-icon slot="start" name="battery-three-quarters" class="hec-icon"></wa-icon>
             {{ 'logged.battery'|trans({}, 'navigation') }}
         </wa-button>

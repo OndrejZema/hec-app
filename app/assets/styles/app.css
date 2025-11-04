@@ -11,6 +11,11 @@
 * {
     box-sizing: border-box;
 }
+wa-button.nav-btn::part(base){
+    display: flex !important;
+    justify-content: start;
+    width: 100%;
+}
 @layer components {
     th{
         color: var(--color-gray-600);

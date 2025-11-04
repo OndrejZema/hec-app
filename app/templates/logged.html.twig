@@ -8,7 +8,11 @@
             </a>
         </div>
         <header class="logged-layout-header flex justify-between p-2 items-center bg-white mr-10">
-            <twig:SelectedHouse></twig:SelectedHouse>
+            {% if currentRoute != 'app_house' %}
+                <twig:SelectedHouse></twig:SelectedHouse>
+                {% else %}
+                <div></div>
+            {% endif %}
             <div class="flex items-center">
                 <div class="md:hidden">
                     <wa-drawer label="HEC" id="mobile-nav">
