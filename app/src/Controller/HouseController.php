@@ -19,7 +19,7 @@ final class HouseController extends HecAbstractController
     {
     }
 
-    #[Route('/house', name: 'app_house')]
+    #[Route('/houses', name: 'app_house')]
     public function index(Request $request): Response|RedirectResponse
     {
         $page = $request->query->getInt("page", 0);
@@ -43,13 +43,12 @@ final class HouseController extends HecAbstractController
         }
 
         return $this->render('house/index.html.twig', [
-            'currentHouse' => 'house 1',
             'page' => $page,
             'perPage' => $perPage,
         ]);
     }
 
-    #[Route('/house/create', name: 'app_house_create')]
+    #[Route('/houses/create', name: 'app_house_create')]
     public function create(Request $request): Response
     {
         $user = $this->getAppUser();
@@ -70,7 +69,7 @@ final class HouseController extends HecAbstractController
         ]);
     }
 
-    #[Route('/house/update/{id}', name: 'app_house_update')]
+    #[Route('/houses/update/{id}', name: 'app_house_update')]
     public function update(Request $request, int $id): Response
     {
         $user = $this->getAppUser();
@@ -96,7 +95,7 @@ final class HouseController extends HecAbstractController
         ]);
     }
 
-    #[Route('/house/delete/{id}', name: 'app_house_delete', methods: ['POST'])]
+    #[Route('/houses/delete/{id}', name: 'app_house_delete', methods: ['POST'])]
     public function delete(Request $request, int $id): Response
     {
         $user = $this->getAppUser();
@@ -104,7 +103,7 @@ final class HouseController extends HecAbstractController
         return $this->redirectToRoute('app_house');
     }
 
-    #[Route('/house/visit/{id}', name: 'app_house_visit', methods: ['POST'])]
+    #[Route('/houses/visit/{id}', name: 'app_house_visit', methods: ['POST'])]
     public function visit(Request $request, int $id): RedirectResponse
     {
         $user = $this->getAppUser();

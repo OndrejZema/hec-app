@@ -4,12 +4,7 @@
 
 {% block content %}
     <div class="max-w-[50rem]">
-        <div class="flex justify-between">
-            <h3 class="">Houses</h3>
-            <wa-button size="small" variant="primary" href="{{ path('app_house_create') }}">
-                <wa-icon name="add"></wa-icon>
-            </wa-button>
-        </div>
+        <twig:SectionHeader title="{{ 'title'|trans({}, 'house') }}" createRouteName="app_house_create"/>
         <turbo-frame id="house_table" src="{{ path('app_house', {page: page, perPage: perPage}) }}"
                      data-turbo-action="advance">
             <twig:SkeletonTable colsCount="3" rowsCount="5"></twig:SkeletonTable>

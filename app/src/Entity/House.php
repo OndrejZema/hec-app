@@ -33,9 +33,37 @@ class House
     #[ORM\OneToMany(targetEntity: HouseVisit::class, mappedBy: 'house')]
     private Collection $houseVisits;
 
+    /**
+     * @var Collection<int, PerformanceProfile>
+     */
+    #[ORM\OneToMany(targetEntity: PerformanceProfile::class, mappedBy: 'house')]
+    private Collection $performanceProfiles;
+
+    /**
+     * @var Collection<int, ConsumptionProfile>
+     */
+    #[ORM\OneToMany(targetEntity: ConsumptionProfile::class, mappedBy: 'house')]
+    private Collection $consumptionProfiles;
+
+    /**
+     * @var Collection<int, HousePerformanceProfile>
+     */
+    #[ORM\OneToMany(targetEntity: HousePerformanceProfile::class, mappedBy: 'house')]
+    private Collection $housePerformanceProfiles;
+
+    /**
+     * @var Collection<int, HouseConsumptionProfile>
+     */
+    #[ORM\OneToMany(targetEntity: HouseConsumptionProfile::class, mappedBy: 'house')]
+    private Collection $houseConsumptionProfiles;
+
     public function __construct()
     {
         $this->houseVisits = new ArrayCollection();
+        $this->performanceProfiles = new ArrayCollection();
+        $this->consumptionProfiles = new ArrayCollection();
+        $this->housePerformanceProfiles = new ArrayCollection();
+        $this->houseConsumptionProfiles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -103,6 +131,126 @@ class House
             // set the owning side to null (unless already changed)
             if ($houseVisit->getHouse() === $this) {
                 $houseVisit->setHouse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PerformanceProfile>
+     */
+    public function getPerformanceProfiles(): Collection
+    {
+        return $this->performanceProfiles;
+    }
+
+    public function addPerformanceProfile(PerformanceProfile $performanceProfile): static
+    {
+        if (!$this->performanceProfiles->contains($performanceProfile)) {
+            $this->performanceProfiles->add($performanceProfile);
+            $performanceProfile->setHouse($this);
+        }
+
+        return $this;
+    }
+
+    public function removePerformanceProfile(PerformanceProfile $performanceProfile): static
+    {
+        if ($this->performanceProfiles->removeElement($performanceProfile)) {
+            // set the owning side to null (unless already changed)
+            if ($performanceProfile->getHouse() === $this) {
+                $performanceProfile->setHouse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ConsumptionProfile>
+     */
+    public function getConsumptionProfiles(): Collection
+    {
+        return $this->consumptionProfiles;
+    }
+
+    public function addConsumptionProfile(ConsumptionProfile $consumptionProfile): static
+    {
+        if (!$this->consumptionProfiles->contains($consumptionProfile)) {
+            $this->consumptionProfiles->add($consumptionProfile);
+            $consumptionProfile->setHouse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConsumptionProfile(ConsumptionProfile $consumptionProfile): static
+    {
+        if ($this->consumptionProfiles->removeElement($consumptionProfile)) {
+            // set the owning side to null (unless already changed)
+            if ($consumptionProfile->getHouse() === $this) {
+                $consumptionProfile->setHouse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HousePerformanceProfile>
+     */
+    public function getHousePerformanceProfiles(): Collection
+    {
+        return $this->housePerformanceProfiles;
+    }
+
+    public function addHousePerformanceProfile(HousePerformanceProfile $housePerformanceProfile): static
+    {
+        if (!$this->housePerformanceProfiles->contains($housePerformanceProfile)) {
+            $this->housePerformanceProfiles->add($housePerformanceProfile);
+            $housePerformanceProfile->setHouse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHousePerformanceProfile(HousePerformanceProfile $housePerformanceProfile): static
+    {
+        if ($this->housePerformanceProfiles->removeElement($housePerformanceProfile)) {
+            // set the owning side to null (unless already changed)
+            if ($housePerformanceProfile->getHouse() === $this) {
+                $housePerformanceProfile->setHouse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HouseConsumptionProfile>
+     */
+    public function getHouseConsumptionProfiles(): Collection
+    {
+        return $this->houseConsumptionProfiles;
+    }
+
+    public function addHouseConsumptionProfile(HouseConsumptionProfile $houseConsumptionProfile): static
+    {
+        if (!$this->houseConsumptionProfiles->contains($houseConsumptionProfile)) {
+            $this->houseConsumptionProfiles->add($houseConsumptionProfile);
+            $houseConsumptionProfile->setHouse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHouseConsumptionProfile(HouseConsumptionProfile $houseConsumptionProfile): static
+    {
+        if ($this->houseConsumptionProfiles->removeElement($houseConsumptionProfile)) {
+            // set the owning side to null (unless already changed)
+            if ($houseConsumptionProfile->getHouse() === $this) {
+                $houseConsumptionProfile->setHouse(null);
             }
         }
 
