@@ -3,13 +3,14 @@
 namespace App\Repository;
 
 use App\Entity\PerformanceProfile;
+use App\Repository\Interface\IPerformanceProfileRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<PerformanceProfile>
  */
-class PerformanceProfileRepository extends ServiceEntityRepository
+class PerformanceProfileRepository extends ServiceEntityRepository implements IPerformanceProfileRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

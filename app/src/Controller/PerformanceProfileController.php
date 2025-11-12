@@ -95,7 +95,7 @@ final class PerformanceProfileController extends HecAbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $house = $form->getData();
-            $this->houseService->update($user, $house);
+            $this->performanceProfileService->update($user, $house);
             return $this->redirectToRoute('app_performance_profile');
         }
         return $this->render('performance_profile/create.html.twig', [
