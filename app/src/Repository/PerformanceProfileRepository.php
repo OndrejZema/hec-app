@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\PerformanceProfile;
+use App\Entity\User;
 use App\Repository\Interface\IPerformanceProfileRepository;
+use App\Trait\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -12,33 +14,51 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PerformanceProfileRepository extends ServiceEntityRepository implements IPerformanceProfileRepository
 {
+    use Paginator;
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, PerformanceProfile::class);
     }
 
-    //    /**
-    //     * @return PerformanceProfile[] Returns an array of PerformanceProfile objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function getById(User $user, int $id): ?PerformanceProfile
+    {
+        return $this->createQueryBuilder('pp')
+            ->andWhere('pp.user = :userId')
+            ->andWhere('pp.id = :id')
+            ->setParameter('userId', $user->getId())
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 
-    //    public function findOneBySomeField($value): ?PerformanceProfile
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function getAll(User $user, int $page, int $perPage): array
+    {
+        $qb = $this->createQueryBuilder('pp')
+            ->andWhere('pp.user = :userId')
+            ->setParameter('userId', $user->getId());
+        list($paginator, $pagination) = $this->paginate($qb, $page, $perPage);
+
+        return [iterator_to_array($paginator), $pagination];
+    }
+
+    public function save(PerformanceProfile $performanceProfile, bool $flush = true): void
+    {
+        $this->getEntityManager()->persist($performanceProfile);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function delete(User $user, int $id, bool $flush = true): void
+    {
+        $performanceProfile = $this->findOneBy(['user' => $user, 'id' => $id]);
+        if($performanceProfile !== null){
+            $this->getEntityManager()->remove($performanceProfile);
+
+            if ($flush) {
+                $this->getEntityManager()->flush();
+            }
+        }
+    }
 }

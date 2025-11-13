@@ -17,9 +17,9 @@ interface IPerformanceProfileService
      */
     public function getAll(User $user, int $houseId, int $page, int $perPage): array;
 
-    public function create(User $user, CreatePerformanceProfileDto $houseDto): void;
+    public function create(User $user, CreatePerformanceProfileDto $performanceProfileDto): void;
 
-    public function update(User $user, UpdatePerformanceProfileDto $houseDto): void;
+    public function update(User $user, UpdatePerformanceProfileDto $performanceProfileDto): void;
 
     public function delete(User $user, int $id): void;
 

@@ -10,22 +10,23 @@ use App\Entity\User;
 
 class HouseMapper
 {
-    public function toDto(House $house): HouseDto
+    public function toDto(House $model): HouseDto
     {
         $dto = new HouseDto();
-        $dto->id = $house->getId();
-        $dto->name = $house->getName();
-        $dto->description = $house->getDescription();
+        $dto->id = $model->getId();
+        $dto->name = $model->getName();
+        $dto->description = $model->getDescription();
         return $dto;
     }
 
-    public function toEntity(CreateHouseDto|HouseDto $dto, ?User $user = null): House{
-        $house = new House();
-        $house->setName($dto->name);
-        $house->setDescription($dto->description);
-        if($user){
-            $house->setUser($user);
+    public function toEntity(CreateHouseDto|HouseDto $dto, ?User $user = null): House
+    {
+        $model = new House();
+        $model->setName($dto->name);
+        $model->setDescription($dto->description);
+        if ($user) {
+            $model->setUser($user);
         }
-        return $house;
+        return $model;
     }
 }

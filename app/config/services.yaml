@@ -27,7 +27,7 @@ services:
         alias: App\Repository\PerformanceProfileRepository
     App\Repository\Interface\IConsumptionProfileRepository:
         alias: App\Repository\ConsumptionProfileRepository
-    App\Repository\Interface\IPerformanceProfileService:
-        alias: App\Repository\PerformanceProfileService
-    App\Repository\Interface\IConsumptionProfileService:
-        alias: App\Repository\ConsumptionProfileService
+    App\Service\Interface\IPerformanceProfileService:
+        alias: App\Service\PerformanceProfileService
+    App\Service\Interface\IConsumptionProfileService:
+        alias: App\Service\ConsumptionProfileService

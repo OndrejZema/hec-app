@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Dto\House\CreateHouseDto;
 use App\Dto\House\UpdateHouseDto;
-use App\Dto\PerformanceProfile\CreatePerformanceProfileDto;
-use App\Dto\PerformanceProfile\UpdatePerformanceProfileDto;
+use App\Dto\PerformanceProfile\CreateConsumptionProfileDto;
+use App\Dto\PerformanceProfile\UpdateConsumptionProfileDto;
 use App\Form\HouseFormType;
 use App\Service\Interface\IHouseService;
 use App\Service\Interface\IPerformanceProfileService;
@@ -58,7 +58,7 @@ final class PerformanceProfileController extends HecAbstractController
     public function create(Request $request): Response
     {
         $user = $this->getAppUser();
-        $performanceProfile = new CreatePerformanceProfileDto();
+        $performanceProfile = new CreateConsumptionProfileDto();
 
         $form = $this->createForm(HouseFormType::class, $performanceProfile);
 
@@ -79,7 +79,7 @@ final class PerformanceProfileController extends HecAbstractController
         $user = $this->getAppUser();
         $performanceProfileDto = $this->performanceProfileService->getById($user, $id);
         //@todo check houseDto
-        $performanceProfile = new UpdatePerformanceProfileDto();
+        $performanceProfile = new UpdateConsumptionProfileDto();
         $performanceProfile->id = $performanceProfileDto->id;
         $performanceProfile->name = $performanceProfileDto->name;
         $performanceProfile->description = $performanceProfileDto->description;
@@ -89,7 +89,7 @@ final class PerformanceProfileController extends HecAbstractController
         $performanceProfile->profileMonth = $performanceProfileDto->profileMonth;
         $performanceProfile->profileYear = $performanceProfileDto->profileYear;
         $form = $this->createForm(HouseFormType::class, $performanceProfile, [
-            'data_class' => UpdatePerformanceProfileDto::class
+            'data_class' => UpdateConsumptionProfileDto::class
         ]);
 
         $form->handleRequest($request);
