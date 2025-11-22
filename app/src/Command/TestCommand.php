@@ -33,15 +33,6 @@ class TestCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $user = $this->em->createQueryBuilder()
-            ->select('u')
-            ->from(User::class, 'u')
-                ->andWhere('u.id = :id')
-                ->setParameter('id', 1)
-                ->getQuery()
-                ->getOneOrNullResult();
-        $current = $this->repo->getSelectedId($user);
-        dd($current);
         return Command::SUCCESS;
     }
 }

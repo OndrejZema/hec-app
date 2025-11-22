@@ -2,6 +2,7 @@
 
 namespace App\Dto\PerformanceProfile;
 
+use App\Dto\House\HouseDto;
 use App\Enum\ProfileTypeEnum;
 
 class CreatePerformanceProfileDto
@@ -10,6 +11,10 @@ class CreatePerformanceProfileDto
     public string $name;
     public ?string $description;
     public ProfileTypeEnum $type;
+    public int $performanceIndex;
+
+    public int $houseId;
+
     /** @var array<int> */
     public array $profileDay;
     /** @var array<int> */

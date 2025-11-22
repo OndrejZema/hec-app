@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="max-w-[50rem]">
-        <twig:SectionHeader title="{{ 'title'|trans({}, 'house') }}" createRouteName="app_consumption_profile_create"/>
+        <twig:SectionHeader title="{{ 'title'|trans({}, 'consumption_profile') }}" createRouteName="app_consumption_profile_create"/>
         <turbo-frame id="consumption_profile_table" src="{{ path('app_consumption_profile', {page: page, perPage: perPage}) }}"
                      data-turbo-action="advance">
             <twig:SkeletonTable colsCount="3" rowsCount="5"></twig:SkeletonTable>

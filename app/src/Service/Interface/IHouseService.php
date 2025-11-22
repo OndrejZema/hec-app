@@ -16,6 +16,7 @@ interface IHouseService
      * @return array{0: array<HouseDto>, 1: PaginationDto}
      */
     public function getAll(User $user, int $page, int $perPage): array;
+    public function getForUser(User $user): array;
 
     public function create(User $user, CreateHouseDto $houseDto): void;
 

@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\Dto\House\CreateHouseDto;
-use App\Dto\House\UpdateHouseDto;
-use App\Dto\PerformanceProfile\CreateConsumptionProfileDto;
-use App\Dto\PerformanceProfile\UpdateConsumptionProfileDto;
+use App\Dto\PerformanceProfile\CreatePerformanceProfileDto;
+use App\Dto\PerformanceProfile\UpdatePerformanceProfileDto;
+use App\Entity\PerformanceProfile;
 use App\Form\HouseFormType;
+use App\Form\PerformanceProfileFormType;
 use App\Service\Interface\IHouseService;
 use App\Service\Interface\IPerformanceProfileService;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,9 +58,9 @@ final class PerformanceProfileController extends HecAbstractController
     public function create(Request $request): Response
     {
         $user = $this->getAppUser();
-        $performanceProfile = new CreateConsumptionProfileDto();
+        $performanceProfile = new CreatePerformanceProfileDto();
 
-        $form = $this->createForm(HouseFormType::class, $performanceProfile);
+        $form = $this->createForm(PerformanceProfileFormType::class, $performanceProfile, ['user' => $user]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -73,13 +73,13 @@ final class PerformanceProfileController extends HecAbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/houses/update/{id}', name: 'app_house_update')]
+    #[Route('/performance-profiles/update/{id}', name: 'app_house_update')]
     public function update(Request $request, int $id): Response
     {
         $user = $this->getAppUser();
         $performanceProfileDto = $this->performanceProfileService->getById($user, $id);
         //@todo check houseDto
-        $performanceProfile = new UpdateConsumptionProfileDto();
+        $performanceProfile = new UpdatePerformanceProfileDto();
         $performanceProfile->id = $performanceProfileDto->id;
         $performanceProfile->name = $performanceProfileDto->name;
         $performanceProfile->description = $performanceProfileDto->description;
@@ -88,8 +88,8 @@ final class PerformanceProfileController extends HecAbstractController
         $performanceProfile->profileWeek = $performanceProfileDto->profileWeek;
         $performanceProfile->profileMonth = $performanceProfileDto->profileMonth;
         $performanceProfile->profileYear = $performanceProfileDto->profileYear;
-        $form = $this->createForm(HouseFormType::class, $performanceProfile, [
-            'data_class' => UpdateConsumptionProfileDto::class
+        $form = $this->createForm(  PerformanceProfileFormType::class, $performanceProfile, [
+            'data_class' => UpdatePerformanceProfileDto::class
         ]);
 
         $form->handleRequest($request);
@@ -103,5 +103,11 @@ final class PerformanceProfileController extends HecAbstractController
         ]);
     }
 
-
+    #[Route('/performance-profiles/delete/{id}', name: 'app_performance_profile_delete', methods: ['POST'])]
+    public function delete(Request $request, int $id): Response
+    {
+        $user = $this->getAppUser();
+        $this->performanceProfileService->delete($user, $id);
+        return $this->redirectToRoute('app_performance_profile');
+    }
 }

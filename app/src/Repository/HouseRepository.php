@@ -2,14 +2,12 @@
 
 namespace App\Repository;
 
-use App\Dto\House\CreateHouseDto;
-use App\Dto\House\HouseDto;
-use App\Dto\House\UpdateHouseDto;
 use App\Entity\House;
 use App\Entity\User;
 use App\Repository\Interface\IHouseRepository;
 use App\Trait\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -18,10 +16,12 @@ use Doctrine\Persistence\ManagerRegistry;
 class HouseRepository extends ServiceEntityRepository implements IHouseRepository
 {
     use Paginator;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, House::class);
     }
+
     public function getById(User $user, int $id): ?House
     {
         return $this->createQueryBuilder('h')
@@ -43,6 +43,14 @@ class HouseRepository extends ServiceEntityRepository implements IHouseRepositor
         return [iterator_to_array($paginator), $pagination];
     }
 
+    public function getForUser(User $user): array
+    {
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.user = :userId')
+            ->setParameter('userId', $user->getId())
+            ->getQuery()->getResult();
+    }
+
     public function save(House $house, bool $flush = true): void
     {
         $this->getEntityManager()->persist($house);
@@ -55,7 +63,7 @@ class HouseRepository extends ServiceEntityRepository implements IHouseRepositor
     public function delete(User $user, int $id, bool $flush = true): void
     {
         $house = $this->findOneBy(['user' => $user, 'id' => $id]);
-        if($house !== null){
+        if ($house !== null) {
             $this->getEntityManager()->remove($house);
 
             if ($flush) {

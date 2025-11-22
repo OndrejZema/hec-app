@@ -42,6 +42,12 @@ class HouseService implements IHouseService
             return $dto;
         }, $houses), $pagination];
     }
+    public function getForUser(User $user): array{
+        $houses = $this->houseRepository->getForUser($user);
+
+        return array_map(function ($house) { return $this->houseMapper->toDto($house); }, $houses);
+    }
+
 
     public function create(User $user, CreateHouseDto $houseDto): void
     {

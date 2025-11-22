@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use App\Repository\HousePerformanceProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: HousePerformanceProfileRepository::class)]
 class HousePerformanceProfile
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

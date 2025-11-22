@@ -5,6 +5,7 @@ namespace App\Repository\Interface;
 use App\Dto\Pagination\PaginationDto;
 use App\Entity\House;
 use App\Entity\User;
+use Doctrine\ORM\QueryBuilder;
 
 interface IHouseRepository
 {
@@ -14,6 +15,12 @@ interface IHouseRepository
      * @return array{0: array<House>, 1: PaginationDto}
      */
     public function getAll(User $user, int $page, int $perPage): array;
+
+    /**
+     * @param User $user
+     * @return array<House>
+     */
+    public function getForUser(User $user): array;
 
     public function save(House $house, bool $flush = true): void;
 
