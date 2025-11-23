@@ -8,7 +8,7 @@
         </wa-button>
         <wa-button size="small"
                    appearance="{{ currentRoute == 'app_performance_profile' ? 'filled' : 'plain' }}"
-                   variant="neutral" class="nav-btn">
+                   variant="neutral" class="nav-btn" href="{{ path('app_performance_profile') }}">
             <wa-icon slot="start" name="chart-line" class="hec-icon"></wa-icon>
             {{ 'logged.performance_profile'|trans({}, 'navigation') }}
 

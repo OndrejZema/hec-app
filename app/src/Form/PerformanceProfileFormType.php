@@ -11,6 +11,8 @@ use App\Form\Type\Chart\ChartType;
 use App\Service\Interface\IHouseService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,10 +29,6 @@ class PerformanceProfileFormType extends AbstractType
     {
         /** @var User $user */
         $user = $options['user'];
-        $houses = [];
-        foreach ($this->houseService->getForUser($user) as $house) {
-            $houses[$house->name] = $house->id;
-        }
         $builder
             ->add('name', TextType::class, [
                 'label' => 'form.name',
@@ -41,47 +39,42 @@ class PerformanceProfileFormType extends AbstractType
                 'translation_domain' => 'common',
                 'required' => false,
             ])
-            ->add('houseId', ChoiceType::class, [
-                'label' => 'form.house',
-                'translation_domain' => 'common',
-                'required' => true,
-                'choices' => $houses
-            ])
             ->add('type', ChoiceType::class, [
                 'label' => 'form.type',
                 'translation_domain' => 'common',
                 'choices' => ProfileTypeEnum::getChoices(),
                 'required' => true,
             ])
-            ->add('performanceIndex', TextareaType::class, [
-                'label' => 'form.type',
-                'translation_domain' => 'common',
+            ->add('performanceIndex', RangeType::class, [
+                'label' => 'form.performance_index',
+                'translation_domain' => 'performance_profile',
                 'required' => true,
+                'attr' => [
+                    'min' => 0,
+                    'max' => 2,
+                ]
             ])
             ->add('profileDay', ChartType::class, [
-                'label' => 'form.type',
+                'label' => 'form.profile.day',
                 'translation_domain' => 'performance_profile',
                 'required' => true,
-                'data' => new ChartData(["8:00"], [new ChartDataset("test", [1])])
-            ])
-            ->add('profileWeek', ChartType::class, [
-                'label' => 'form.type',
-                'translation_domain' => 'performance_profile',
-                'required' => true,
-                'data' => new ChartData(["monday"], [new ChartDataset("test", [1])])
-            ])
-            ->add('profileMonth', ChartType::class, [
-                'label' => 'form.type',
-                'translation_domain' => 'performance_profile',
-                'required' => true,
-                'data' => new ChartData(["1"], [new ChartDataset("test", [1])])
-            ])
-            ->add('profileYear', ChartType::class, [
-                'label' => 'form.type',
-                'translation_domain' => 'performance_profile',
-                'required' => true,
-                'data' => new ChartData(["january"], [new ChartDataset("test", [1])])
+                'labels' => ['jedna', 'dva', 'tri']
             ]);
+//            ->add('profileWeek', ChartType::class, [
+//                    'label' => 'form.profile.week',
+//                'translation_domain' => 'performance_profile',
+//                'required' => true,
+//            ])
+//            ->add('profileMonth', ChartType::class, [
+//                'label' => 'form.profile.month',
+//                'translation_domain' => 'performance_profile',
+//                'required' => true,
+//            ])
+//            ->add('profileYear', ChartType::class, [
+//                'label' => 'form.profile.year',
+//                'translation_domain' => 'performance_profile',
+//                'required' => true,
+//            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

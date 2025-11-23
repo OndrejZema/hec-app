@@ -3,7 +3,26 @@ class HecChart extends HTMLElement {
         super();
         this.chart = null;
         this.data = JSON.parse(this.getAttribute("data"))
+        this.labels = JSON.parse(this.getAttribute("labels"))
+        this.label = this.getAttribute("label")
+        this.backgroundColor = this.getAttribute("backgroundColor")
+        this.borderColor = this.getAttribute("borderColor")
+        this.borderWidth = this.getAttribute("borderWidth")
+        this.dragData = this.getAttribute("dragData")
         this.name = this.getAttribute("name")
+        this.chartData = {
+            labels: this.labels,
+            datasets: [
+                {
+                    label: this.label,
+                    data: this.data,
+                    backgroundColor: this.backgroundColor,
+                    borderColor: this.borderColor,
+                    borderWidth: this.borderColor,
+                    dragData: this.dragData,
+                }
+            ]
+        }
         // {
         //     labels: ["A", "B", "C", "A", "B", "C", "A", "B", "C", "A", "B", "C", "A", "B", "C", "A", "B", "C", "A", "B", "C", "A", "B", "C"],
         //     datasets: [
@@ -43,7 +62,7 @@ class HecChart extends HTMLElement {
 
         this.chart = new Chart(ctx, {
             type: this.getAttribute("type") || "bar",
-            data: this.data,
+            data: this.chartData,
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -93,9 +112,9 @@ class HecChart extends HTMLElement {
     updateHiddenInput() {
         const input = document.getElementById(`hiddenInputValue${this.id}`);
         const chartData = {
-            labels: this.data.labels,
-            values: this.data.datasets[0].data,
-            timestamp: new Date().toISOString(),
+            // labels: this.data.labels,
+            values: this.chartData.datasets[0].data,
+            // timestamp: new Date().toISOString(),
         };
         input.value = JSON.stringify(chartData);
     }

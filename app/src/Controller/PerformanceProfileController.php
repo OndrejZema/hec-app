@@ -41,9 +41,8 @@ final class PerformanceProfileController extends HecAbstractController
 
         if ($request->headers->get('turbo-frame')) {
             list($performanceProfiles, $pagination) = $this->performanceProfileService->getAll($user, $houseId, $page, $perPage);
-
             return $this->render('performance_profile/_table_frame.html.twig', [
-                'performanceProfiles' => $performanceProfiles,
+                'performanceProfiles' => [], //$performanceProfiles,
                 'pagination' => $pagination
             ]);
         }
@@ -59,6 +58,8 @@ final class PerformanceProfileController extends HecAbstractController
     {
         $user = $this->getAppUser();
         $performanceProfile = new CreatePerformanceProfileDto();
+        $performanceProfile->profileDay = [10, 20, 30];
+        $performanceProfile->performanceIndex = 1;
 
         $form = $this->createForm(PerformanceProfileFormType::class, $performanceProfile, ['user' => $user]);
 

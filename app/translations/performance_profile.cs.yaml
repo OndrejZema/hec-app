@@ -1,0 +1,7 @@
+form:
+    performance_index: "Index výkonu"
+    profile:
+        day: "Denní profil"
+        week: "Týdenní profil"
+        month: "Měsíční profil"
+        year: "Roční profil"

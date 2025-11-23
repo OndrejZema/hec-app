@@ -16,11 +16,10 @@
             {{ form_row(form.description) }}
             {{ form_row(form.type) }}
             {{ form_row(form.performanceIndex) }}
-            {{ form_row(form.houseId) }}
             {{ form_row(form.profileDay) }}
-            {{ form_row(form.profileWeek) }}
-            {{ form_row(form.profileMonth) }}
-            {{ form_row(form.profileYear) }}
+{#            {{ form_row(form.profileWeek) }}#}
+{#            {{ form_row(form.profileMonth) }}#}
+{#            {{ form_row(form.profileYear) }}#}
         </div>
         <wa-button type="submit" class="w-full mt-2">{{ 'save'|trans({}, 'common') }}</wa-button>
         {{ form_end(form) }}

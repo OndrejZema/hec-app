@@ -30,6 +30,36 @@
     ></wa-input>
 {% endblock %}
 
+{% block number_widget %}
+    <wa-input
+        type="number"
+        id="{{ id }}"
+        name="{{ full_name }}"
+        value="{{ value }}"
+        label="{{ label|trans(label_translation_parameters|default({}), translation_domain) }}"
+        {% if required %}required{% endif %}
+        {% for attrname, attrvalue in attr %}
+            {{- attrname }}="{{ attrvalue }}"
+        {% endfor %}
+    ></wa-input>
+{% endblock %}
+
+{% block range_widget %}
+    <wa-slider
+        type="range"
+        id="{{ id }}"
+        name="{{ full_name }}"
+        value="{{ value }}"
+        label="{{ label|trans(label_translation_parameters|default({}), translation_domain) }}"
+        with-markers
+        with-tooltip
+        {% if required %}required{% endif %}
+        {% for attrname, attrvalue in attr %}
+            {{- attrname }}="{{ attrvalue }}"
+        {% endfor %}
+    ></wa-slider>
+{% endblock %}
+
 {% block password_widget %}
     <wa-input
         type="password"
@@ -72,6 +102,23 @@
     ></wa-textarea>
 {% endblock %}
 
+{% block choice_widget %}
+    <wa-select
+        id="{{ id }}"
+        name="{{ full_name }}"
+        value="{{ value }}"
+        label="{{ label|trans(label_translation_parameters|default({}), translation_domain) }}"
+        {% if required %}required{% endif %}
+        {% for attrname, attrvalue in attr %}
+            {{- attrname }}="{{ attrvalue }}"
+        {% endfor %}
+    >
+        {% for option in choices %}
+            <wa-option value="{{ option.value }}">{{ option.label }}</wa-option>
+        {% endfor %}
+    </wa-select>
+{% endblock %}
+
 {%- block checkbox_widget -%}
     <wa-checkbox
         type="text"
@@ -93,7 +140,13 @@
         name="{{ full_name }}"
         type="{{ type }}"
 {#        label="{{ label|trans(label_translation_parameters|default({}), translation_domain) }}"#}
-        data="{{ data|json_encode|e('html_attr') }}"
+        data="{{ value|json_encode|e('html_attr') }}"
+        labels="{{ labels|json_encode|e('html_attr') }}"
+        label="{{ label }}"
+        backgroundColor="{{ backgroundColor }}"
+        borderColor="{{ borderColor }}"
+        borderWidth="{{ borderWidth }}"
+        dragData="{{ dragData }}"
         {% if required %}required{% endif %}
         {% for attrname, attrvalue in attr %}
             {{- attrname }}="{{ attrvalue }}"

@@ -1,0 +1,22 @@
+<turbo-frame id="performance_profile_table">
+    <table>
+        <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for performanceProfile in performanceProfiles %}
+            <tr>
+
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <twig:Pagination routeName="app_house" page="{{ pagination.page }}" perPage="{{ pagination.perPage }}"
+                     lastPage="{{ pagination.lastPage }}"></twig:Pagination>
+</turbo-frame>

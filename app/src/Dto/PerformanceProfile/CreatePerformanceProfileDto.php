@@ -9,7 +9,7 @@ class CreatePerformanceProfileDto
 {
     public int $id;
     public string $name;
-    public ?string $description;
+    public ?string $description = null;
     public ProfileTypeEnum $type;
     public int $performanceIndex;
 
