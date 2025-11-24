@@ -2,7 +2,6 @@
 
 namespace App\Dto\PerformanceProfile;
 
-use App\Dto\House\HouseDto;
 use App\Enum\ProfileTypeEnum;
 
 class CreatePerformanceProfileDto
@@ -10,17 +9,17 @@ class CreatePerformanceProfileDto
     public int $id;
     public string $name;
     public ?string $description = null;
-    public ProfileTypeEnum $type;
-    public int $performanceIndex;
+    public ProfileTypeEnum $type = ProfileTypeEnum::AI;
+    public int $performanceIndex = 1;
 
     public int $houseId;
 
     /** @var array<int> */
-    public array $profileDay;
+    public array $profileDay = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
     /** @var array<int> */
-    public array $profileWeek;
+    public array $profileWeek = [10, 10, 10, 10, 10, 10, 10];
     /** @var array<int> */
-    public array $profileMonth;
+    public array $profileMonth = [10, 10, 10, 10];
     /** @var array<int> */
-    public array $profileYear;
+    public array $profileYear = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
 }

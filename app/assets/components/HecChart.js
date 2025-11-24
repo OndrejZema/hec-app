@@ -4,6 +4,7 @@ class HecChart extends HTMLElement {
         this.chart = null;
         this.data = JSON.parse(this.getAttribute("data"))
         this.labels = JSON.parse(this.getAttribute("labels"))
+        console.log(this.labels)
         this.label = this.getAttribute("label")
         this.backgroundColor = this.getAttribute("backgroundColor")
         this.borderColor = this.getAttribute("borderColor")
@@ -88,7 +89,7 @@ class HecChart extends HTMLElement {
                 scales: {
                     y: {
                         beginAtZero: true,
-                        min: 10,
+                        min: 0,
                         max: 110,
                         grace: 0,
                         grid: {

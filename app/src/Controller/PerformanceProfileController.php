@@ -58,8 +58,6 @@ final class PerformanceProfileController extends HecAbstractController
     {
         $user = $this->getAppUser();
         $performanceProfile = new CreatePerformanceProfileDto();
-        $performanceProfile->profileDay = [10, 20, 30];
-        $performanceProfile->performanceIndex = 1;
 
         $form = $this->createForm(PerformanceProfileFormType::class, $performanceProfile, ['user' => $user]);
 

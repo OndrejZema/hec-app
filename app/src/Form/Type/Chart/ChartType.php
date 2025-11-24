@@ -14,7 +14,7 @@ class ChartType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-//        $builder->addModelTransformer(new StringToArrayTransformer());
+        $builder->addModelTransformer(new StringToArrayTransformer());
     }
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
@@ -31,7 +31,6 @@ class ChartType extends AbstractType
     {
         $resolver->setDefaults([
             'type' => 'bar',
-            'data' => [],
             'labels' => [],
             'label' => '',
             'backgroundColor' => '#fd9a00',
@@ -41,7 +40,6 @@ class ChartType extends AbstractType
         ]);
 
         $resolver->setAllowedTypes('type', 'string');
-        $resolver->setAllowedTypes('data', ['array']);
         $resolver->setAllowedTypes('labels', ['array']);
         $resolver->setAllowedTypes('label', ['string']);
         $resolver->setAllowedTypes('backgroundColor', ['string']);

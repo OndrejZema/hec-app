@@ -8,13 +8,15 @@ use App\Dto\PerformanceProfile\UpdatePerformanceProfileDto;
 use App\Entity\User;
 use App\Mapper\PerformanceProfileMapper;
 use App\Repository\Interface\IPerformanceProfileRepository;
+use App\Service\Interface\IHouseService;
 use App\Service\Interface\IPerformanceProfileService;
 
 class PerformanceProfileService implements IPerformanceProfileService
 {
     public function __construct(
         protected IPerformanceProfileRepository $performanceProfileRepository,
-        protected PerformanceProfileMapper      $performanceProfileMapper
+        protected PerformanceProfileMapper      $performanceProfileMapper,
+        protected IHouseService                 $houseService
     )
     {
     }
@@ -34,7 +36,7 @@ class PerformanceProfileService implements IPerformanceProfileService
         list($performanceProfiles, $pagination) = $this->performanceProfileRepository->getAll($user, $page, $perPage);
 //        $selectedId = $this->getSelectedId($user);
         $activeId = 0;
-        return [array_map(function ($model) use($activeId) {
+        return [array_map(function ($model) use ($activeId) {
             $dto = $this->performanceProfileMapper->toDto($model);
 //            $dto->isActive = $activeId === $dto->id;
             return $dto;
@@ -43,9 +45,10 @@ class PerformanceProfileService implements IPerformanceProfileService
 
     public function create(User $user, CreatePerformanceProfileDto $performanceProfileDto): void
     {
-        $house = $this->performanceProfileMapper->toEntity($performanceProfileDto, $user);
+        $currentHouse = $this->houseService->
+        $performanceProfile = $this->performanceProfileMapper->toEntity($performanceProfileDto, $user);
 
-        $this->performanceProfileRepository->save($house);
+        $this->performanceProfileRepository->save($performanceProfile);
     }
 
     public function update(User $user, UpdatePerformanceProfileDto $performanceProfileDto): void

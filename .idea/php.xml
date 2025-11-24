@@ -101,6 +101,8 @@
       <path value="$PROJECT_DIR$/app/vendor/symfony/asset" />
       <path value="$PROJECT_DIR$/app/vendor/gedmo/doctrine-extensions" />
       <path value="$PROJECT_DIR$/app/vendor/stof/doctrine-extensions-bundle" />
+      <path value="$PROJECT_DIR$/app/vendor/carbonphp/carbon-doctrine-types" />
+      <path value="$PROJECT_DIR$/app/vendor/nesbot/carbon" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

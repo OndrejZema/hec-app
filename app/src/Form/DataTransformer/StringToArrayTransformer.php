@@ -22,7 +22,7 @@ class StringToArrayTransformer implements DataTransformerInterface
         }
 
         // Převod pole na string, oddělený čárkou a mezerou
-        return implode(',', $value);
+        return json_encode($value); // implode(',', $value);
     }
 
     /**

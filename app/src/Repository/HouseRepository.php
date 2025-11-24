@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Dto\House\HouseDto;
 use App\Entity\House;
 use App\Entity\User;
 use App\Repository\Interface\IHouseRepository;
@@ -49,6 +50,9 @@ class HouseRepository extends ServiceEntityRepository implements IHouseRepositor
             ->andWhere('h.user = :userId')
             ->setParameter('userId', $user->getId())
             ->getQuery()->getResult();
+    }
+    public function getCurrentForUser(User $user): ?House {
+        return
     }
 
     public function save(House $house, bool $flush = true): void

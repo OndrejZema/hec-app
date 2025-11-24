@@ -2,6 +2,7 @@
 
 namespace App\Repository\Interface;
 
+use App\Dto\House\HouseDto;
 use App\Dto\Pagination\PaginationDto;
 use App\Entity\House;
 use App\Entity\User;
@@ -21,6 +22,8 @@ interface IHouseRepository
      * @return array<House>
      */
     public function getForUser(User $user): array;
+
+    public function getCurrentForUser(User $user): ?House;
 
     public function save(House $house, bool $flush = true): void;
 

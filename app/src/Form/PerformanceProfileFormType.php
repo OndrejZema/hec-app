@@ -8,6 +8,7 @@ use App\Enum\ProfileTypeEnum;
 use App\Form\Type\Chart\ChartData;
 use App\Form\Type\Chart\ChartDataset;
 use App\Form\Type\Chart\ChartType;
+use App\Service\Interface\IDateRangeService;
 use App\Service\Interface\IHouseService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PerformanceProfileFormType extends AbstractType
 {
-    public function __construct(protected IHouseService $houseService)
+    public function __construct(protected IDateRangeService $dateRangeService)
     {
 
     }
@@ -58,23 +59,26 @@ class PerformanceProfileFormType extends AbstractType
                 'label' => 'form.profile.day',
                 'translation_domain' => 'performance_profile',
                 'required' => true,
-                'labels' => ['jedna', 'dva', 'tri']
+                'labels' => $this->dateRangeService->hours()
+            ])
+            ->add('profileWeek', ChartType::class, [
+                    'label' => 'form.profile.week',
+                'translation_domain' => 'performance_profile',
+                'required' => true,
+                'labels' => $this->dateRangeService->days()
+            ])
+            ->add('profileMonth', ChartType::class, [
+                'label' => 'form.profile.month',
+                'translation_domain' => 'performance_profile',
+                'required' => true,
+                'labels' => $this->dateRangeService->weeks()
+            ])
+            ->add('profileYear', ChartType::class, [
+                'label' => 'form.profile.year',
+                'translation_domain' => 'performance_profile',
+                'required' => true,
+                'labels' => $this->dateRangeService->months()
             ]);
-//            ->add('profileWeek', ChartType::class, [
-//                    'label' => 'form.profile.week',
-//                'translation_domain' => 'performance_profile',
-//                'required' => true,
-//            ])
-//            ->add('profileMonth', ChartType::class, [
-//                'label' => 'form.profile.month',
-//                'translation_domain' => 'performance_profile',
-//                'required' => true,
-//            ])
-//            ->add('profileYear', ChartType::class, [
-//                'label' => 'form.profile.year',
-//                'translation_domain' => 'performance_profile',
-//                'required' => true,
-//            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

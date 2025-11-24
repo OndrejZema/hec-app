@@ -36,16 +36,33 @@ class HouseService implements IHouseService
     {
         list($houses, $pagination) = $this->houseRepository->getAll($user, $page, $perPage);
         $selectedId = $this->getSelectedId($user);
-        return [array_map(function ($model) use($selectedId) {
+        return [array_map(function ($model) use ($selectedId) {
             $dto = $this->houseMapper->toDto($model);
             $dto->isSelected = $selectedId === $dto->id;
             return $dto;
         }, $houses), $pagination];
     }
-    public function getForUser(User $user): array{
+
+    public function getForUser(User $user): array
+    {
         $houses = $this->houseRepository->getForUser($user);
 
-        return array_map(function ($house) { return $this->houseMapper->toDto($house); }, $houses);
+        return array_map(function ($house) {
+            return $this->houseMapper->toDto($house);
+        }, $houses);
+    }
+
+    public function getCurrentForUser(User $user): ?HouseDto
+    {
+        $houseId = $this->houseVisitService->getSelectedId($user);
+        if ($houseId === null) {
+            return null;
+        }
+        $house = $this->houseRepository->getById($user, $houseId);
+        if ($house === null) {
+            return null;
+        }
+        return $this->houseMapper->toDto($house);
     }
 
 
