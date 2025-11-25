@@ -11,9 +11,7 @@ class CreatePerformanceProfileDto
     public ?string $description = null;
     public ProfileTypeEnum $type = ProfileTypeEnum::AI;
     public int $performanceIndex = 1;
-
     public int $houseId;
-
     /** @var array<int> */
     public array $profileDay = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
     /** @var array<int> */

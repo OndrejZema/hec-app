@@ -31,11 +31,13 @@ class PerformanceProfileRepository extends ServiceEntityRepository implements IP
             ->getOneOrNullResult();
     }
 
-    public function getAll(User $user, int $page, int $perPage): array
+    public function getAll(User $user, int $houseId, int $page, int $perPage): array
     {
         $qb = $this->createQueryBuilder('pp')
             ->andWhere('pp.user = :userId')
-            ->setParameter('userId', $user->getId());
+            ->andWhere('pp.house = :houseId')
+            ->setParameter('userId', $user->getId())
+            ->setParameter('houseId', $houseId);
         list($paginator, $pagination) = $this->paginate($qb, $page, $perPage);
 
         return [iterator_to_array($paginator), $pagination];

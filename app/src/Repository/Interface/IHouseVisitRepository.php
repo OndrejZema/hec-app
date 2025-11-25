@@ -8,5 +8,5 @@ use App\Entity\User;
 interface IHouseVisitRepository
 {
     public function save(HouseVisit $houseVisit, bool $flush = true): void;
-    public function getSelectedId(User $user): ?int;
+    public function getCurrentId(User $user): ?int;
 }

@@ -17,14 +17,7 @@ final class SelectedHouse
     {
         $user = $this->security->getUser();
         if ($user instanceof User) {
-            $selectedId = $this->houseService->getSelectedId($user);
-            if($selectedId !== null) {
-                $house = $this->houseService->getById($user, $selectedId);
-                if($house !== null){
-                    $this->selectedHouse = $house->name;
-                }
-            }
-
+            $this->selectedHouse = $this->houseService->getCurrentForUser($user)?->name;
         }
 
     }

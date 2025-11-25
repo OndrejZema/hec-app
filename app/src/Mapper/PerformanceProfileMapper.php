@@ -16,23 +16,24 @@ class PerformanceProfileMapper
         $dto->id = $model->getId();
         $dto->name = $model->getName();
         $dto->description = $model->getDescription();
+        $dto->performanceIndex = $model->getPerformanceIndex();
+        $dto->type = $model->getType();
         return $dto;
     }
 
-    public function toEntity(CreatePerformanceProfileDto|PerformanceProfileDto $dto, House $house, ?User $user = null): PerformanceProfile{
+    public function toEntity(CreatePerformanceProfileDto|PerformanceProfileDto $dto, ?House $house = null, ?User $user = null): PerformanceProfile
+    {
         $model = new PerformanceProfile();
         $model->setName($dto->name);
         $model->setDescription($dto->description);
-        $model->setHouse($house);
         $model->setType($dto->type);
         $model->setPerformanceIndex($dto->performanceIndex);
         $model->setProfileDay($dto->profileDay);
         $model->setProfileWeek($dto->profileWeek);
         $model->setProfileMonth($dto->profileMonth);
         $model->setProfileYear($dto->profileYear);
-        if($user){
-            $model->setUser($user);
-        }
+        $model->setHouse($house);
+        $model->setUser($user);
         return $model;
     }
 }

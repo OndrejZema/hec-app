@@ -23,8 +23,8 @@ class HouseVisitService implements IHouseVisitService
         $this->houseVisitRepository->save($houseVisit);
     }
 
-    public function getSelectedId(User $user): ?int
+    public function getCurrentId(User $user): ?int
     {
-        return $this->houseVisitRepository->getSelectedId($user);
+        return $this->houseVisitRepository->getCurrentId($user);
     }
 }

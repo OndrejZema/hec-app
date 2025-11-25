@@ -14,7 +14,7 @@ interface IPerformanceProfileRepository
     /**
      * @return array{0: array<PerformanceProfile>, 1: PaginationDto}
      */
-    public function getAll(User $user, int $page, int $perPage): array;
+    public function getAll(User $user, int $houseId, int $page, int $perPage): array;
 
     public function save(PerformanceProfile $performanceProfile, bool $flush = true): void;
 

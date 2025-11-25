@@ -23,8 +23,6 @@ interface IHouseRepository
      */
     public function getForUser(User $user): array;
 
-    public function getCurrentForUser(User $user): ?House;
-
     public function save(House $house, bool $flush = true): void;
 
     public function delete(User $user, int $id, bool $flush = true): void;

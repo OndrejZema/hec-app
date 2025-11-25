@@ -29,7 +29,7 @@ class HouseVisitRepository extends ServiceEntityRepository implements IHouseVisi
         }
     }
 
-    public function getSelectedId(User $user): ?int
+    public function getCurrentId(User $user): ?int
     {
         try {
             return $this->createQueryBuilder('h')

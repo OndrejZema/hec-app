@@ -17,6 +17,7 @@ interface IHouseService
      */
     public function getAll(User $user, int $page, int $perPage): array;
     public function getForUser(User $user): array;
+    public function getCurrentForUser(User $user): ?HouseDto;
 
     public function create(User $user, CreateHouseDto $houseDto): void;
 
@@ -26,6 +27,6 @@ interface IHouseService
 
     public function visit(User $user, int $id): void;
 
-    public function getSelectedId(User $user): ?int;
+    public function getCurrentId(User $user): ?int;
 
 }

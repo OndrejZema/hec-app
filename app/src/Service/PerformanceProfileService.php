@@ -6,9 +6,11 @@ use App\Dto\PerformanceProfile\CreatePerformanceProfileDto;
 use App\Dto\PerformanceProfile\PerformanceProfileDto;
 use App\Dto\PerformanceProfile\UpdatePerformanceProfileDto;
 use App\Entity\User;
+use App\Mapper\HouseMapper;
 use App\Mapper\PerformanceProfileMapper;
+use App\Repository\Interface\IHouseRepository;
+use App\Repository\Interface\IHouseVisitRepository;
 use App\Repository\Interface\IPerformanceProfileRepository;
-use App\Service\Interface\IHouseService;
 use App\Service\Interface\IPerformanceProfileService;
 
 class PerformanceProfileService implements IPerformanceProfileService
@@ -16,7 +18,9 @@ class PerformanceProfileService implements IPerformanceProfileService
     public function __construct(
         protected IPerformanceProfileRepository $performanceProfileRepository,
         protected PerformanceProfileMapper      $performanceProfileMapper,
-        protected IHouseService                 $houseService
+        protected IHouseRepository              $houseRepository,
+        protected IHouseVisitRepository         $houseVisitRepository,
+        protected HouseMapper                   $houseMapper
     )
     {
     }
@@ -33,7 +37,7 @@ class PerformanceProfileService implements IPerformanceProfileService
 
     public function getAll(User $user, int $houseId, int $page, int $perPage): array
     {
-        list($performanceProfiles, $pagination) = $this->performanceProfileRepository->getAll($user, $page, $perPage);
+        list($performanceProfiles, $pagination) = $this->performanceProfileRepository->getAll($user, $houseId, $page, $perPage);
 //        $selectedId = $this->getSelectedId($user);
         $activeId = 0;
         return [array_map(function ($model) use ($activeId) {
@@ -45,21 +49,29 @@ class PerformanceProfileService implements IPerformanceProfileService
 
     public function create(User $user, CreatePerformanceProfileDto $performanceProfileDto): void
     {
-        $currentHouse = $this->houseService->
-        $performanceProfile = $this->performanceProfileMapper->toEntity($performanceProfileDto, $user);
+        $currentHouseId = $this->houseVisitRepository->getCurrentId($user);
+        $house = $this->houseRepository->getById($user, $currentHouseId);
+
+        $performanceProfile = $this->performanceProfileMapper->toEntity($performanceProfileDto, $house, $user);
 
         $this->performanceProfileRepository->save($performanceProfile);
     }
 
     public function update(User $user, UpdatePerformanceProfileDto $performanceProfileDto): void
     {
-        $house = $this->performanceProfileRepository->getById($user, $performanceProfileDto->id);
-        if ($house === null) {
+        $performanceProfile = $this->performanceProfileRepository->getById($user, $performanceProfileDto->id);
+        if ($performanceProfile === null) {
             //@todo throw exception
         }
-        $house->setName($performanceProfileDto->name);
-        $house->setDescription($performanceProfileDto->description);
-        $this->performanceProfileRepository->save($house);
+        $performanceProfile->setName($performanceProfileDto->name);
+        $performanceProfile->setDescription($performanceProfileDto->description);
+        $performanceProfile->setType($performanceProfileDto->type);
+        $performanceProfile->setPerformanceIndex($performanceProfileDto->performanceIndex);
+        $performanceProfile->setProfileDay($performanceProfileDto->profileDay);
+        $performanceProfile->setProfileWeek($performanceProfileDto->profileWeek);
+        $performanceProfile->setProfileMonth($performanceProfileDto->profileMonth);
+        $performanceProfile->setProfileYear($performanceProfileDto->profileYear);
+        $this->performanceProfileRepository->save($performanceProfile);
     }
 
     public function delete(User $user, int $id): void

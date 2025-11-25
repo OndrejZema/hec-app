@@ -9,5 +9,5 @@ interface IHouseVisitService
 {
     public function visit(User $user, House $house): void;
 
-    public function getSelectedId(User $user): ?int;
+    public function getCurrentId(User $user): ?int;
 }

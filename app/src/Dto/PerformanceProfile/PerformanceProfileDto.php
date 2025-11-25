@@ -10,6 +10,7 @@ class PerformanceProfileDto
     public string $name;
     public ?string $description;
     public ProfileTypeEnum $type;
+    public int $performanceIndex;
     /** @var array<int> */
     public array $profileDay;
     /** @var array<int> */

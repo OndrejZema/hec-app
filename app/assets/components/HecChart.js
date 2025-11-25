@@ -112,12 +112,7 @@ class HecChart extends HTMLElement {
 
     updateHiddenInput() {
         const input = document.getElementById(`hiddenInputValue${this.id}`);
-        const chartData = {
-            // labels: this.data.labels,
-            values: this.chartData.datasets[0].data,
-            // timestamp: new Date().toISOString(),
-        };
-        input.value = JSON.stringify(chartData);
+        input.value = JSON.stringify(this.chartData.datasets[0].data);
     }
 }
 customElements.define("hec-chart", HecChart);

@@ -29,26 +29,23 @@ final class PerformanceProfileController extends HecAbstractController
 
         $page = $request->query->getInt("page", 0);
         $perPage = $request->query->getInt("perPage", 0);
-        $houseId = $request->query->getInt("houseId", 0);
 
-        if ($page === 0 || $perPage === 0 || $houseId === 0) {
+        if ($page === 0 || $perPage === 0) {
             return $this->redirectToRoute('app_performance_profile', [
                 'page' => 1,
                 'perPage' => 10,
-                'houseId' => $this->houseService->getSelectedId($user)
             ]);
         }
-
+        $houseId = $this->houseService->getCurrentId($user);
         if ($request->headers->get('turbo-frame')) {
             list($performanceProfiles, $pagination) = $this->performanceProfileService->getAll($user, $houseId, $page, $perPage);
             return $this->render('performance_profile/_table_frame.html.twig', [
-                'performanceProfiles' => [], //$performanceProfiles,
+                'performanceProfiles' => $performanceProfiles,
                 'pagination' => $pagination
             ]);
         }
 
         return $this->render('performance_profile/index.html.twig', [
-            'houseId' => $houseId,
             'page' => $page,
             'perPage' => $perPage,
         ]);

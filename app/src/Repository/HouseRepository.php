@@ -51,9 +51,6 @@ class HouseRepository extends ServiceEntityRepository implements IHouseRepositor
             ->setParameter('userId', $user->getId())
             ->getQuery()->getResult();
     }
-    public function getCurrentForUser(User $user): ?House {
-        return
-    }
 
     public function save(House $house, bool $flush = true): void
     {

@@ -5,13 +5,18 @@
             <th></th>
             <th>Name</th>
             <th>Description</th>
-            <th></th>
+            <th>Type</th>
+            <th>Performance Index</th>
         </tr>
         </thead>
         <tbody>
         {% for performanceProfile in performanceProfiles %}
             <tr>
-
+                <td></td>
+                <td>{{ performanceProfile.name }}</td>
+                <td>{{ performanceProfile.description }}</td>
+                <td>{{ performanceProfile.type.value }}</td>
+                <td>{{ performanceProfile.performanceIndex }}</td>
             </tr>
         {% endfor %}
 

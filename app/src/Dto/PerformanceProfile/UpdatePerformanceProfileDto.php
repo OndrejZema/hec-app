@@ -10,6 +10,8 @@ class UpdatePerformanceProfileDto
     public string $name;
     public ?string $description;
     public ProfileTypeEnum $type;
+    public int $performanceIndex;
+    public int $houseId;
     /** @var array<int> */
     public array $profileDay;
     /** @var array<int> */

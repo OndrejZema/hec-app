@@ -35,7 +35,7 @@ class HouseService implements IHouseService
     public function getAll(User $user, int $page, int $perPage): array
     {
         list($houses, $pagination) = $this->houseRepository->getAll($user, $page, $perPage);
-        $selectedId = $this->getSelectedId($user);
+        $selectedId = $this->getCurrentId($user);
         return [array_map(function ($model) use ($selectedId) {
             $dto = $this->houseMapper->toDto($model);
             $dto->isSelected = $selectedId === $dto->id;
@@ -54,7 +54,7 @@ class HouseService implements IHouseService
 
     public function getCurrentForUser(User $user): ?HouseDto
     {
-        $houseId = $this->houseVisitService->getSelectedId($user);
+        $houseId = $this->houseVisitService->getCurrentId($user);
         if ($houseId === null) {
             return null;
         }
@@ -98,8 +98,8 @@ class HouseService implements IHouseService
         $this->houseVisitService->visit($user, $house);
     }
 
-    public function getSelectedId(User $user): ?int
+    public function getCurrentId(User $user): ?int
     {
-        return $this->houseVisitService->getSelectedId($user);
+        return $this->houseVisitService->getCurrentId($user);
     }
 }

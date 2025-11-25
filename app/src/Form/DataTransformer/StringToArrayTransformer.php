@@ -37,9 +37,6 @@ class StringToArrayTransformer implements DataTransformerInterface
         if (!is_string($value)) {
             throw new TransformationFailedException('Očekáván typ string.');
         }
-        $string = preg_replace('/\s*,\s*/', ',', $value);
-        $array = explode(',', $string);
-        $array = array_filter($array);
-        return array_values($array);
+        return json_decode($value);
     }
 }
