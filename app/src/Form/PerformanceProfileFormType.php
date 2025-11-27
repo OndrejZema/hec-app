@@ -28,8 +28,6 @@ class PerformanceProfileFormType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var User $user */
-        $user = $options['user'];
         $builder
             ->add('name', TextType::class, [
                 'label' => 'form.name',
@@ -86,7 +84,5 @@ class PerformanceProfileFormType extends AbstractType
         $resolver->setDefaults([
             'data_class' => CreatePerformanceProfileDto::class,
         ]);
-
-        $resolver->setRequired('user');
     }
 }

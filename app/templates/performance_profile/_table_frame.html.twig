@@ -17,6 +17,28 @@
                 <td>{{ performanceProfile.description }}</td>
                 <td>{{ performanceProfile.type.value }}</td>
                 <td>{{ performanceProfile.performanceIndex }}</td>
+                <td>{{ performanceProfile.performanceIndex }}</td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 24) | map(v => '')|json_encode }}" data="{{ performanceProfile.profileDay|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 7) | map(v => '')|json_encode }}" data="{{ performanceProfile.profileWeek|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 4) | map(v => '')|json_encode }}" data="{{ performanceProfile.profileMonth|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 12) | map(v => '')|json_encode }}" data="{{ performanceProfile.profileYear|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td>
+                    <div class="flex items-center gap-2 justify-end">
+{#                        {% if( not performanceProfile.isSelected) %}#}
+{#                            <form method="POST" action="{{ path('app_performance_profile_select', {id: performanceProfile.id}) }}">#}
+{#                                <input type="hidden" name="_token" value="{{ csrf_token('visit' ~ performanceProfile.id) }}">#}
+{#                                <wa-button type="submit" appearance="plain">#}
+{#                                    <wa-icon name="play" class="hec-icon"></wa-icon>#}
+{#                                </wa-button>#}
+{#                            </form>#}
+{#                        {% endif %}#}
+                        <wa-button appearance="plain" href="{{ path('app_performance_profile_update', {id: performanceProfile.id}) }}"
+                                   target="_top">
+                            <wa-icon name="edit"></wa-icon>
+                        </wa-button>
+                        <twig:DeleteDialog routeName="app_performance_profile_delete" id="{{ performanceProfile.id }}"></twig:DeleteDialog>
+                    </div>
+                </td>
             </tr>
         {% endfor %}
 

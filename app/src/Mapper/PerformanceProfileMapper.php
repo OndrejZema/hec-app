@@ -18,6 +18,10 @@ class PerformanceProfileMapper
         $dto->description = $model->getDescription();
         $dto->performanceIndex = $model->getPerformanceIndex();
         $dto->type = $model->getType();
+        $dto->profileDay = $model->getProfileDay();
+        $dto->profileWeek = $model->getProfileWeek();
+        $dto->profileMonth = $model->getProfileMonth();
+        $dto->profileYear = $model->getProfileYear();
         return $dto;
     }
 

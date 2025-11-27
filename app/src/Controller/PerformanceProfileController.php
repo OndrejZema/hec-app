@@ -56,7 +56,7 @@ final class PerformanceProfileController extends HecAbstractController
         $user = $this->getAppUser();
         $performanceProfile = new CreatePerformanceProfileDto();
 
-        $form = $this->createForm(PerformanceProfileFormType::class, $performanceProfile, ['user' => $user]);
+        $form = $this->createForm(PerformanceProfileFormType::class, $performanceProfile);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -69,7 +69,7 @@ final class PerformanceProfileController extends HecAbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/performance-profiles/update/{id}', name: 'app_house_update')]
+    #[Route('/performance-profiles/update/{id}', name: 'app_performance_profile_update')]
     public function update(Request $request, int $id): Response
     {
         $user = $this->getAppUser();

@@ -4,13 +4,19 @@ class HecChart extends HTMLElement {
         this.chart = null;
         this.data = JSON.parse(this.getAttribute("data"))
         this.labels = JSON.parse(this.getAttribute("labels"))
-        console.log(this.labels)
         this.label = this.getAttribute("label")
         this.backgroundColor = this.getAttribute("backgroundColor")
         this.borderColor = this.getAttribute("borderColor")
         this.borderWidth = this.getAttribute("borderWidth")
         this.dragData = this.getAttribute("dragData")
         this.name = this.getAttribute("name")
+        this.class = this.getAttribute("class")
+        if(this.class === null){
+            this.class = "h-[30rem]"
+        }
+        this.showLegend = this.getAttribute("showLegend") ?? true
+        this.showTitle = this.getAttribute("showTitle") ?? true
+        this.showLabelsY = this.getAttribute("showLabelsY") ?? true
         this.chartData = {
             labels: this.labels,
             datasets: [
@@ -51,7 +57,7 @@ class HecChart extends HTMLElement {
 
     render() {
         this.innerHTML = `
-            <div style="height: 30rem;">
+            <div class="${this.class}">
                 <canvas id="chartCanvas-${this.id}"></canvas>
             </div>
             <input id="hiddenInputValue${this.id}" name="${this.name}" class="hidden">`;
@@ -74,15 +80,15 @@ class HecChart extends HTMLElement {
                         },
                     },
                     title: {
-                        display: true,
-                        text: this.getAttribute("chart-title") || "Hec chart",
+                        display: this.showTitle,
+                        text: this.getAttribute("chart-title") || "",
                         font: {
                             size: 18,
                             weight: "bold",
                         },
                     },
                     legend: {
-                        display: true,
+                        display: this.showLegend,
                         position: "top",
                     },
                 },
@@ -95,6 +101,9 @@ class HecChart extends HTMLElement {
                         grid: {
                             color: "rgba(0,0,0,0.1)",
                         },
+                        ticks: {
+                            display: this.showLabelsY
+                        }
                     },
                     x: {
                         grid: {
