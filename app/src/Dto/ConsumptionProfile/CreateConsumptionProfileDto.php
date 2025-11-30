@@ -8,14 +8,16 @@ class CreateConsumptionProfileDto
 {
     public int $id;
     public string $name;
-    public ?string $description;
-    public ProfileTypeEnum $type;
+    public ?string $description = null;
+    public ProfileTypeEnum $type = ProfileTypeEnum::AI;
+    public int $houseId;
+    public int $consumptionIndex = 1;
     /** @var array<int> */
-    public array $profileDay;
+    public array $profileDay = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
     /** @var array<int> */
-    public array $profileWeek;
+    public array $profileWeek = [10, 10, 10, 10, 10, 10, 10];
     /** @var array<int> */
-    public array $profileMonth;
+    public array $profileMonth = [10, 10, 10, 10];
     /** @var array<int> */
-    public array $profileYear;
+    public array $profileYear = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
 }

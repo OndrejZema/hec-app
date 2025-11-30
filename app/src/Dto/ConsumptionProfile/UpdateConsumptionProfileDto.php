@@ -10,6 +10,8 @@ class UpdateConsumptionProfileDto
     public string $name;
     public ?string $description;
     public ProfileTypeEnum $type;
+    public int $houseId;
+    public int $consumptionIndex;
     /** @var array<int> */
     public array $profileDay;
     /** @var array<int> */

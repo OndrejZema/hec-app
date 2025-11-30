@@ -10,8 +10,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatorInterface;
+
 class ChartType extends AbstractType
 {
+    public function __construct(protected TranslatorInterface $translator){
+
+    }
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer(new StringToArrayTransformer());
@@ -20,7 +25,7 @@ class ChartType extends AbstractType
     {
         $view->vars['type'] = $options['type'];
         $view->vars['labels'] = $options['labels'];
-        $view->vars['label'] = $options['label'];
+        $view->vars['label'] = $this->translator->trans($options['label'], [], $options['translation_domain']);
         $view->vars['backgroundColor'] = $options['backgroundColor'];
         $view->vars['borderColor'] = $options['borderColor'];
         $view->vars['borderWidth'] = $options['borderWidth'];

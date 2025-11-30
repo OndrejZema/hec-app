@@ -10,6 +10,8 @@ class ConsumptionProfileDto
     public string $name;
     public ?string $description;
     public ProfileTypeEnum $type;
+    public int $consumptionIndex;
+    public int $houseId;
     /** @var array<int> */
     public array $profileDay;
     /** @var array<int> */

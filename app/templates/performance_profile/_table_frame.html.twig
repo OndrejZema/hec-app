@@ -3,10 +3,14 @@
         <thead>
         <tr>
             <th></th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Type</th>
-            <th>Performance Index</th>
+            <th>{{ 'table.name'|trans({}, 'performance_profile') }}</th>
+            <th>{{ 'table.description'|trans({}, 'performance_profile') }}</th>
+            <th>{{ 'table.type'|trans({}, 'performance_profile') }}</th>
+            <th>{{ 'table.performance_index'|trans({}, 'performance_profile') }}</th>
+            <th>{{ 'table.profile.day'|trans({}, 'performance_profile') }}</th>
+            <th>{{ 'table.profile.week'|trans({}, 'performance_profile') }}</th>
+            <th>{{ 'table.profile.month'|trans({}, 'performance_profile') }}</th>
+            <th>{{ 'table.profile.year'|trans({}, 'performance_profile') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -16,7 +20,6 @@
                 <td>{{ performanceProfile.name }}</td>
                 <td>{{ performanceProfile.description }}</td>
                 <td>{{ performanceProfile.type.value }}</td>
-                <td>{{ performanceProfile.performanceIndex }}</td>
                 <td>{{ performanceProfile.performanceIndex }}</td>
                 <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 24) | map(v => '')|json_encode }}" data="{{ performanceProfile.profileDay|json_encode }}" class="h-10 w-20"></hec-chart></td>
                 <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 7) | map(v => '')|json_encode }}" data="{{ performanceProfile.profileWeek|json_encode }}" class="h-10 w-20"></hec-chart></td>

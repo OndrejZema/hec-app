@@ -1,5 +1,18 @@
 form:
+    name: "Jméno"
+    description: "Popis"
     performance_index: "Index výkonu"
+    type: "Typ"
+    profile:
+        day: "Denní profil"
+        week: "Týdenní profil"
+        month: "Měsíční profil"
+        year: "Roční profil"
+table:
+    name: "Jméno"
+    description: "Popis"
+    performance_index: "Index výkonu"
+    type: "Typ"
     profile:
         day: "Denní profil"
         week: "Týdenní profil"

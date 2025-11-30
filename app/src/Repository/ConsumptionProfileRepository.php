@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\ConsumptionProfile;
-use App\Entity\House;
 use App\Entity\User;
 use App\Repository\Interface\IConsumptionProfileRepository;
 use App\Trait\Paginator;
@@ -24,20 +23,23 @@ class ConsumptionProfileRepository extends ServiceEntityRepository implements IC
 
     public function getById(User $user, int $id): ?ConsumptionProfile
     {
-        return $this->createQueryBuilder('pp')
-            ->andWhere('pp.user = :userId')
-            ->andWhere('pp.id = :id')
+        return $this->createQueryBuilder('cp')
+            ->andWhere('cp.user = :userId')
+            ->andWhere('cp.id = :id')
             ->setParameter('userId', $user->getId())
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult();
     }
 
-    public function getAll(User $user, int $page, int $perPage): array
+    public function getAll(User $user, int $houseId, int $page, int $perPage): array
     {
         $qb = $this->createQueryBuilder('cp')
             ->andWhere('cp.user = :userId')
-            ->setParameter('userId', $user->getId());
+            ->andWhere('cp.house = :houseId')
+            ->setParameter('userId', $user->getId())
+            ->setParameter('houseId', $houseId);
+
         list($paginator, $pagination) = $this->paginate($qb, $page, $perPage);
 
         return [iterator_to_array($paginator), $pagination];
@@ -56,7 +58,7 @@ class ConsumptionProfileRepository extends ServiceEntityRepository implements IC
     public function delete(User $user, int $id, bool $flush = true): void
     {
         $consumptionProfile = $this->findOneBy(['user' => $user, 'id' => $id]);
-        if($consumptionProfile !== null){
+        if ($consumptionProfile !== null) {
             $this->getEntityManager()->remove($consumptionProfile);
 
             if ($flush) {

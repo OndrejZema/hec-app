@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Dto\PerformanceProfile\CreatePerformanceProfileDto;
 use App\Dto\PerformanceProfile\UpdatePerformanceProfileDto;
-use App\Entity\PerformanceProfile;
-use App\Form\HouseFormType;
 use App\Form\PerformanceProfileFormType;
 use App\Service\Interface\IHouseService;
 use App\Service\Interface\IPerformanceProfileService;
@@ -22,7 +20,7 @@ final class PerformanceProfileController extends HecAbstractController
 
     }
 
-    #[Route('/performance/profile', name: 'app_performance_profile')]
+    #[Route('/performance-profiles', name: 'app_performance_profile')]
     public function index(Request $request): Response
     {
         $user = $this->getAppUser();
@@ -80,6 +78,7 @@ final class PerformanceProfileController extends HecAbstractController
         $performanceProfile->name = $performanceProfileDto->name;
         $performanceProfile->description = $performanceProfileDto->description;
         $performanceProfile->type = $performanceProfileDto->type;
+        $performanceProfile->performanceIndex = $performanceProfileDto->performanceIndex;
         $performanceProfile->profileDay = $performanceProfileDto->profileDay;
         $performanceProfile->profileWeek = $performanceProfileDto->profileWeek;
         $performanceProfile->profileMonth = $performanceProfileDto->profileMonth;

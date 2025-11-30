@@ -5,8 +5,8 @@
 {% block content %}
     <div class="max-w-[80rem]">
         <div class="flex items-center justify-between">
-            <h3>Performance profile</h3>
-            <wa-button appearance="plain outlined" href="{{ path('app_performance_profile') }}">
+            <h3>Consumption profile</h3>
+            <wa-button appearance="plain outlined" href="{{ path('app_consumption_profile') }}">
                 <wa-icon name="chevron-left"></wa-icon>
             </wa-button>
         </div>
@@ -15,7 +15,7 @@
             <div class="flex flex-col gap-4">
                 {{ form_row(form.name) }}
                 {{ form_row(form.type) }}
-                {{ form_row(form.performanceIndex) }}
+                {{ form_row(form.consumptionIndex) }}
             </div>
             {{ form_row(form.description) }}
             {{ form_row(form.profileDay) }}

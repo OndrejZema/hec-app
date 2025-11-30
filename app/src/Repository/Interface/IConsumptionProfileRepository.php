@@ -13,7 +13,7 @@ interface IConsumptionProfileRepository
     /**
      * @return array{0: array<ConsumptionProfile>, 1: PaginationDto}
      */
-    public function getAll(User $user, int $page, int $perPage): array;
+    public function getAll(User $user, int $houseId, int $page, int $perPage): array;
 
     public function save(ConsumptionProfile $consumptionProfile, bool $flush = true): void;
 
