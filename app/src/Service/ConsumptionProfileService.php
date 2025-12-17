@@ -8,6 +8,7 @@ use App\Dto\ConsumptionProfile\UpdateConsumptionProfileDto;
 use App\Entity\User;
 use App\Mapper\ConsumptionProfileMapper;
 use App\Repository\Interface\IConsumptionProfileRepository;
+use App\Repository\Interface\IHouseConsumptionProfileRepository;
 use App\Repository\Interface\IHouseRepository;
 use App\Repository\Interface\IHouseVisitRepository;
 use App\Service\Interface\IConsumptionProfileService;
@@ -15,11 +16,11 @@ use App\Service\Interface\IConsumptionProfileService;
 class ConsumptionProfileService implements IConsumptionProfileService
 {
     public function __construct(
-        protected IConsumptionProfileRepository $consumptionProfileRepository,
-        protected ConsumptionProfileMapper      $consumptionProfileMapper,
-        protected IHouseRepository              $houseRepository,
-        protected IHouseVisitRepository         $houseVisitRepository,
-
+        protected IConsumptionProfileRepository      $consumptionProfileRepository,
+        protected ConsumptionProfileMapper           $consumptionProfileMapper,
+        protected IHouseRepository                   $houseRepository,
+        protected IHouseVisitRepository              $houseVisitRepository,
+        protected IHouseConsumptionProfileRepository $houseConsumptionProfileRepository
     )
     {
     }
@@ -78,8 +79,10 @@ class ConsumptionProfileService implements IConsumptionProfileService
         $this->consumptionProfileRepository->delete($user, $id);
     }
 
-    public function activate(User $user, int $houseId, int $id): void
+    public function select(User $user, int $houseId, int $id): void
     {
-        // TODO: Implement activate() method.
+        $house = $this->houseRepository->getById($user, $houseId);
+        $profile = $this->consumptionProfileRepository->getById($user, $id);
+        $this->houseConsumptionProfileRepository->selectProfile($user, $house, $profile);
     }
 }

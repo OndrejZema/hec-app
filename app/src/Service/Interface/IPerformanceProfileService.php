@@ -23,6 +23,6 @@ interface IPerformanceProfileService
 
     public function delete(User $user, int $id): void;
 
-    public function activate(User $user, int $houseId, int $id): void;
+    public function select(User $user, int $houseId, int $id): void;
 
 }

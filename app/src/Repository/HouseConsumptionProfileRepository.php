@@ -2,14 +2,18 @@
 
 namespace App\Repository;
 
+use App\Entity\ConsumptionProfile;
+use App\Entity\House;
 use App\Entity\HouseConsumptionProfile;
+use App\Entity\User;
+use App\Repository\Interface\IHouseConsumptionProfileRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<HouseConsumptionProfile>
  */
-class HouseConsumptionProfileRepository extends ServiceEntityRepository
+class HouseConsumptionProfileRepository extends ServiceEntityRepository implements IHouseConsumptionProfileRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -40,4 +44,13 @@ class HouseConsumptionProfileRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function selectProfile(User $user, House $house, ConsumptionProfile $profile): void
+    {
+        // TODO: Implement selectProfile() method.
+    }
+
+    public function getCurrentProfile(User $user, House $house): ConsumptionProfile
+    {
+        // TODO: Implement getCurrentProfile() method.
+    }
 }

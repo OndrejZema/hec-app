@@ -107,4 +107,12 @@ final class ConsumptionProfileController extends HecAbstractController
         $this->consumptionProfileService->delete($user, $id);
         return $this->redirectToRoute('app_consumption_profile');
     }
+
+    #[Route('/consumption-profiles/select/{id}', name: 'app_consumption_profile_select', methods: ['POST'])]
+    public function select(Request $request, int $id): Response
+    {
+        $user = $this->getAppUser();
+        $this->consumptionProfileService->select($user, $id);
+        return $this->redirectToRoute('app_consumption_profile');
+    }
 }

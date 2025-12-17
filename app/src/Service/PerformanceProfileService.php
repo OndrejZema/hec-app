@@ -8,6 +8,7 @@ use App\Dto\PerformanceProfile\UpdatePerformanceProfileDto;
 use App\Entity\User;
 use App\Mapper\HouseMapper;
 use App\Mapper\PerformanceProfileMapper;
+use App\Repository\Interface\IHousePerformanceProfileRepository;
 use App\Repository\Interface\IHouseRepository;
 use App\Repository\Interface\IHouseVisitRepository;
 use App\Repository\Interface\IPerformanceProfileRepository;
@@ -16,11 +17,12 @@ use App\Service\Interface\IPerformanceProfileService;
 class PerformanceProfileService implements IPerformanceProfileService
 {
     public function __construct(
-        protected IPerformanceProfileRepository $performanceProfileRepository,
-        protected PerformanceProfileMapper      $performanceProfileMapper,
-        protected IHouseRepository              $houseRepository,
-        protected IHouseVisitRepository         $houseVisitRepository,
-        protected HouseMapper                   $houseMapper
+        protected IPerformanceProfileRepository      $performanceProfileRepository,
+        protected PerformanceProfileMapper           $performanceProfileMapper,
+        protected IHouseRepository                   $houseRepository,
+        protected IHouseVisitRepository              $houseVisitRepository,
+        protected HouseMapper                        $houseMapper,
+        protected IHousePerformanceProfileRepository $housePerformanceProfileRepository
     )
     {
     }
@@ -79,8 +81,10 @@ class PerformanceProfileService implements IPerformanceProfileService
         $this->performanceProfileRepository->delete($user, $id);
     }
 
-    public function activate(User $user, int $houseId, int $id): void
+    public function select(User $user, int $houseId, int $id): void
     {
-        // TODO: Implement activate() method.
+        $house = $this->houseRepository->getById($user, $houseId);
+        $profile = $this->performanceProfileRepository->getById($user, $id);
+        $this->housePerformanceProfileRepository->selectProfile($user, $house, $profile);
     }
 }
