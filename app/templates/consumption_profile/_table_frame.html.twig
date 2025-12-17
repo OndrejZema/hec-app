@@ -2,12 +2,16 @@
     <table>
         <thead>
         <tr>
+
             <th></th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Type</th>
-            <th>Consumption Index</th>
-            <th></th>
+            <th>{{ 'table.name'|trans({}, 'consumption_profile') }}</th>
+            <th>{{ 'table.description'|trans({}, 'consumption_profile') }}</th>
+            <th>{{ 'table.type'|trans({}, 'consumption_profile') }}</th>
+            <th>{{ 'table.performance_index'|trans({}, 'consumption_profile') }}</th>
+            <th>{{ 'table.profile.day'|trans({}, 'consumption_profile') }}</th>
+            <th>{{ 'table.profile.week'|trans({}, 'consumption_profile') }}</th>
+            <th>{{ 'table.profile.month'|trans({}, 'consumption_profile') }}</th>
+            <th>{{ 'table.profile.year'|trans({}, 'consumption_profile') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +24,12 @@
                 </td>
                 <td>{{ consumptionProfile.name }}</td>
                 <td>{{ consumptionProfile.description }}</td>
+                <td>{{ consumptionProfile.type.value }}</td>
+                <td>{{ consumptionProfile.consumptionIndex }}</td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 24) | map(v => '')|json_encode }}" data="{{ consumptionProfile.profileDay|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 7) | map(v => '')|json_encode }}" data="{{ consumptionProfile.profileWeek|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 4) | map(v => '')|json_encode }}" data="{{ consumptionProfile.profileMonth|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 12) | map(v => '')|json_encode }}" data="{{ consumptionProfile.profileYear|json_encode }}" class="h-10 w-20"></hec-chart></td>
                 <td>
                     <div class="flex items-center gap-2 justify-end">
 {#                        {% if( not consumptionProfile.isSelected) %}#}

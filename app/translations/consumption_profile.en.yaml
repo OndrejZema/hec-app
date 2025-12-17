@@ -1,0 +1,20 @@
+form:
+    name: "Name"
+    description: "Description"
+    performance_index: "Performance index"
+    type: "Type"
+    profile:
+        day: "Day profile"
+        week: "Week profile"
+        month: "Month profile"
+        year: "Year profile"
+table:
+    name: "Name"
+    description: "Description"
+    performance_index: "Performance index"
+    type: "Type"
+    profile:
+        day: "Day profile"
+        week: "Week profile"
+        month: "Month profile"
+        year: "Year profile"
