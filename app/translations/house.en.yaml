@@ -1,1 +1,9 @@
 title: "Houses"
+form:
+    name: "Name"
+    description: "Description"
+table:
+    name: "name"
+    description: "Description"
+    performance_profile_count: "performance profile count"
+    consumption_profile_count: "consumption profile count"

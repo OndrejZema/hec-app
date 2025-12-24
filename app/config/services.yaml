@@ -25,6 +25,14 @@ services:
         alias: App\Repository\HouseRepository
     App\Repository\Interface\IHouseService:
         alias: App\Repository\HouseService
+    App\Service\Interface\IHousePerformanceProfileService:
+        alias: App\Service\HousePerformanceProfileService
+    App\Service\Interface\IHouseConsumptionProfileService:
+        alias: App\Service\HouseConsumptionProfileService
+    App\Repository\Interface\IHousePerformanceProfileRepository:
+        alias: App\Repository\HousePerformanceProfileRepository
+    App\Repository\Interface\IHouseConsumptionProfileRepository:
+        alias: App\Repository\HouseConsumptionProfileRepository
     App\Repository\Interface\IPerformanceProfileRepository:
         alias: App\Repository\PerformanceProfileRepository
     App\Repository\Interface\IConsumptionProfileRepository:

@@ -7,7 +7,9 @@ use App\Dto\House\HouseDto;
 use App\Dto\House\UpdateHouseDto;
 use App\Entity\User;
 use App\Mapper\HouseMapper;
+use App\Repository\Interface\IConsumptionProfileRepository;
 use App\Repository\Interface\IHouseRepository;
+use App\Repository\Interface\IPerformanceProfileRepository;
 use App\Service\Interface\IHouseService;
 use App\Service\Interface\IHouseVisitService;
 
@@ -15,9 +17,11 @@ class HouseService implements IHouseService
 {
 
     public function __construct(
-        protected IHouseRepository   $houseRepository,
-        protected IHouseVisitService $houseVisitService,
-        protected HouseMapper        $houseMapper
+        protected IHouseRepository              $houseRepository,
+        protected IHouseVisitService            $houseVisitService,
+        protected HouseMapper                   $houseMapper,
+        protected IPerformanceProfileRepository $performanceProfileRepository,
+        protected IConsumptionProfileRepository $consumptionProfileRepository,
     )
     {
     }
@@ -35,10 +39,12 @@ class HouseService implements IHouseService
     public function getAll(User $user, int $page, int $perPage): array
     {
         list($houses, $pagination) = $this->houseRepository->getAll($user, $page, $perPage);
-        $selectedId = $this->getCurrentId($user);
-        return [array_map(function ($model) use ($selectedId) {
+        $currentId = $this->getCurrentId($user);
+        return [array_map(function ($model) use ($currentId, $user) {
             $dto = $this->houseMapper->toDto($model);
-            $dto->isSelected = $selectedId === $dto->id;
+            $dto->isCurrent = $currentId === $dto->id;
+            $dto->performanceProfileCount = $this->performanceProfileRepository->getCountForHouse($user, $model);
+            $dto->consumptionProfileCount = $this->consumptionProfileRepository->getCountForHouse($user, $model);
             return $dto;
         }, $houses), $pagination];
     }

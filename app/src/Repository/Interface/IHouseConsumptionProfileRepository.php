@@ -8,6 +8,6 @@ use App\Entity\User;
 
 interface IHouseConsumptionProfileRepository
 {
-    public function selectProfile(User $user, House $house, ConsumptionProfile $profile): void;
-    public function getCurrentProfile(User $user,  House $house): ConsumptionProfile;
+    public function switchProfile(User $user, House $house, ConsumptionProfile $profile): void;
+    public function getCurrentProfileId(User $user,  House $house): ?int;
 }

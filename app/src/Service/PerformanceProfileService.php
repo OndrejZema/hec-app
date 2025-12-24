@@ -40,11 +40,11 @@ class PerformanceProfileService implements IPerformanceProfileService
     public function getAll(User $user, int $houseId, int $page, int $perPage): array
     {
         list($performanceProfiles, $pagination) = $this->performanceProfileRepository->getAll($user, $houseId, $page, $perPage);
-//        $selectedId = $this->getSelectedId($user);
-        $activeId = 0;
-        return [array_map(function ($model) use ($activeId) {
+        $house = $this->houseRepository->getById($user, $houseId);
+        $currentId = $this->housePerformanceProfileRepository->getCurrentProfileId($user, $house);
+        return [array_map(function ($model) use ($currentId) {
             $dto = $this->performanceProfileMapper->toDto($model);
-//            $dto->isActive = $activeId === $dto->id;
+            $dto->isCurrent = $currentId === $dto->id;
             return $dto;
         }, $performanceProfiles), $pagination];
     }
@@ -81,10 +81,10 @@ class PerformanceProfileService implements IPerformanceProfileService
         $this->performanceProfileRepository->delete($user, $id);
     }
 
-    public function select(User $user, int $houseId, int $id): void
+    public function switchProfile(User $user, int $houseId, int $id): void
     {
         $house = $this->houseRepository->getById($user, $houseId);
         $profile = $this->performanceProfileRepository->getById($user, $id);
-        $this->housePerformanceProfileRepository->selectProfile($user, $house, $profile);
+        $this->housePerformanceProfileRepository->switchProfile($user, $house, $profile);
     }
 }

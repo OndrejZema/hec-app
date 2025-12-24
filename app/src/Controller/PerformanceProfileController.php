@@ -105,4 +105,13 @@ final class PerformanceProfileController extends HecAbstractController
         $this->performanceProfileService->delete($user, $id);
         return $this->redirectToRoute('app_performance_profile');
     }
+
+    #[Route('/performance-profiles/switch/{id}', name: 'app_performance_profile_switch_profile', methods: ['POST'])]
+    public function switchProfile(Request $request, int $id): Response
+    {
+        $user = $this->getAppUser();
+        $houseId = $this->houseService->getCurrentId($user);
+        $this->performanceProfileService->switchProfile($user, $houseId, $id);
+        return $this->redirectToRoute('app_performance_profile');
+    }
 }

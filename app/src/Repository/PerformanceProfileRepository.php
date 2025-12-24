@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\House;
 use App\Entity\PerformanceProfile;
 use App\Entity\User;
 use App\Repository\Interface\IPerformanceProfileRepository;
@@ -15,6 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
 class PerformanceProfileRepository extends ServiceEntityRepository implements IPerformanceProfileRepository
 {
     use Paginator;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, PerformanceProfile::class);
@@ -55,7 +57,7 @@ class PerformanceProfileRepository extends ServiceEntityRepository implements IP
     public function delete(User $user, int $id, bool $flush = true): void
     {
         $performanceProfile = $this->findOneBy(['user' => $user, 'id' => $id]);
-        if($performanceProfile !== null){
+        if ($performanceProfile !== null) {
             $this->getEntityManager()->remove($performanceProfile);
 
             if ($flush) {
@@ -63,4 +65,17 @@ class PerformanceProfileRepository extends ServiceEntityRepository implements IP
             }
         }
     }
+
+    public function getCountForHouse(User $user, House $house): int
+    {
+        return (int) $this->createQueryBuilder('h')
+            ->select('COUNT(h.id)')
+            ->andWhere('h.user = :user')
+            ->andWhere('h.house = :house')
+            ->setParameter('user', $user)
+            ->setParameter('house', $house)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 }

@@ -38,11 +38,11 @@ class ConsumptionProfileService implements IConsumptionProfileService
     public function getAll(User $user, int $houseId, int $page, int $perPage): array
     {
         list($consumptionProfiles, $pagination) = $this->consumptionProfileRepository->getAll($user, $houseId, $page, $perPage);
-//        $selectedId = $this->getSelectedId($user);
-        $activeId = 0;
-        return [array_map(function ($model) use ($activeId) {
+        $house = $this->houseRepository->getById($user, $houseId);
+        $currentId = $this->houseConsumptionProfileRepository->getCurrentProfileId($user, $house);
+        return [array_map(function ($model) use ($currentId) {
             $dto = $this->consumptionProfileMapper->toDto($model);
-//            $dto->isActive = $activeId === $dto->id;
+            $dto->isCurrent = $currentId === $dto->id;
             return $dto;
         }, $consumptionProfiles), $pagination];
     }
@@ -79,10 +79,10 @@ class ConsumptionProfileService implements IConsumptionProfileService
         $this->consumptionProfileRepository->delete($user, $id);
     }
 
-    public function select(User $user, int $houseId, int $id): void
+    public function switchProfile(User $user, int $houseId, int $id): void
     {
         $house = $this->houseRepository->getById($user, $houseId);
         $profile = $this->consumptionProfileRepository->getById($user, $id);
-        $this->houseConsumptionProfileRepository->selectProfile($user, $house, $profile);
+        $this->houseConsumptionProfileRepository->switchProfile($user, $house, $profile);
     }
 }

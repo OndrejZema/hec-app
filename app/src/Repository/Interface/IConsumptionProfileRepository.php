@@ -4,6 +4,7 @@ namespace App\Repository\Interface;
 
 use App\Dto\Pagination\PaginationDto;
 use App\Entity\ConsumptionProfile;
+use App\Entity\House;
 use App\Entity\User;
 
 interface IConsumptionProfileRepository
@@ -18,4 +19,6 @@ interface IConsumptionProfileRepository
     public function save(ConsumptionProfile $consumptionProfile, bool $flush = true): void;
 
     public function delete(User $user, int $id, bool $flush = true): void;
+    public function getCountForHouse(User $user, House $house): int;
+
 }

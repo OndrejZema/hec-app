@@ -19,4 +19,6 @@ interface IPerformanceProfileRepository
     public function save(PerformanceProfile $performanceProfile, bool $flush = true): void;
 
     public function delete(User $user, int $id, bool $flush = true): void;
+
+    public function getCountForHouse(User $user, House $house): int;
 }

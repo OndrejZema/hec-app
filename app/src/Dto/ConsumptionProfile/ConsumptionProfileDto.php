@@ -20,4 +20,5 @@ class ConsumptionProfileDto
     public array $profileMonth;
     /** @var array<int> */
     public array $profileYear;
+    public bool $isCurrent;
 }

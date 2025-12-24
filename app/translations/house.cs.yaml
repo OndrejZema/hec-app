@@ -1,1 +1,9 @@
 title: "Domy"
+form:
+    name: "Název"
+    description: "Popis"
+table:
+    name: "Jméno"
+    description: "Popis"
+    performance_profile_count: "Počet profilů výkonu"
+    consumption_profile_count: "Počet profilů spotřeby"

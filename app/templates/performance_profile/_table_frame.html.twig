@@ -16,7 +16,11 @@
         <tbody>
         {% for performanceProfile in performanceProfiles %}
             <tr>
-                <td></td>
+                <td>
+                    {% if(performanceProfile.isCurrent) %}
+                        <wa-icon name="check-circle" class="hec-icon"></wa-icon>
+                    {% endif %}
+                </td>
                 <td>{{ performanceProfile.name }}</td>
                 <td>{{ performanceProfile.description }}</td>
                 <td>{{ performanceProfile.type.value }}</td>
@@ -27,14 +31,14 @@
                 <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 12) | map(v => '')|json_encode }}" data="{{ performanceProfile.profileYear|json_encode }}" class="h-10 w-20"></hec-chart></td>
                 <td>
                     <div class="flex items-center gap-2 justify-end">
-{#                        {% if( not performanceProfile.isSelected) %}#}
-{#                            <form method="POST" action="{{ path('app_performance_profile_select', {id: performanceProfile.id}) }}">#}
-{#                                <input type="hidden" name="_token" value="{{ csrf_token('visit' ~ performanceProfile.id) }}">#}
-{#                                <wa-button type="submit" appearance="plain">#}
-{#                                    <wa-icon name="play" class="hec-icon"></wa-icon>#}
-{#                                </wa-button>#}
-{#                            </form>#}
-{#                        {% endif %}#}
+                        {% if( not performanceProfile.isCurrent) %}
+                            <form method="POST" action="{{ path('app_performance_profile_switch_profile', {id: performanceProfile.id}) }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token('visit' ~ performanceProfile.id) }}">
+                                <wa-button type="submit" appearance="plain">
+                                    <wa-icon name="play" class="hec-icon"></wa-icon>
+                                </wa-button>
+                            </form>
+                        {% endif %}
                         <wa-button appearance="plain" href="{{ path('app_performance_profile_update', {id: performanceProfile.id}) }}"
                                    target="_top">
                             <wa-icon name="edit"></wa-icon>

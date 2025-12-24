@@ -18,9 +18,9 @@
         {% for consumptionProfile in consumptionProfiles %}
             <tr>
                 <td>
-{#                    {% if(consumptionProfile.isSelected) %}#}
-{#                        <wa-icon name="check-circle" class="hec-icon"></wa-icon>#}
-{#                    {% endif %}#}
+                    {% if(consumptionProfile.isCurrent) %}
+                        <wa-icon name="check-circle" class="hec-icon"></wa-icon>
+                    {% endif %}
                 </td>
                 <td>{{ consumptionProfile.name }}</td>
                 <td>{{ consumptionProfile.description }}</td>
@@ -32,14 +32,14 @@
                 <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 12) | map(v => '')|json_encode }}" data="{{ consumptionProfile.profileYear|json_encode }}" class="h-10 w-20"></hec-chart></td>
                 <td>
                     <div class="flex items-center gap-2 justify-end">
-{#                        {% if( not consumptionProfile.isSelected) %}#}
-{#                            <form method="POST" action="{{ path('app_consumption_profile_visit', {id: consumptionProfile.id}) }}">#}
-{#                                <input type="hidden" name="_token" value="{{ csrf_token('visit' ~ consumptionProfile.id) }}">#}
-{#                                <wa-button type="submit" appearance="plain">#}
-{#                                    <wa-icon name="play" class="hec-icon"></wa-icon>#}
-{#                                </wa-button>#}
-{#                            </form>#}
-{#                        {% endif %}#}
+                        {% if( not consumptionProfile.isCurrent) %}
+                            <form method="POST" action="{{ path('app_consumption_profile_switch_profile', {id: consumptionProfile.id}) }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token('visit' ~ consumptionProfile.id) }}">
+                                <wa-button type="submit" appearance="plain">
+                                    <wa-icon name="play" class="hec-icon"></wa-icon>
+                                </wa-button>
+                            </form>
+                        {% endif %}
                         <wa-button appearance="plain" href="{{ path('app_consumption_profile_update', {id: consumptionProfile.id}) }}"
                                    target="_top">
                             <wa-icon name="edit"></wa-icon>

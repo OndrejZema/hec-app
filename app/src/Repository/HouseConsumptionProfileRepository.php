@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Repository\Interface\IHouseConsumptionProfileRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Throwable;
 
 /**
  * @extends ServiceEntityRepository<HouseConsumptionProfile>
@@ -19,38 +20,31 @@ class HouseConsumptionProfileRepository extends ServiceEntityRepository implemen
     {
         parent::__construct($registry, HouseConsumptionProfile::class);
     }
-
-    //    /**
-    //     * @return HouseConsumptionProfile[] Returns an array of HouseConsumptionProfile objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('h')
-    //            ->andWhere('h.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('h.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?HouseConsumptionProfile
-    //    {
-    //        return $this->createQueryBuilder('h')
-    //            ->andWhere('h.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
-    public function selectProfile(User $user, House $house, ConsumptionProfile $profile): void
+    public function switchProfile(User $user, House $house, ConsumptionProfile $profile): void
     {
-        // TODO: Implement selectProfile() method.
+        $currentProfile = new HouseConsumptionProfile();
+        $currentProfile->setUser($user);
+        $currentProfile->setHouse($house);
+        $currentProfile->setConsumptionProfile($profile);
+        $this->getEntityManager()->persist($currentProfile);
+        $this->getEntityManager()->flush();
     }
 
-    public function getCurrentProfile(User $user, House $house): ConsumptionProfile
+    public function getCurrentProfileId(User $user, House $house): ?int
     {
-        // TODO: Implement getCurrentProfile() method.
+        try {
+            return $this->createQueryBuilder('cp')
+                ->andWhere('cp.user = :user')
+                ->setParameter('user', $user)
+                ->andWhere('cp.house = :house')
+                ->setParameter('house', $house)
+                ->select('IDENTITY(cp.consumptionProfile)')
+                ->orderBy('cp.createdAt', 'DESC')
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (Throwable $ex) {
+            return null;
+        }
     }
 }

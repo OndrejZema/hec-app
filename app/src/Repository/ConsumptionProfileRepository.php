@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\ConsumptionProfile;
+use App\Entity\House;
 use App\Entity\User;
 use App\Repository\Interface\IConsumptionProfileRepository;
 use App\Trait\Paginator;
@@ -65,5 +66,16 @@ class ConsumptionProfileRepository extends ServiceEntityRepository implements IC
                 $this->getEntityManager()->flush();
             }
         }
+    }
+    public function getCountForHouse(User $user, House $house): int
+    {
+        return (int) $this->createQueryBuilder('h')
+            ->select('COUNT(h.id)')
+            ->andWhere('h.user = :user')
+            ->andWhere('h.house = :house')
+            ->setParameter('user', $user)
+            ->setParameter('house', $house)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }
