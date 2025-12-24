@@ -35,7 +35,7 @@ class ConsumptionProfileFormType extends AbstractType
             ])
             ->add('type', ChoiceType::class, [
                 'label' => 'form.type',
-                'translation_domain' => 'common',
+                'translation_domain' => 'consumption_profile',
                 'choices' => ProfileTypeEnum::getChoices(),
                 'required' => true,
             ])

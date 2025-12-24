@@ -1,7 +1,8 @@
+title: "Profily spotřeby"
 form:
     name: "Jméno"
     description: "Popis"
-    consumption_index: "Index výkonu"
+    consumption_index: "Index spotřeby"
     type: "Typ"
     profile:
         day: "Denní profil"

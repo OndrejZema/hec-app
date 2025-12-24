@@ -1,7 +1,8 @@
+title: "Consumption profiles"
 form:
     name: "Name"
     description: "Description"
-    performance_index: "Performance index"
+    consumption_index: "Consumption index"
     type: "Type"
     profile:
         day: "Day profile"
