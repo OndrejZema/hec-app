@@ -78,6 +78,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: HouseConsumptionProfile::class, mappedBy: 'user')]
     private Collection $houseConsumptionProfiles;
 
+    /**
+     * @var Collection<int, BrokerProfile>
+     */
+    #[ORM\OneToMany(targetEntity: BrokerProfile::class, mappedBy: 'user')]
+    private Collection $brokerProfiles;
+
+    /**
+     * @var Collection<int, HouseBrokerProfile>
+     */
+    #[ORM\OneToMany(targetEntity: HouseBrokerProfile::class, mappedBy: 'user')]
+    private Collection $houseBrokerProfiles;
+
     public function __construct()
     {
         $this->houses = new ArrayCollection();
@@ -86,6 +98,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->consumptionProfiles = new ArrayCollection();
         $this->housePerformanceProfiles = new ArrayCollection();
         $this->houseConsumptionProfiles = new ArrayCollection();
+        $this->brokerProfiles = new ArrayCollection();
+        $this->houseBrokerProfiles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -355,6 +369,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($houseConsumptionProfile->getUser() === $this) {
                 $houseConsumptionProfile->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BrokerProfile>
+     */
+    public function getBrokerProfiles(): Collection
+    {
+        return $this->brokerProfiles;
+    }
+
+    public function addBrokerProfile(BrokerProfile $brokerProfile): static
+    {
+        if (!$this->brokerProfiles->contains($brokerProfile)) {
+            $this->brokerProfiles->add($brokerProfile);
+            $brokerProfile->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBrokerProfile(BrokerProfile $brokerProfile): static
+    {
+        if ($this->brokerProfiles->removeElement($brokerProfile)) {
+            // set the owning side to null (unless already changed)
+            if ($brokerProfile->getUser() === $this) {
+                $brokerProfile->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HouseBrokerProfile>
+     */
+    public function getHouseBrokerProfiles(): Collection
+    {
+        return $this->houseBrokerProfiles;
+    }
+
+    public function addHouseBrokerProfile(HouseBrokerProfile $houseBrokerProfile): static
+    {
+        if (!$this->houseBrokerProfiles->contains($houseBrokerProfile)) {
+            $this->houseBrokerProfiles->add($houseBrokerProfile);
+            $houseBrokerProfile->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHouseBrokerProfile(HouseBrokerProfile $houseBrokerProfile): static
+    {
+        if ($this->houseBrokerProfiles->removeElement($houseBrokerProfile)) {
+            // set the owning side to null (unless already changed)
+            if ($houseBrokerProfile->getUser() === $this) {
+                $houseBrokerProfile->setUser(null);
             }
         }
 

@@ -33,12 +33,14 @@
                 <td>
                     <div class="flex items-center gap-2 justify-end">
                         {% if( not consumptionProfile.isCurrent) %}
-                            <form method="POST" action="{{ path('app_consumption_profile_switch_profile', {id: consumptionProfile.id}) }}">
-                                <input type="hidden" name="_token" value="{{ csrf_token('visit' ~ consumptionProfile.id) }}">
-                                <wa-button type="submit" appearance="plain">
-                                    <wa-icon name="play" class="hec-icon"></wa-icon>
-                                </wa-button>
-                            </form>
+                            <twig:BtnAction
+                                method="POST"
+                                action="{{ path('app_consumption_profile_switch_profile', {id: consumptionProfile.id}) }}"
+                                csrf="{{ csrf_token('cp_switch_' ~ consumptionProfile.id)  }}"
+                                iconName="play"
+                            >
+                            </twig:BtnAction>
+
                         {% endif %}
                         <wa-button appearance="plain" href="{{ path('app_consumption_profile_update', {id: consumptionProfile.id}) }}"
                                    target="_top">

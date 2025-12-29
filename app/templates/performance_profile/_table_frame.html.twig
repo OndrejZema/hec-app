@@ -32,12 +32,13 @@
                 <td>
                     <div class="flex items-center gap-2 justify-end">
                         {% if( not performanceProfile.isCurrent) %}
-                            <form method="POST" action="{{ path('app_performance_profile_switch_profile', {id: performanceProfile.id}) }}">
-                                <input type="hidden" name="_token" value="{{ csrf_token('visit' ~ performanceProfile.id) }}">
-                                <wa-button type="submit" appearance="plain">
-                                    <wa-icon name="play" class="hec-icon"></wa-icon>
-                                </wa-button>
-                            </form>
+                            <twig:BtnAction
+                                method="POST"
+                                action="{{ path('app_performance_profile_switch_profile', {id: performanceProfile.id}) }}"
+                                csrf="{{ csrf_token('pp_switch_' ~ performanceProfile.id)  }}"
+                                iconName="play"
+                            >
+                            </twig:BtnAction>
                         {% endif %}
                         <wa-button appearance="plain" href="{{ path('app_performance_profile_update', {id: performanceProfile.id}) }}"
                                    target="_top">

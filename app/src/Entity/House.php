@@ -60,6 +60,12 @@ class House
     #[ORM\OneToMany(targetEntity: HouseConsumptionProfile::class, mappedBy: 'house')]
     private Collection $houseConsumptionProfiles;
 
+    /**
+     * @var Collection<int, HouseBrokerProfile>
+     */
+    #[ORM\OneToMany(targetEntity: HouseBrokerProfile::class, mappedBy: 'house')]
+    private Collection $houseBrokerProfiles;
+
     public function __construct()
     {
         $this->houseVisits = new ArrayCollection();
@@ -67,6 +73,7 @@ class House
         $this->consumptionProfiles = new ArrayCollection();
         $this->housePerformanceProfiles = new ArrayCollection();
         $this->houseConsumptionProfiles = new ArrayCollection();
+        $this->houseBrokerProfiles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -254,6 +261,36 @@ class House
             // set the owning side to null (unless already changed)
             if ($houseConsumptionProfile->getHouse() === $this) {
                 $houseConsumptionProfile->setHouse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HouseBrokerProfile>
+     */
+    public function getHouseBrokerProfiles(): Collection
+    {
+        return $this->houseBrokerProfiles;
+    }
+
+    public function addHouseBrokerProfile(HouseBrokerProfile $houseBrokerProfile): static
+    {
+        if (!$this->houseBrokerProfiles->contains($houseBrokerProfile)) {
+            $this->houseBrokerProfiles->add($houseBrokerProfile);
+            $houseBrokerProfile->setHouse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHouseBrokerProfile(HouseBrokerProfile $houseBrokerProfile): static
+    {
+        if ($this->houseBrokerProfiles->removeElement($houseBrokerProfile)) {
+            // set the owning side to null (unless already changed)
+            if ($houseBrokerProfile->getHouse() === $this) {
+                $houseBrokerProfile->setHouse(null);
             }
         }
 

@@ -3,7 +3,7 @@
 {% block title %}Hello PerformanceProfileController!{% endblock %}
 
 {% block content %}
-    <div class="max-w-[50rem]">
+    <div class="max-w-[80rem]">
         <twig:SectionHeader title="{{ 'title'|trans({}, 'performance_profile') }}" createRouteName="app_performance_profile_create"/>
         <turbo-frame id="performance_profile_table" src="{{ path('app_performance_profile', {page: page, perPage: perPage}) }}"
                      data-turbo-action="advance">

@@ -1,0 +1,64 @@
+<turbo-frame id="broker_profile_table">
+    <table>
+        <thead>
+        <tr>
+
+            <th></th>
+            <th>{{ 'table.name'|trans({}, 'broker_profile') }}</th>
+            <th>{{ 'table.description'|trans({}, 'broker_profile') }}</th>
+            <th>{{ 'table.purchase.profile.day'|trans({}, 'broker_profile') }}</th>
+            <th>{{ 'table.purchase.profile.week'|trans({}, 'broker_profile') }}</th>
+            <th>{{ 'table.purchase.profile.month'|trans({}, 'broker_profile') }}</th>
+            <th>{{ 'table.purchase.profile.year'|trans({}, 'broker_profile') }}</th>
+            <th>{{ 'table.sale.profile.day'|trans({}, 'broker_profile') }}</th>
+            <th>{{ 'table.sale.profile.week'|trans({}, 'broker_profile') }}</th>
+            <th>{{ 'table.sale.profile.month'|trans({}, 'broker_profile') }}</th>
+            <th>{{ 'table.sale.profile.year'|trans({}, 'broker_profile') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for brokerProfile in brokerProfiles %}
+            <tr>
+                <td>
+                    {% if(brokerProfiles.isCurrent) %}
+                        <wa-icon name="check-circle" class="hec-icon"></wa-icon>
+                    {% endif %}
+                </td>
+                <td>{{ brokerProfile.name }}</td>
+                <td>{{ brokerProfile.description }}</td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 24) | map(v => '')|json_encode }}" data="{{ brokerProfile.purchaseProfileDay|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 7) | map(v => '')|json_encode }}" data="{{  brokerProfile.purchaseProfileWeek|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 4) | map(v => '')|json_encode }}" data="{{  brokerProfile.purchaseProfileMonth|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 12) | map(v => '')|json_encode }}" data="{{ brokerProfile.purchaseProfileYear|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 24) | map(v => '')|json_encode }}" data="{{ brokerProfile.saleProfileDay|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 7) | map(v => '')|json_encode }}" data="{{  brokerProfile.saleProfileWeek|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 4) | map(v => '')|json_encode }}" data="{{  brokerProfile.saleProfileMonth|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 12) | map(v => '')|json_encode }}" data="{{ brokerProfile.saleProfileYear|json_encode }}" class="h-10 w-20"></hec-chart></td>
+                <td>
+{#                    <div class="flex items-center gap-2 justify-end">#}
+{#                        {% if( not consumptionProfile.isCurrent) %}#}
+{#                            <twig:BtnAction#}
+{#                                method="POST"#}
+{#                                action="{{ path('app_consumption_profile_switch_profile', {id: consumptionProfile.id}) }}"#}
+{#                                csrf="{{ csrf_token('cp_switch_' ~ consumptionProfile.id)  }}"#}
+{#                                iconName="play"#}
+{#                            >#}
+{#                            </twig:BtnAction>#}
+
+{#                        {% endif %}#}
+{#                        <wa-button appearance="plain" href="{{ path('app_consumption_profile_update', {id: consumptionProfile.id}) }}"#}
+{#                                   target="_top">#}
+{#                            <wa-icon name="edit"></wa-icon>#}
+{#                        </wa-button>#}
+{#                        <twig:DeleteDialog routeName="app_consumption_profile_delete" id="{{ consumptionProfile.id }}"></twig:DeleteDialog>#}
+
+{#                    </div>#}
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <twig:Pagination routeName="app_broker_profile" page="{{ pagination.page }}" perPage="{{ pagination.perPage }}"
+                     lastPage="{{ pagination.lastPage }}"></twig:Pagination>
+</turbo-frame>

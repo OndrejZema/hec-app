@@ -1,0 +1,31 @@
+title: "Profily spotřeby"
+form:
+    name: "Jméno"
+    description: "Popis"
+    purchase:
+        profile:
+            day: "Denní profil"
+            week: "Týdenní profil"
+            month: "Měsíční profil"
+            year: "Roční profil"
+    sale:
+        profile:
+            day: "Denní profil"
+            week: "Týdenní profil"
+            month: "Měsíční profil"
+            year: "Roční profil"
+table:
+    name: "Jméno"
+    description: "Popis"
+    purchase:
+        profile:
+            day: "Denní profil"
+            week: "Týdenní profil"
+            month: "Měsíční profil"
+            year: "Roční profil"
+    sale:
+        profile:
+            day: "Denní profil"
+            week: "Týdenní profil"
+            month: "Měsíční profil"
+            year: "Roční profil"

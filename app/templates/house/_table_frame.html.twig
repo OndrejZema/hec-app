@@ -25,12 +25,13 @@
                 <td>
                     <div class="flex items-center gap-2 justify-end">
                         {% if( not house.isCurrent) %}
-                            <form method="POST" action="{{ path('app_house_visit', {id: house.id}) }}">
-                                <input type="hidden" name="_token" value="{{ csrf_token('visit' ~ house.id) }}">
-                                <wa-button type="submit" appearance="plain">
-                                    <wa-icon name="play" class="hec-icon"></wa-icon>
-                                </wa-button>
-                            </form>
+                            <twig:BtnAction
+                                method="POST"
+                                action="{{ path('app_house_visit', {id: house.id}) }}"
+                                csrf="{{ csrf_token('house_visit' ~ house.id)  }}"
+                                iconName="play"
+                            >
+                            </twig:BtnAction>
                         {% endif %}
                         <wa-button appearance="plain" href="{{ path('app_house_update', {id: house.id}) }}"
                                    target="_top">

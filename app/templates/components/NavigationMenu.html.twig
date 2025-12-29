@@ -15,7 +15,7 @@
         </wa-button>
         <wa-button size="small"
                    appearance="{{ currentRoute == 'app_broker_profile' ? 'filled' : 'plain' }}"
-                   variant="neutral" class="nav-btn">
+                   variant="neutral" class="nav-btn" href="{{ path('app_broker_profile') }}">
             <wa-icon slot="start" name="dollar-sign" class="hec-icon"></wa-icon>
             {{ 'logged.broker_profile'|trans({}, 'navigation') }}
 

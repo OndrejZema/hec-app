@@ -41,3 +41,9 @@ services:
         alias: App\Service\PerformanceProfileService
     App\Service\Interface\IConsumptionProfileService:
         alias: App\Service\ConsumptionProfileService
+    App\Service\Interface\IBrokerProfileService:
+        alias: App\Service\BrokerProfileService
+    App\Repository\Interface\IBrokerProfileRepository:
+        alias: App\Repository\BrokerProfileRepository
+    App\Repository\Interface\IHouseBrokerProfileRepository:
+        alias: App\Repository\HouseBrokerProfileRepository

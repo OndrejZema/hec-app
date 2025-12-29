@@ -1,0 +1,31 @@
+title: "Consumption profiles"
+form:
+    name: "Name"
+    description: "Description"
+    purchase:
+        profile:
+            day: "Day profile"
+            week: "Week profile"
+            month: "Month profile"
+            year: "Year profile"
+    sale:
+        profile:
+            day: "Day profile"
+            week: "Week profile"
+            month: "Month profile"
+            year: "Year profile"
+table:
+    name: "Name"
+    description: "Description"
+    purchase:
+        profile:
+            day: "Day profile"
+            week: "Week profile"
+            month: "Month profile"
+            year: "Year profile"
+    sale:
+        profile:
+            day: "Day profile"
+            week: "Week profile"
+            month: "Month profile"
+            year: "Year profile"

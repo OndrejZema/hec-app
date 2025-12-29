@@ -3,7 +3,7 @@ form:
     name: "Name"
     description: "Description"
 table:
-    name: "name"
+    name: "Name"
     description: "Description"
-    performance_profile_count: "performance profile count"
-    consumption_profile_count: "consumption profile count"
+    performance_profile_count: "Performance profile count"
+    consumption_profile_count: "Consumption profile count"

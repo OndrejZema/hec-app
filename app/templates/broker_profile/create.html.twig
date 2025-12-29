@@ -1,0 +1,29 @@
+{% extends 'logged.html.twig' %}
+
+{% block title %}Hello HouseController!{% endblock %}
+
+{% block content %}
+    <div class="max-w-[80rem]">
+        <div class="flex items-center justify-between">
+            <h3>Broker profile</h3>
+            <wa-button appearance="plain outlined" href="{{ path('app_consumption_profile') }}">
+                <wa-icon name="chevron-left"></wa-icon>
+            </wa-button>
+        </div>
+        {{ form_start(form) }}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {{ form_row(form.name) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.purchaseProfileDay) }}
+            {{ form_row(form.purchaseProfileWeek) }}
+            {{ form_row(form.purchaseProfileMonth) }}
+            {{ form_row(form.purchaseProfileYear) }}
+            {{ form_row(form.saleProfileDay) }}
+            {{ form_row(form.saleProfileWeek) }}
+            {{ form_row(form.saleProfileMonth) }}
+            {{ form_row(form.saleProfileYear) }}
+        </div>
+        <wa-button type="submit" class="w-full mt-2">{{ 'save'|trans({}, 'common') }}</wa-button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
