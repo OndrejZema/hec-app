@@ -89,13 +89,20 @@ final class BrokerProfileController extends HecAbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $house = $form->getData();
             $this->brokerProfileService->update($user, $house);
-            return $this->redirectToRoute('app_performance_profile');
+            return $this->redirectToRoute('app_broker_profile');
         }
-        return $this->render('performance_profile/create.html.twig', [
+        return $this->render('broker_profile/create.html.twig', [
             'form' => $form,
         ]);
     }
-
+    #[Route('/broker-profiles/switch/{id}', name: 'app_broker_profile_switch_profile', methods: ['POST'])]
+    public function switchProfile(Request $request, int $id): Response
+    {
+        $user = $this->getAppUser();
+//        $houseId = $this->houseService->getCurrentId($user);
+//        $this->performanceProfileService->switchProfile($user, $houseId, $id);
+        return $this->redirectToRoute('app_broker_profile');
+    }
     #[Route('/broker-profiles/delete/{id}', name: 'app_broker_profile_delete', methods: ['POST'])]
     public function delete(Request $request, int $id): Response
     {

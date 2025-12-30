@@ -17,15 +17,15 @@ form:
 table:
     name: "Name"
     description: "Description"
-    purchase:
-        profile:
-            day: "Day profile"
-            week: "Week profile"
-            month: "Month profile"
-            year: "Year profile"
-    sale:
-        profile:
-            day: "Day profile"
-            week: "Week profile"
-            month: "Month profile"
-            year: "Year profile"
+    purchase: "Purchase"
+    sale: "Sale"
+    purchase_profile:
+        day: "Day profile"
+        week: "Week profile"
+        month: "Month profile"
+        year: "Year profile"
+    sale_profile:
+        day: "Day profile"
+        week: "Week profile"
+        month: "Month profile"
+        year: "Year profile"

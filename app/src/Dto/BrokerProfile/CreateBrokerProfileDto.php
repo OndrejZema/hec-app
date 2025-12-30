@@ -7,19 +7,19 @@ class CreateBrokerProfileDto
     public string $name;
     public ?string $description;
     /** @var array<int> */
-    public array $purchaseProfileDay;
+    public array $purchaseProfileDay = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
     /** @var array<int> */
-    public array $purchaseProfileWeek;
+    public array $purchaseProfileWeek = [10, 10, 10, 10, 10, 10, 10];
     /** @var array<int> */
-    public array $purchaseProfileMonth;
+    public array $purchaseProfileMonth = [10, 10, 10, 10];
     /** @var array<int> */
-    public array $purchaseProfileYear;
+    public array $purchaseProfileYear = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
     /** @var array<int> */
-    public array $saleProfileDay;
+    public array $saleProfileDay = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
     /** @var array<int> */
-    public array $saleProfileWeek;
+    public array $saleProfileWeek = [10, 10, 10, 10, 10, 10, 10];
     /** @var array<int> */
-    public array $saleProfileMonth;
+    public array $saleProfileMonth = [10, 10, 10, 10];
     /** @var array<int> */
-    public array $saleProfileYear;
+    public array $saleProfileYear = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
 }

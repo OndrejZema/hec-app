@@ -23,5 +23,5 @@ class BrokerProfileDto
     public array $saleProfileMonth;
     /** @var array<int> */
     public array $saleProfileYear;
-    public bool $isCurrent;
+    public bool $isCurrent = false;
 }
