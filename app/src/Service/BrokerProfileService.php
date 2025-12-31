@@ -13,6 +13,7 @@ use App\Repository\Interface\IHouseBrokerProfileRepository;
 use App\Repository\Interface\IHouseRepository;
 use App\Repository\Interface\IHouseVisitRepository;
 use App\Service\Interface\IBrokerProfileService;
+use Exception;
 
 class BrokerProfileService implements IBrokerProfileService
 {
@@ -89,6 +90,11 @@ class BrokerProfileService implements IBrokerProfileService
     {
         $house = $this->houseRepository->getById($user, $houseId);
         $currentProfile = $this->houseBrokerProfileRepository->getCurrentProfile($user, $house);
+
+        if($id !== $currentProfile->getBrokerProfile()->getId()) {
+            throw new Exception("Wrong profile");
+        }
+
         $currentProfile->setIsActive(!$currentProfile->isActive());
         $this->houseBrokerProfileRepository->save($user, $currentProfile);
     }
