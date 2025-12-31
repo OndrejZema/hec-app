@@ -85,11 +85,18 @@
                                 <twig:BtnAction
                                     method="POST"
                                     action="{{ path('app_broker_profile_switch_profile', {id: brokerProfile.id}) }}"
-                                    csrf="{{ csrf_token('cp_switch_' ~ brokerProfile.id) }}"
+                                    csrf="{{ csrf_token('bp_switch_profile' ~ brokerProfile.id) }}"
                                     iconName="play"
                                 >
                                 </twig:BtnAction>
-
+                            {% else %}
+                                <twig:BtnAction
+                                    method="POST"
+                                    action="{{ path('app_broker_profile_switch_state', {id: brokerProfile.id}) }}"
+                                    csrf="{{ csrf_token('bp_switch_state' ~ brokerProfile.id) }}"
+                                    iconName="{{ brokerProfile.isActive ? "pause":"play" }}"
+                                >
+                                </twig:BtnAction>
                             {% endif %}
                             <wa-button appearance="plain"
                                        href="{{ path('app_broker_profile_update', {id: brokerProfile.id}) }}"

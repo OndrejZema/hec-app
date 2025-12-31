@@ -38,11 +38,12 @@ class BrokerProfileService implements IBrokerProfileService
         $houseId = $this->houseVisitRepository->getCurrentId($user);
         $house = $this->houseRepository->getById($user, $houseId);
         $dtos = [];
-        $currentProfileId = $this->houseBrokerProfileRepository->getCurrentProfileId($user, $house);
+        $currentProfile = $this->houseBrokerProfileRepository->getCurrentProfile($user, $house);
         /** @var BrokerProfile $item */
         foreach ($items as $item) {
             $dto = $this->brokerProfileMapper->toDto($item);
-            $dto->isCurrent = $item->getId() === $currentProfileId;
+            $dto->isCurrent = $item->getId() === $currentProfile->getBrokerProfile()->getId();
+            $dto->isActive = $dto->isCurrent ? $currentProfile->isActive() : false;
             $dtos[] = $dto;
         }
         return [$dtos, $pagination];
@@ -83,4 +84,13 @@ class BrokerProfileService implements IBrokerProfileService
         $brokerProfile = $this->brokerProfileRepository->getById($user, $id);
         $this->houseBrokerProfileRepository->switchProfile($user, $house, $brokerProfile);
     }
+
+    public function switchState(User $user, int $houseId, int $id): void
+    {
+        $house = $this->houseRepository->getById($user, $houseId);
+        $currentProfile = $this->houseBrokerProfileRepository->getCurrentProfile($user, $house);
+        $currentProfile->setIsActive(!$currentProfile->isActive());
+        $this->houseBrokerProfileRepository->save($user, $currentProfile);
+    }
+
 }

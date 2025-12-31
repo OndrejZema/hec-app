@@ -15,7 +15,7 @@ final class BrokerProfileController extends HecAbstractController
 {
     public function __construct(
         protected IBrokerProfileService $brokerProfileService,
-        protected IHouseService $houseService
+        protected IHouseService         $houseService
     )
     {
 
@@ -47,6 +47,7 @@ final class BrokerProfileController extends HecAbstractController
             'perPage' => $perPage,
         ]);
     }
+
     #[Route('/broker-profiles/create', name: 'app_broker_profile_create')]
     public function create(Request $request): Response
     {
@@ -66,6 +67,7 @@ final class BrokerProfileController extends HecAbstractController
             'form' => $form,
         ]);
     }
+
     #[Route('/broker-profiles/update/{id}', name: 'app_broker_profile_update')]
     public function update(Request $request, int $id): Response
     {
@@ -84,7 +86,7 @@ final class BrokerProfileController extends HecAbstractController
         $brokerProfile->saleProfileMonth = $brokerProfileDto->saleProfileMonth;
         $brokerProfile->saleProfileYear = $brokerProfileDto->saleProfileYear;
 
-        $form = $this->createForm(  BrokerProfileFormType::class, $brokerProfile, [
+        $form = $this->createForm(BrokerProfileFormType::class, $brokerProfile, [
             'data_class' => UpdateBrokerProfileDto::class
         ]);
 
@@ -98,6 +100,7 @@ final class BrokerProfileController extends HecAbstractController
             'form' => $form,
         ]);
     }
+
     #[Route('/broker-profiles/switch/{id}', name: 'app_broker_profile_switch_profile', methods: ['POST'])]
     public function switchProfile(Request $request, int $id): Response
     {
@@ -106,6 +109,16 @@ final class BrokerProfileController extends HecAbstractController
         $this->brokerProfileService->switchProfile($user, $houseId, $id);
         return $this->redirectToRoute('app_broker_profile');
     }
+
+    #[Route('/broker-profiles/switch-state/{id}', name: 'app_broker_profile_switch_state', methods: ['POST'])]
+    public function switchState(Request $request, int $id): Response
+    {
+        $user = $this->getAppUser();
+        $houseId = $this->houseService->getCurrentId($user);
+        $this->brokerProfileService->switchState($user, $houseId, $id);
+        return $this->redirectToRoute('app_broker_profile');
+    }
+
     #[Route('/broker-profiles/delete/{id}', name: 'app_broker_profile_delete', methods: ['POST'])]
     public function delete(Request $request, int $id): Response
     {

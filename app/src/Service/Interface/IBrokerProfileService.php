@@ -25,4 +25,5 @@ interface IBrokerProfileService
     public function delete(User $user, int $id): void;
 
     public function switchProfile(User $user, int $houseId, int $id): void;
+    public function switchState(User $user, int $houseId, int $id): void;
 }

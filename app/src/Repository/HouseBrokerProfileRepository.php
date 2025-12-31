@@ -32,7 +32,16 @@ class HouseBrokerProfileRepository extends ServiceEntityRepository implements IH
         $this->getEntityManager()->flush();
     }
 
-    public function getCurrentProfileId(User $user, House $house): ?int
+    public function save(User $user, HouseBrokerProfile $profile, bool $flush = true): void
+    {
+        $this->getEntityManager()->persist($profile);
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+
+    public function getCurrentProfile(User $user, House $house): ?HouseBrokerProfile
     {
         try {
             return $this->createQueryBuilder('cp')
@@ -40,11 +49,10 @@ class HouseBrokerProfileRepository extends ServiceEntityRepository implements IH
                 ->setParameter('user', $user)
                 ->andWhere('cp.house = :house')
                 ->setParameter('house', $house)
-                ->select('IDENTITY(cp.brokerProfile)')
                 ->orderBy('cp.createdAt', 'DESC')
                 ->setMaxResults(1)
                 ->getQuery()
-                ->getSingleScalarResult();
+                ->getOneOrNullResult();
         } catch (Throwable $ex) {
             return null;
         }
