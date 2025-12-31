@@ -8,6 +8,7 @@ use App\Dto\House\UpdateHouseDto;
 use App\Entity\User;
 use App\Mapper\HouseMapper;
 use App\Repository\Interface\IConsumptionProfileRepository;
+use App\Repository\Interface\IHouseBrokerProfileRepository;
 use App\Repository\Interface\IHouseRepository;
 use App\Repository\Interface\IPerformanceProfileRepository;
 use App\Service\Interface\IHouseService;
@@ -22,6 +23,7 @@ class HouseService implements IHouseService
         protected HouseMapper                   $houseMapper,
         protected IPerformanceProfileRepository $performanceProfileRepository,
         protected IConsumptionProfileRepository $consumptionProfileRepository,
+        protected IHouseBrokerProfileRepository $houseBrokerProfileRepository,
     )
     {
     }
@@ -42,9 +44,12 @@ class HouseService implements IHouseService
         $currentId = $this->getCurrentId($user);
         return [array_map(function ($model) use ($currentId, $user) {
             $dto = $this->houseMapper->toDto($model);
+            $currentHouseBrokerProfile = $this->houseBrokerProfileRepository->getCurrentProfile($user, $model);
             $dto->isCurrent = $currentId === $dto->id;
             $dto->performanceProfileCount = $this->performanceProfileRepository->getCountForHouse($user, $model);
             $dto->consumptionProfileCount = $this->consumptionProfileRepository->getCountForHouse($user, $model);
+            $dto->brokerProfileName = $currentHouseBrokerProfile?->getBrokerProfile()->getName();
+            $dto->hasActiveBrokerProfile = $currentHouseBrokerProfile?->isActive();
             return $dto;
         }, $houses), $pagination];
     }

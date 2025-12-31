@@ -7,3 +7,6 @@ table:
     description: "Popis"
     performance_profile_count: "Počet profilů výkonu"
     consumption_profile_count: "Počet profilů spotřeby"
+    broker_profile_name: "Obchodní profil"
+    not_active_broker_profile: "Obchodní profil není aktivní"
+    not_set_broker_profile: "Obchodní profil není nastavený"

@@ -6,6 +6,7 @@ use App\Dto\BrokerProfile\BrokerProfileDto;
 use App\Dto\BrokerProfile\CreateBrokerProfileDto;
 use App\Dto\BrokerProfile\UpdateBrokerProfileDto;
 use App\Entity\BrokerProfile;
+use App\Entity\HouseBrokerProfile;
 use App\Entity\User;
 use App\Mapper\BrokerProfileMapper;
 use App\Repository\Interface\IBrokerProfileRepository;
@@ -43,7 +44,7 @@ class BrokerProfileService implements IBrokerProfileService
         /** @var BrokerProfile $item */
         foreach ($items as $item) {
             $dto = $this->brokerProfileMapper->toDto($item);
-            $dto->isCurrent = $item->getId() === $currentProfile->getBrokerProfile()->getId();
+            $dto->isCurrent = $item->getId() === $currentProfile?->getBrokerProfile()->getId() ?? false;
             $dto->isActive = $dto->isCurrent ? $currentProfile->isActive() : false;
             $dtos[] = $dto;
         }
@@ -94,9 +95,12 @@ class BrokerProfileService implements IBrokerProfileService
         if($id !== $currentProfile->getBrokerProfile()->getId()) {
             throw new Exception("Wrong profile");
         }
-
-        $currentProfile->setIsActive(!$currentProfile->isActive());
-        $this->houseBrokerProfileRepository->save($user, $currentProfile);
+        $newProfile = new HouseBrokerProfile();
+        $newProfile->setUser($currentProfile->getUser());
+        $newProfile->setHouse($currentProfile->getHouse());
+        $newProfile->setBrokerProfile($currentProfile->getBrokerProfile());
+        $newProfile->setIsActive(!$currentProfile->isActive());
+        $this->houseBrokerProfileRepository->save($user, $newProfile);
     }
 
 }

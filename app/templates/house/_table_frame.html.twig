@@ -9,6 +9,7 @@
                 <th>{{ 'table.description'|trans({}, 'house') }}</th>
                 <th>{{ 'table.performance_profile_count'|trans({}, 'house') }}</th>
                 <th>{{ 'table.consumption_profile_count'|trans({}, 'house') }}</th>
+                <th>{{ 'table.broker_profile_name'|trans({}, 'house') }}</th>
                 <th></th>
             </tr>
             </thead>
@@ -20,10 +21,28 @@
                             <wa-icon name="check-circle" class="hec-icon"></wa-icon>
                         {% endif %}
                     </td>
-                    <td>{{ house.name }} {{ house.id }}</td>
+                    <td>{{ house.name }}</td>
                     <td>{{ house.description }}</td>
                     <td>{{ house.performanceProfileCount }}</td>
                     <td>{{ house.consumptionProfileCount }}</td>
+                    <td>
+                        <div class="flex items-center">
+                            {{ house.brokerProfileName }}
+                            {% if (house.hasActiveBrokerProfile == false and not house.hasActiveBrokerProfile is null) %}
+                                <wa-tooltip for="{{ 'house_broker_profile_' ~ house.id }}">
+                                    {{ 'table.not_active_broker_profile'|trans({}, 'house') }}
+                                </wa-tooltip>
+                                <wa-icon name="exclamation" class="hec-icon"
+                                         id="{{ 'house_broker_profile_' ~ house.id }}"></wa-icon>
+                            {% elseif (house.hasActiveBrokerProfile is null) %}
+                                <wa-tooltip for="{{ 'house_broker_profile_null' ~ house.id }}">
+                                    {{ 'table.not_set_broker_profile'|trans({}, 'house') }}
+                                </wa-tooltip>
+                                <wa-icon name="triangle-exclamation" class="hec-icon"
+                                         id="{{ 'house_broker_profile_null' ~ house.id }}"></wa-icon>
+                            {% endif %}
+                        </div>
+                    </td>
                     <td>
                         <div class="flex items-center gap-2 justify-end">
                             {% if( not house.isCurrent) %}

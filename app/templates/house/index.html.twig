@@ -3,7 +3,7 @@
 {% block title %}Hello HouseController!{% endblock %}
 
 {% block content %}
-    <div class="max-w-[50rem]">
+    <div class="max-w-[80rem]">
         <twig:SectionHeader title="{{ 'title'|trans({}, 'house') }}" createRouteName="app_house_create"/>
         <turbo-frame id="house_table" src="{{ path('app_house', {page: page, perPage: perPage}) }}"
                      data-turbo-action="advance">

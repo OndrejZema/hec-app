@@ -7,3 +7,6 @@ table:
     description: "Description"
     performance_profile_count: "Performance profile count"
     consumption_profile_count: "Consumption profile count"
+    broker_profile_name: "Broker profile"
+    not_active_broker_profile: "Broker profile is not active"
+    not_set_broker_profile: "Broker profile is not set"

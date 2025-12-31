@@ -10,4 +10,8 @@ class HouseDto
     public bool $isCurrent = false;
     public int $performanceProfileCount = 0;
     public int $consumptionProfileCount = 0;
+
+    public ?string $brokerProfileName = null;
+
+    public ?bool $hasActiveBrokerProfile = null;
 }
