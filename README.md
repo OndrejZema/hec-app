@@ -1,1 +1,1 @@
-# Home Eletricity Consultant
+# Home Electricity Consultant
