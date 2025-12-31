@@ -5,16 +5,23 @@ namespace App\Service;
 use App\Dto\BrokerProfile\BrokerProfileDto;
 use App\Dto\BrokerProfile\CreateBrokerProfileDto;
 use App\Dto\BrokerProfile\UpdateBrokerProfileDto;
+use App\Entity\BrokerProfile;
 use App\Entity\User;
 use App\Mapper\BrokerProfileMapper;
 use App\Repository\Interface\IBrokerProfileRepository;
+use App\Repository\Interface\IHouseBrokerProfileRepository;
+use App\Repository\Interface\IHouseRepository;
+use App\Repository\Interface\IHouseVisitRepository;
 use App\Service\Interface\IBrokerProfileService;
 
 class BrokerProfileService implements IBrokerProfileService
 {
     public function __construct(
-        protected IBrokerProfileRepository $brokerProfileRepository,
-        protected BrokerProfileMapper      $brokerProfileMapper
+        protected IBrokerProfileRepository      $brokerProfileRepository,
+        protected BrokerProfileMapper           $brokerProfileMapper,
+        protected IHouseVisitRepository         $houseVisitRepository,
+        protected IHouseRepository              $houseRepository,
+        protected IHouseBrokerProfileRepository $houseBrokerProfileRepository
     )
     {
     }
@@ -28,10 +35,15 @@ class BrokerProfileService implements IBrokerProfileService
     public function getAll(User $user, int $page, int $perPage): array
     {
         list($items, $pagination) = $this->brokerProfileRepository->getAll($user, $page, $perPage);
+        $houseId = $this->houseVisitRepository->getCurrentId($user);
+        $house = $this->houseRepository->getById($user, $houseId);
         $dtos = [];
-
+        $currentProfileId = $this->houseBrokerProfileRepository->getCurrentProfileId($user, $house);
+        /** @var BrokerProfile $item */
         foreach ($items as $item) {
-            $dtos[] = $this->brokerProfileMapper->toDto($item);
+            $dto = $this->brokerProfileMapper->toDto($item);
+            $dto->isCurrent = $item->getId() === $currentProfileId;
+            $dtos[] = $dto;
         }
         return [$dtos, $pagination];
     }
@@ -63,5 +75,12 @@ class BrokerProfileService implements IBrokerProfileService
     public function delete(User $user, int $id): void
     {
         $this->brokerProfileRepository->delete($user, $id);
+    }
+
+    public function switchProfile(User $user, int $houseId, int $id): void
+    {
+        $house = $this->houseRepository->getById($user, $houseId);
+        $brokerProfile = $this->brokerProfileRepository->getById($user, $id);
+        $this->houseBrokerProfileRepository->switchProfile($user, $house, $brokerProfile);
     }
 }

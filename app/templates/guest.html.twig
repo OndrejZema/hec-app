@@ -6,9 +6,7 @@
         {% block nav %}
             <header class="w-full flex justify-center border-b border-gray-200 bg-white">
                 <nav class="w-full max-w-[80rem] flex justify-between py-1 items-center">
-                    <div>
-                        Logo
-                    </div>
+                    <twig:AppLogo></twig:AppLogo>
                     <div>
                         <wa-button appearance="plain" href="{{ path('app_login') }}">
                             <wa-icon name="user" slot="start"></wa-icon>

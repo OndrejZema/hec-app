@@ -4,16 +4,19 @@ namespace App\Controller;
 
 use App\Dto\BrokerProfile\CreateBrokerProfileDto;
 use App\Dto\BrokerProfile\UpdateBrokerProfileDto;
-use App\Dto\PerformanceProfile\UpdatePerformanceProfileDto;
 use App\Form\BrokerProfileFormType;
 use App\Service\Interface\IBrokerProfileService;
+use App\Service\Interface\IHouseService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class BrokerProfileController extends HecAbstractController
 {
-    public function __construct(protected IBrokerProfileService $brokerProfileService)
+    public function __construct(
+        protected IBrokerProfileService $brokerProfileService,
+        protected IHouseService $houseService
+    )
     {
 
     }
@@ -99,8 +102,8 @@ final class BrokerProfileController extends HecAbstractController
     public function switchProfile(Request $request, int $id): Response
     {
         $user = $this->getAppUser();
-//        $houseId = $this->houseService->getCurrentId($user);
-//        $this->performanceProfileService->switchProfile($user, $houseId, $id);
+        $houseId = $this->houseService->getCurrentId($user);
+        $this->brokerProfileService->switchProfile($user, $houseId, $id);
         return $this->redirectToRoute('app_broker_profile');
     }
     #[Route('/broker-profiles/delete/{id}', name: 'app_broker_profile_delete', methods: ['POST'])]

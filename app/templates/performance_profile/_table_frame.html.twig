@@ -1,57 +1,80 @@
 <turbo-frame id="performance_profile_table">
-    <table>
-        <thead>
-        <tr>
-            <th></th>
-            <th>{{ 'table.name'|trans({}, 'performance_profile') }}</th>
-            <th>{{ 'table.description'|trans({}, 'performance_profile') }}</th>
-            <th>{{ 'table.type'|trans({}, 'performance_profile') }}</th>
-            <th>{{ 'table.performance_index'|trans({}, 'performance_profile') }}</th>
-            <th>{{ 'table.profile.day'|trans({}, 'performance_profile') }}</th>
-            <th>{{ 'table.profile.week'|trans({}, 'performance_profile') }}</th>
-            <th>{{ 'table.profile.month'|trans({}, 'performance_profile') }}</th>
-            <th>{{ 'table.profile.year'|trans({}, 'performance_profile') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for performanceProfile in performanceProfiles %}
+    <div class="overflow-x-auto">
+        <table>
+            <thead>
             <tr>
-                <td>
-                    {% if(performanceProfile.isCurrent) %}
-                        <wa-icon name="check-circle" class="hec-icon"></wa-icon>
-                    {% endif %}
-                </td>
-                <td>{{ performanceProfile.name }}</td>
-                <td>{{ performanceProfile.description }}</td>
-                <td>{{ performanceProfile.type.value }}</td>
-                <td>{{ performanceProfile.performanceIndex }}</td>
-                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 24) | map(v => '')|json_encode }}" data="{{ performanceProfile.profileDay|json_encode }}" class="h-10 w-20"></hec-chart></td>
-                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 7) | map(v => '')|json_encode }}" data="{{ performanceProfile.profileWeek|json_encode }}" class="h-10 w-20"></hec-chart></td>
-                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 4) | map(v => '')|json_encode }}" data="{{ performanceProfile.profileMonth|json_encode }}" class="h-10 w-20"></hec-chart></td>
-                <td> <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}" showTitle="{{ false }}" labels="{{range(1, 12) | map(v => '')|json_encode }}" data="{{ performanceProfile.profileYear|json_encode }}" class="h-10 w-20"></hec-chart></td>
-                <td>
-                    <div class="flex items-center gap-2 justify-end">
-                        {% if( not performanceProfile.isCurrent) %}
-                            <twig:BtnAction
-                                method="POST"
-                                action="{{ path('app_performance_profile_switch_profile', {id: performanceProfile.id}) }}"
-                                csrf="{{ csrf_token('pp_switch_' ~ performanceProfile.id)  }}"
-                                iconName="play"
-                            >
-                            </twig:BtnAction>
-                        {% endif %}
-                        <wa-button appearance="plain" href="{{ path('app_performance_profile_update', {id: performanceProfile.id}) }}"
-                                   target="_top">
-                            <wa-icon name="edit"></wa-icon>
-                        </wa-button>
-                        <twig:DeleteDialog routeName="app_performance_profile_delete" id="{{ performanceProfile.id }}"></twig:DeleteDialog>
-                    </div>
-                </td>
+                <th></th>
+                <th>{{ 'table.name'|trans({}, 'performance_profile') }}</th>
+                <th>{{ 'table.description'|trans({}, 'performance_profile') }}</th>
+                <th>{{ 'table.type'|trans({}, 'performance_profile') }}</th>
+                <th>{{ 'table.performance_index'|trans({}, 'performance_profile') }}</th>
+                <th>{{ 'table.profile.day'|trans({}, 'performance_profile') }}</th>
+                <th>{{ 'table.profile.week'|trans({}, 'performance_profile') }}</th>
+                <th>{{ 'table.profile.month'|trans({}, 'performance_profile') }}</th>
+                <th>{{ 'table.profile.year'|trans({}, 'performance_profile') }}</th>
             </tr>
-        {% endfor %}
+            </thead>
+            <tbody>
+            {% for performanceProfile in performanceProfiles %}
+                <tr>
+                    <td>
+                        {% if(performanceProfile.isCurrent) %}
+                            <wa-icon name="check-circle" class="hec-icon"></wa-icon>
+                        {% endif %}
+                    </td>
+                    <td>{{ performanceProfile.name }}</td>
+                    <td>{{ performanceProfile.description }}</td>
+                    <td>{{ performanceProfile.type.value }}</td>
+                    <td>{{ performanceProfile.performanceIndex }}</td>
+                    <td>
+                        <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}"
+                                   showTitle="{{ false }}" labels="{{ range(1, 24) | map(v => '')|json_encode }}"
+                                   data="{{ performanceProfile.profileDay|json_encode }}" class="h-10 w-20"></hec-chart>
+                    </td>
+                    <td>
+                        <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}"
+                                   showTitle="{{ false }}" labels="{{ range(1, 7) | map(v => '')|json_encode }}"
+                                   data="{{ performanceProfile.profileWeek|json_encode }}"
+                                   class="h-10 w-20"></hec-chart>
+                    </td>
+                    <td>
+                        <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}"
+                                   showTitle="{{ false }}" labels="{{ range(1, 4) | map(v => '')|json_encode }}"
+                                   data="{{ performanceProfile.profileMonth|json_encode }}"
+                                   class="h-10 w-20"></hec-chart>
+                    </td>
+                    <td>
+                        <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}"
+                                   showTitle="{{ false }}" labels="{{ range(1, 12) | map(v => '')|json_encode }}"
+                                   data="{{ performanceProfile.profileYear|json_encode }}"
+                                   class="h-10 w-20"></hec-chart>
+                    </td>
+                    <td>
+                        <div class="flex items-center gap-2 justify-end">
+                            {% if( not performanceProfile.isCurrent) %}
+                                <twig:BtnAction
+                                    method="POST"
+                                    action="{{ path('app_performance_profile_switch_profile', {id: performanceProfile.id}) }}"
+                                    csrf="{{ csrf_token('pp_switch_' ~ performanceProfile.id) }}"
+                                    iconName="play"
+                                >
+                                </twig:BtnAction>
+                            {% endif %}
+                            <wa-button appearance="plain"
+                                       href="{{ path('app_performance_profile_update', {id: performanceProfile.id}) }}"
+                                       target="_top">
+                                <wa-icon name="edit"></wa-icon>
+                            </wa-button>
+                            <twig:DeleteDialog routeName="app_performance_profile_delete"
+                                               id="{{ performanceProfile.id }}"></twig:DeleteDialog>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
     <twig:Pagination routeName="app_house" page="{{ pagination.page }}" perPage="{{ pagination.perPage }}"
                      lastPage="{{ pagination.lastPage }}"></twig:Pagination>
 </turbo-frame>

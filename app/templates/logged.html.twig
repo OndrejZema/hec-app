@@ -3,8 +3,8 @@
 {% block body %}
     <div class="logged-layout">
         <div class="logged-layout-logo bg-white">
-            <a href="{{ path('app_dashboard') }}">
-                <img src="{{ asset('imgs/logo.svg') }}" class="">
+            <a href="{{ path('app_dashboard') }}" class="!no-underline">
+                <twig:AppLogo></twig:AppLogo>
             </a>
         </div>
         <header class="logged-layout-header flex justify-between p-2 items-center bg-white mr-10">

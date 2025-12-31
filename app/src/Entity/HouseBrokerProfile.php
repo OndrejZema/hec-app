@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use App\Repository\HouseBrokerProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: HouseBrokerProfileRepository::class)]
 class HouseBrokerProfile
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -20,7 +23,7 @@ class HouseBrokerProfile
     private ?BrokerProfile $brokerProfile = null;
 
     #[ORM\Column]
-    private ?bool $isActive = null;
+    private bool $isActive = true;
 
     #[ORM\ManyToOne(inversedBy: 'houseBrokerProfiles')]
     #[ORM\JoinColumn(nullable: false)]
