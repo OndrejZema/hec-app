@@ -3,7 +3,7 @@
 {% block title %}Hello BrokerProfileController!{% endblock %}
 
 {% block content %}
-    <div class="max-w-[80rem]">
+    <div class="section-table">
         <twig:SectionHeader title="{{ 'title'|trans({}, 'broker_profile') }}" createRouteName="app_broker_profile_create"/>
         <turbo-frame id="broker_profile_table" src="{{ path('app_broker_profile', {page: page, perPage: perPage}) }}"
                      data-turbo-action="advance">

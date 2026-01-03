@@ -17,6 +17,7 @@ form:
 table:
     name: "Jméno"
     description: "Popis"
+    houses_count: "Počet domů"
     purchase: "Nákup"
     sale: "Prodej"
     purchase_profile:

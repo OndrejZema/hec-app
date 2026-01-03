@@ -17,6 +17,7 @@ form:
 table:
     name: "Name"
     description: "Description"
+    houses_count: "Number of houses"
     purchase: "Purchase"
     sale: "Sale"
     purchase_profile:

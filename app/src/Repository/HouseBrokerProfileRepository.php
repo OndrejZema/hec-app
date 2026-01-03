@@ -58,4 +58,24 @@ class HouseBrokerProfileRepository extends ServiceEntityRepository implements IH
         }
     }
 
+    public function getHouseCountForBrokerProfile(User $user, BrokerProfile $profile): int
+    {
+        $em = $this->getEntityManager();
+
+        $sub = $em->createQueryBuilder()
+            ->select('MAX(hbp2.createdAt)')
+            ->from(HouseBrokerProfile::class, 'hbp2')
+            ->where('hbp2.house = hbp.house');
+
+        $qb = $em->createQueryBuilder();
+        $qb
+            ->select('COUNT(DISTINCT hbp.house)')
+            ->from(HouseBrokerProfile::class, 'hbp')
+            ->where($qb->expr()->eq('hbp.createdAt', '(' . $sub->getDQL() . ')'))
+            ->andWhere('hbp.brokerProfile = :brokerProfile')
+            ->setParameter('brokerProfile', $profile);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
 }

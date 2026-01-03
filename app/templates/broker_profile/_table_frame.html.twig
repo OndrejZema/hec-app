@@ -4,16 +4,16 @@
         <table>
             <thead>
             <tr>
-                <th colspan="3" class="border-r border-gray-200"></th>
+                <th colspan="4" class="border-r border-gray-200"></th>
                 <th colspan="4"
                     class="!text-center border-r border-gray-200">{{ 'table.purchase'|trans({}, 'broker_profile') }}</th>
                 <th colspan="4" class="!text-center">{{ 'table.sale'|trans({}, 'broker_profile') }}</th>
             </tr>
             <tr>
-
                 <th></th>
                 <th>{{ 'table.name'|trans({}, 'broker_profile') }}</th>
-                <th class="border-r border-gray-200">{{ 'table.description'|trans({}, 'broker_profile') }}</th>
+                <th>{{ 'table.description'|trans({}, 'broker_profile') }}</th>
+                <th class="border-r border-gray-200">{{ 'table.houses_count'|trans({}, 'broker_profile') }}</th>
                 <th>{{ 'table.purchase_profile.day'|trans({}, 'broker_profile') }}</th>
                 <th>{{ 'table.purchase_profile.week'|trans({}, 'broker_profile') }}</th>
                 <th>{{ 'table.purchase_profile.month'|trans({}, 'broker_profile') }}</th>
@@ -34,6 +34,7 @@
                     </td>
                     <td>{{ brokerProfile.name }}</td>
                     <td>{{ brokerProfile.description }}</td>
+                    <td>{{ brokerProfile.housesCount }}</td>
                     <td>
                         <hec-chart showLabelsY="{{ false }}" backgroundColor="#fd9a00" showLegend="{{ false }}"
                                    showTitle="{{ false }}" labels="{{ range(1, 24) | map(v => '')|json_encode }}"
