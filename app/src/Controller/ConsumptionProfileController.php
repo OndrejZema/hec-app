@@ -64,7 +64,7 @@ final class ConsumptionProfileController extends HecAbstractController
             return $this->redirectToRoute('app_consumption_profile');
         }
 
-        return $this->render('consumption_profile/create.html.twig', [
+        return $this->render('consumption_profile/form.html.twig', [
             'form' => $form,
         ]);
     }
@@ -95,7 +95,7 @@ final class ConsumptionProfileController extends HecAbstractController
             $this->consumptionProfileService->update($user, $house);
             return $this->redirectToRoute('app_consumption_profile');
         }
-        return $this->render('consumption_profile/create.html.twig', [
+        return $this->render('consumption_profile/form.html.twig', [
             'form' => $form,
         ]);
     }

@@ -63,7 +63,7 @@ final class BrokerProfileController extends HecAbstractController
             return $this->redirectToRoute('app_broker_profile');
         }
 
-        return $this->render('broker_profile/create.html.twig', [
+        return $this->render('broker_profile/form.html.twig', [
             'form' => $form,
         ]);
     }
@@ -96,7 +96,7 @@ final class BrokerProfileController extends HecAbstractController
             $this->brokerProfileService->update($user, $house);
             return $this->redirectToRoute('app_broker_profile');
         }
-        return $this->render('broker_profile/create.html.twig', [
+        return $this->render('broker_profile/form.html.twig', [
             'form' => $form,
         ]);
     }

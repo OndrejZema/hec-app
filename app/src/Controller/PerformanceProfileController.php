@@ -63,7 +63,7 @@ final class PerformanceProfileController extends HecAbstractController
             return $this->redirectToRoute('app_performance_profile');
         }
 
-        return $this->render('performance_profile/create.html.twig', [
+        return $this->render('performance_profile/form.html.twig', [
             'form' => $form,
         ]);
     }
@@ -93,7 +93,7 @@ final class PerformanceProfileController extends HecAbstractController
             $this->performanceProfileService->update($user, $house);
             return $this->redirectToRoute('app_performance_profile');
         }
-        return $this->render('performance_profile/create.html.twig', [
+        return $this->render('performance_profile/form.html.twig', [
             'form' => $form,
         ]);
     }

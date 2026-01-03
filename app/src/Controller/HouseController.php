@@ -63,7 +63,7 @@ final class HouseController extends HecAbstractController
             return $this->redirectToRoute('app_house');
         }
 
-        return $this->render('house/create.html.twig', [
+        return $this->render('house/form.html.twig', [
             'currentHouse' => 'house 1',
             'form' => $form,
         ]);
@@ -89,7 +89,7 @@ final class HouseController extends HecAbstractController
             $this->houseService->update($user, $house);
             return $this->redirectToRoute('app_house');
         }
-        return $this->render('house/create.html.twig', [
+        return $this->render('house/form.html.twig', [
             'currentHouse' => 'house 1',
             'form' => $form,
         ]);
