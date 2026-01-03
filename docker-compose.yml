@@ -47,6 +47,26 @@ services:
       - "8888:80"
     depends_on:
       - mariadb
+  questdb:
+    image: questdb/questdb:latest
+    container_name: questdb
+    restart: unless-stopped
+    ports:
+      - "9000:9000" # Web Console + REST
+      - "9009:9009" # InfluxDB line protocol (TCP)
+      - "8812:8812" # PostgreSQL wire protocol
+      - "9003:9003" # Min health endpoint (optional; stays exposed)
+    environment:
+      - QDB_PG_USER=admin
+      - QDB_PG_PASSWORD=admin
+    volumes:
+      - questdb_data:/var/lib/questdb
+    healthcheck:
+      test: [ "CMD", "wget", "-qO-", "http://127.0.0.1:9003/min" ]
+      interval: 10s
+      timeout: 3s
+      retries: 10
 
 volumes:
   mariadb_data:
+  questdb_data:
