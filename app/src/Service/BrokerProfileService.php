@@ -46,6 +46,8 @@ class BrokerProfileService implements IBrokerProfileService
             $dto = $this->brokerProfileMapper->toDto($item);
             $dto->isCurrent = $item->getId() === $currentProfile?->getBrokerProfile()->getId() ?? false;
             $dto->isActive = $dto->isCurrent ? $currentProfile->isActive() : false;
+            //@todo number of houses, where this broker profile is   activated
+            $dto->houseCount = 0;
             $dtos[] = $dto;
         }
         return [$dtos, $pagination];

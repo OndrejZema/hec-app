@@ -25,4 +25,5 @@ class BrokerProfileDto
     public array $saleProfileYear;
     public bool $isCurrent = false;
     public bool $isActive = false;
+    public int $houseCount = 0;
 }
