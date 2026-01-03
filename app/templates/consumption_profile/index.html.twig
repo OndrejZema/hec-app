@@ -3,7 +3,7 @@
 {% block title %}Hello ConsumptionProfileController!{% endblock %}
 
 {% block content %}
-    <div class="max-w-[80rem]">
+    <div class="section-table">
         <twig:SectionHeader title="{{ 'title'|trans({}, 'consumption_profile') }}" createRouteName="app_consumption_profile_create"/>
         <turbo-frame id="consumption_profile_table" src="{{ path('app_consumption_profile', {page: page, perPage: perPage}) }}"
                      data-turbo-action="advance">

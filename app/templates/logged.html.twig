@@ -7,7 +7,7 @@
                 <twig:AppLogo></twig:AppLogo>
             </a>
         </div>
-        <header class="logged-layout-header flex justify-between p-2 items-center bg-white mr-10">
+        <header class="logged-layout-header flex justify-between px-4 py-2 items-center bg-white">
             {% if currentRoute != 'app_house' %}
                 <twig:SelectedHouse></twig:SelectedHouse>
                 {% else %}
@@ -37,7 +37,7 @@
         <div class="logged-layout-nav">
             <twig:NavigationMenu/>
         </div>
-        <div class="logged-layout-content p-8 bg-gray-100 border border-gray-200 rounded">
+        <div class="logged-layout-content p-4 border border-gray-200 rounded">
             {% block content %}
 
             {% endblock %}

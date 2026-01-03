@@ -29,6 +29,9 @@ wa-button.nav-btn::part(base){
     .hec-icon {
         @apply text-amber-500;
     }
+    .section-table{
+        max-width: 150rem;
+    }
 }
 
 @layer base {
