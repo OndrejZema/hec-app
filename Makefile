@@ -49,3 +49,5 @@ make-migration:
 	docker compose exec php bash -c "php bin/console make:migration"
 migrate:
 	docker compose exec php bash -c "php bin/console doctrine:migrations:migrate"
+codex:
+	docker compose exec codex bash
